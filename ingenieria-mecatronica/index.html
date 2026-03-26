@@ -46,7 +46,13 @@
         .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
         .btn-cyan { background: var(--cyan); color: var(--navy); }
         .btn-cyan:hover { background: var(--cyan-oscuro); transform: translateY(-2px); }
-        section { padding: 5rem 1.5rem; }
+        section { padding: 5rem 1.5rem; position: relative; }
+        .bg-flecha { position: relative; }
+        .bg-flecha::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/degradante-flecha.png'); background-size: 300px; background-repeat: no-repeat; background-attachment: fixed; opacity: .06; pointer-events: none; z-index: 0; }
+        .bg-flecha-right::before { background-position: right -50px center; }
+        .bg-flecha-left::before { background-position: left -50px center; }
+        .bg-flecha-center::before { background-position: center; background-size: 400px; }
+        .bg-flecha > * { position: relative; z-index: 1; }
         .section-divider { display: flex; align-items: center; justify-content: center; padding: 0 1.5rem; }
         .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,.3), rgba(0,212,255,.4)); max-width: 400px; }
         .section-divider::after { background: linear-gradient(90deg, rgba(0,212,255,.4), rgba(0,212,255,.3), transparent); }
@@ -257,6 +263,8 @@
         <div class="logo-area">
             <img src="assets/logo.avif" alt="CENYCA Universidad" class="logo-img">
             <span class="header-divider"></span>
+            <img src="assets/slogan.avif" alt="Donde tu potencial se vuelve éxito" style="height:28px; opacity:.8;">
+            <span class="header-divider"></span>
             <span class="header-career">Ingeniería Mecatrónica</span>
         </div>
         <a href="#contacto" class="nav-cta">Inscríbete ahora</a>
@@ -269,14 +277,11 @@
         <h1>Ingeniería <span class="accent">Mecatrónica</span></h1>
         <p>Diseña, construye y programa el futuro. Fórmate como ingeniero integral capaz de crear sistemas inteligentes que combinan mecánica, electrónica y programación.</p>
         <a href="#contacto" class="nav-cta" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
-        <div class="hero-slogan">
-            <img src="assets/slogan.avif" alt="Donde tu potencial se vuelve éxito">
-        </div>
     </div>
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
-<section class="beneficios" id="beneficios">
+<section class="beneficios bg-flecha bg-flecha-right" id="beneficios">
     <div class="container">
         <div class="section-title">
             <h2>¿Por qué estudiar Mecatrónica?</h2>
@@ -292,7 +297,7 @@
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
-<section id="perfil">
+<section id="perfil" class="bg-flecha bg-flecha-left">
     <div class="container">
         <div class="section-title">
             <h2>Perfil del egresado</h2>
@@ -318,7 +323,7 @@
 </section>
 <div class="wave-divider"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#F5F5F5" d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z"/></svg></div>
 
-<section id="campo" style="background:var(--gris-claro); padding-top:3rem;">
+<section id="campo" class="bg-flecha bg-flecha-right" style="background:var(--gris-claro); padding-top:3rem;">
     <div class="container">
         <div class="section-title">
             <h2>Campo laboral</h2>
@@ -341,7 +346,7 @@
 </section>
 <div class="wave-divider flip"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#F5F5F5" d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z"/></svg></div>
 
-<section id="experiencias" style="background: var(--gris-claro); padding-top:3rem;">
+<section id="experiencias" class="bg-flecha bg-flecha-center" style="background: var(--gris-claro); padding-top:3rem;">
     <div class="container">
         <div class="section-title">
             <h2>Lo que nos diferencia</h2>
@@ -450,7 +455,7 @@
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
-<section id="ubicacion">
+<section id="ubicacion" class="bg-flecha bg-flecha-left">
     <div class="container">
         <div class="section-title">
             <h2>Ubicación</h2>
