@@ -199,9 +199,10 @@
             .urgencia-grid { gap: 1rem; }
             .mapa-wrapper iframe { height: 200px; }
             #ubicacion .container > div[style*="grid-template-columns"] img { height: 200px; }
-            .inversion-card { border-radius: 16px; }
-            .inversion-beca { gap: .5rem; }
-            .beca-btn { padding: .4rem 1rem; font-size: .8rem; }
+            .inversion-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+            .inversion-opciones { display: flex; gap: .5rem; flex-wrap: wrap; }
+            .inversion-opciones h3 { width: 100%; }
+            .beca-btn { width: auto; flex: 1; text-align: center; margin-bottom: 0; padding: .6rem 1rem; font-size: .8rem; }
             .info-item { font-size: .9rem; }
         }
         @media (max-width: 480px) {
@@ -268,25 +269,20 @@
             .footer-legal { font-size: .65rem; }
         }
 
-        /* Inversión simulador */
-        .inversion-card { max-width: 540px; margin: 0 auto; background: var(--blanco); border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,.08); overflow: hidden; }
-        .inversion-header { background: var(--navy); color: var(--blanco); padding: 1.25rem 1.5rem; text-align: center; }
-        .inversion-header h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
-        .inversion-body { padding: 1.5rem; }
-        .inversion-row { display: flex; justify-content: space-between; align-items: center; padding: .65rem 0; border-bottom: 1px solid #f0f0f0; }
-        .inversion-row:last-child { border-bottom: none; }
-        .inversion-label { font-size: .9rem; color: var(--gris-oscuro); font-weight: 400; }
-        .inversion-label small { display: block; font-size: .75rem; color: var(--gris); font-weight: 300; }
-        .inversion-value { font-size: 1.05rem; font-weight: 700; color: var(--navy); }
-        .inversion-beca { display: flex; align-items: center; gap: .75rem; justify-content: center; margin: 1.25rem 0 .5rem; }
-        .beca-btn { padding: .5rem 1.25rem; border-radius: 50px; border: 2px solid var(--cyan); background: transparent; color: var(--navy); font-family: montserrat, sans-serif; font-weight: 600; font-size: .85rem; cursor: pointer; transition: .3s; }
-        .beca-btn.active { background: var(--cyan); color: var(--navy); }
-        .beca-btn:hover { background: var(--cyan); color: var(--navy); }
-        .inversion-total { background: linear-gradient(135deg, var(--navy), var(--navy-light)); color: var(--blanco); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .inversion-total .total-label { font-size: .85rem; font-weight: 400; opacity: .8; }
-        .inversion-total .total-label span { display: block; font-size: .7rem; opacity: .6; }
-        .inversion-total .total-value { font-size: 1.4rem; font-weight: 700; color: var(--cyan); }
-        .inversion-nota { text-align: center; font-size: .75rem; color: var(--gris); margin-top: .75rem; opacity: .7; }
+        /* Inversión simulador horizontal */
+        .inversion-banner { background: linear-gradient(135deg, var(--navy), var(--navy-light)); color: var(--blanco); padding: 3rem 1.5rem; }
+        .inversion-layout { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: center; }
+        .inversion-opciones h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .5px; }
+        .beca-btn { display: block; width: 100%; padding: .75rem 1.25rem; border-radius: 50px; border: 2px solid rgba(255,255,255,.25); background: transparent; color: var(--blanco); font-family: montserrat, sans-serif; font-weight: 600; font-size: .9rem; cursor: pointer; transition: .3s; margin-bottom: .6rem; text-align: left; }
+        .beca-btn.active { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+        .beca-btn:hover { border-color: var(--cyan); }
+        .inversion-detalle { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+        .inversion-item { flex: 1; min-width: 150px; }
+        .inversion-item-label { font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; opacity: .6; margin-bottom: .3rem; font-weight: 400; }
+        .inversion-item-value { font-size: 1.4rem; font-weight: 700; }
+        .inversion-item-value.cyan { color: var(--cyan); }
+        .inversion-item-note { font-size: .7rem; opacity: .5; margin-top: .15rem; font-weight: 300; }
+        .inversion-nota { text-align: center; font-size: .75rem; color: rgba(255,255,255,.4); margin-top: 1.5rem; }
 
         /* Scroll animations */
         .anim { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
@@ -466,44 +462,33 @@
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
-<section id="inversion" class="bg-flecha bg-flecha-center">
-    <div class="container">
-        <div class="section-title">
-            <h2>Inversión</h2>
-            <p>Conoce el costo de tu carrera y simula con beca.</p>
-            <div class="accent-line"></div>
+<section id="inversion" class="inversion-banner">
+    <div class="inversion-layout">
+        <div class="inversion-opciones">
+            <h3>Selecciona tu beca</h3>
+            <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
+            <button class="beca-btn" onclick="calcBeca(10, this)">Beca 10%</button>
+            <button class="beca-btn" onclick="calcBeca(20, this)">Beca 20%</button>
         </div>
-        <div class="inversion-card">
-            <div class="inversion-header"><h3>Simulador de costos</h3></div>
-            <div class="inversion-body">
-                <div class="inversion-row">
-                    <span class="inversion-label">Inscripción <small>Pago único, sin reinscripción</small></span>
-                    <span class="inversion-value">$2,000</span>
-                </div>
-                <div class="inversion-row">
-                    <span class="inversion-label">Mensualidad</span>
-                    <span class="inversion-value" id="mensualidad-display">$4,000</span>
-                </div>
-                <div class="inversion-row">
-                    <span class="inversion-label">Paquete cuatrimestral <small>Seguro + credencial estudiantil</small></span>
-                    <span class="inversion-value">$950</span>
-                </div>
-                <div style="text-align:center; padding-top:.75rem;">
-                    <span style="font-size:.85rem; font-weight:600; color:var(--gris-oscuro);">Selecciona tu beca:</span>
-                    <div class="inversion-beca">
-                        <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
-                        <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
-                        <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
-                    </div>
-                </div>
+        <div class="inversion-detalle">
+            <div class="inversion-item">
+                <div class="inversion-item-label">Inscripción</div>
+                <div class="inversion-item-value">$2,000 MXN</div>
+                <div class="inversion-item-note">Pago único, sin reinscripción</div>
             </div>
-            <div class="inversion-total">
-                <div class="total-label">Mensualidad con beca<span>+ inscripción de $2,000 + paquete cuatrimestral $950</span></div>
-                <div class="total-value" id="total-display">$4,000/mes</div>
+            <div class="inversion-item">
+                <div class="inversion-item-label">Mensualidad</div>
+                <div class="inversion-item-value cyan" id="mensualidad-display">$4,000 MXN</div>
+                <div class="inversion-item-note" id="beca-note"></div>
+            </div>
+            <div class="inversion-item">
+                <div class="inversion-item-label">Paquete cuatrimestral</div>
+                <div class="inversion-item-value">$950 MXN</div>
+                <div class="inversion-item-note">Seguro + credencial estudiantil</div>
             </div>
         </div>
-        <p class="inversion-nota">* Los costos pueden variar. Consulta directamente para más información sobre becas y promociones.</p>
     </div>
+    <p class="inversion-nota">* Los costos pueden variar. Consulta directamente para más información sobre becas y promociones.</p>
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
@@ -618,8 +603,8 @@
         const base = 4000;
         const descuento = base * (pct / 100);
         const final = base - descuento;
-        document.getElementById('mensualidad-display').textContent = pct > 0 ? '$' + final.toLocaleString('es-MX') + ' (-' + pct + '%)' : '$4,000';
-        document.getElementById('total-display').textContent = '$' + final.toLocaleString('es-MX') + '/mes';
+        document.getElementById('mensualidad-display').textContent = '$' + final.toLocaleString('es-MX') + ' MXN';
+        document.getElementById('beca-note').textContent = pct > 0 ? 'Ahorro de $' + descuento.toLocaleString('es-MX') + '/mes con beca ' + pct + '%' : '';
         document.querySelectorAll('.beca-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     }
