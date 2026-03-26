@@ -288,6 +288,19 @@
         .inversion-total .total-value { font-size: 1.4rem; font-weight: 700; color: var(--cyan); }
         .inversion-nota { text-align: center; font-size: .75rem; color: var(--gris); margin-top: .75rem; opacity: .7; }
 
+        /* Acordeón collapsible */
+        .accordion-trigger { cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 2rem 1.5rem; transition: .3s; }
+        .accordion-trigger:hover { opacity: .85; }
+        .accordion-trigger .section-title { margin-bottom: 0; }
+        .accordion-chevron { width: 44px; height: 44px; min-width: 44px; border-radius: 50%; background: var(--cyan); display: flex; align-items: center; justify-content: center; transition: transform .4s ease; flex-shrink: 0; }
+        .accordion-chevron svg { transition: transform .4s ease; color: var(--navy); }
+        .accordion-trigger.open .accordion-chevron svg { transform: rotate(180deg); }
+        .accordion-hint { font-size: .75rem; color: var(--gris); font-weight: 400; text-transform: uppercase; letter-spacing: 1px; margin-top: .3rem; }
+        .accordion-trigger.open .accordion-hint { display: none; }
+        .accordion-body { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
+        .accordion-body.open { max-height: 2000px; }
+        .accordion-body-inner { padding: 0 1.5rem 3rem; }
+
         /* Scroll animations */
         .anim { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
         .anim-up { transform: translateY(40px); }
@@ -344,39 +357,51 @@
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
-<section id="perfil" class="bg-flecha bg-flecha-left">
+<section id="perfil" class="bg-flecha bg-flecha-left" style="padding:0;">
     <div class="container">
-        <div class="section-title">
-            <h2>Perfil del egresado</h2>
-            <p>Al finalizar la carrera serás capaz de:</p>
-            <div class="accent-line"></div>
-        </div>
-        <div class="perfil-content">
-            <div class="perfil-image">
-                <img src="assets/asset_3.jpg" alt="Estudiante de Ingeniería Mecatrónica trabajando con robot industrial">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="section-title">
+                <h2>Perfil del egresado</h2>
+                <p class="accordion-hint">Toca para ver más</p>
+                <div class="accent-line"></div>
             </div>
-            <div>
-                <ul class="perfil-lista">
-                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Diseñar y desarrollar sistemas mecatrónicos integrando mecánica, electrónica y control.</span></li>
-                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Programar controladores, PLCs y sistemas embebidos para automatización industrial.</span></li>
-                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Implementar soluciones de robótica y manufactura inteligente en entornos industriales.</span></li>
-                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Gestionar proyectos de innovación tecnológica con visión estratégica y sustentable.</span></li>
-                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Liderar equipos multidisciplinarios en el desarrollo de productos y procesos automatizados.</span></li>
-                    <li style="border-bottom:none; padding-top:1rem;"><span></span><span style="font-style:italic; opacity:.85;">Tu formación te preparará para ser un ingeniero competitivo en la industria manufacturera y tecnológica de la región.</span></li>
-                </ul>
+            <div class="accordion-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="accordion-body">
+            <div class="accordion-body-inner">
+                <div class="perfil-content">
+                    <div class="perfil-image">
+                        <img src="assets/asset_3.jpg" alt="Estudiante de Ingeniería Mecatrónica trabajando con robot industrial">
+                    </div>
+                    <div>
+                        <ul class="perfil-lista">
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Diseñar y desarrollar sistemas mecatrónicos integrando mecánica, electrónica y control.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Programar controladores, PLCs y sistemas embebidos para automatización industrial.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Implementar soluciones de robótica y manufactura inteligente en entornos industriales.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Gestionar proyectos de innovación tecnológica con visión estratégica y sustentable.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Liderar equipos multidisciplinarios en el desarrollo de productos y procesos automatizados.</span></li>
+                            <li style="border-bottom:none; padding-top:1rem;"><span></span><span style="font-style:italic; opacity:.85;">Tu formación te preparará para ser un ingeniero competitivo en la industria manufacturera y tecnológica de la región.</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 <div class="wave-divider"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#F5F5F5" d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z"/></svg></div>
 
-<section id="campo" class="bg-flecha bg-flecha-right" style="background:var(--gris-claro); padding-top:3rem;">
+<section id="campo" class="bg-flecha bg-flecha-right" style="background:var(--gris-claro); padding:0;">
     <div class="container">
-        <div class="section-title">
-            <h2>Campo laboral</h2>
-            <p>Un amplio abanico de oportunidades profesionales te espera al egresar.</p>
-            <div class="accent-line"></div>
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="section-title">
+                <h2>Campo laboral</h2>
+                <p class="accordion-hint">Toca para ver más</p>
+                <div class="accent-line"></div>
+            </div>
+            <div class="accordion-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
         </div>
+        <div class="accordion-body">
+            <div class="accordion-body-inner">
         <div class="campo-grid">
             <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></span><h3>Automatización industrial</h3></div>
             <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg></span><h3>Robótica y sistemas inteligentes</h3></div>
@@ -388,6 +413,8 @@
             <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><h3>Investigación y desarrollo</h3></div>
             <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><h3>Control de calidad y procesos</h3></div>
             <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><h3>Emprendimiento tecnológico</h3></div>
+        </div>
+            </div>
         </div>
     </div>
 </section>
@@ -603,6 +630,13 @@
     <div class="footer-bottom">&copy; 2026 CENYCA Universidad. Todos los derechos reservados.</div>
 </footer>
 <script>
+    // Acordeón toggle
+    function toggleAccordion(trigger) {
+        trigger.classList.toggle('open');
+        const body = trigger.nextElementSibling;
+        body.classList.toggle('open');
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
         const btn = e.target.querySelector('button[type="submit"]');
