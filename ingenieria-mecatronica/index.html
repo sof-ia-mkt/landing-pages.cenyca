@@ -29,12 +29,15 @@
         .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
         .hamburger span { display: block; width: 26px; height: 3px; background: var(--blanco); border-radius: 2px; transition: .3s; }
         .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(27,32,64,.75), rgba(27,32,64,.85)); z-index: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(27,32,64,.7), rgba(27,32,64,.82)); z-index: 1; }
         .hero-content { position: relative; z-index: 2; }
-        .hero { margin-top: 80px; position: relative; overflow: hidden; background-image: linear-gradient(rgba(27,32,64,.75), rgba(27,32,64,.85)), url("assets/asset_1.jpg"); background-size: cover; background-position: center; background-repeat: no-repeat; color: var(--blanco); padding: 7rem 1.5rem 6rem; text-align: center; position: relative; overflow: hidden; }
+        .hero { margin-top: 80px; position: relative; overflow: hidden; background-image: linear-gradient(rgba(27,32,64,.7), rgba(27,32,64,.82)), url("assets/asset_1.jpg"); background-size: cover; background-position: center; background-repeat: no-repeat; color: var(--blanco); padding: 9rem 1.5rem 8rem; text-align: center; }
         .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
         .hero-badge { display: inline-block; background: rgba(0,212,255,.15); backdrop-filter: blur(8px); padding: .4rem 1.2rem; border-radius: 50px; font-size: .85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: .5px; }
-        .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 400; line-height: 1.15; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 1px; }
+        .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 400; line-height: 1.05; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 2px; }
+        .hero h1 .accent { color: var(--cyan); }
+        .hero-slogan { margin-top: 2.5rem; opacity: .7; }
+        .hero-slogan img { height: 40px; }
         .hero p { font-size: 1.1rem; opacity: .92; max-width: 600px; margin: 0 auto 2.5rem; }
         .hero-badges { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
         .hero-badge-item { background: rgba(255,255,255,.12); backdrop-filter: blur(6px); padding: .5rem 1rem; border-radius: 10px; font-size: .82rem; font-weight: 500; display: flex; align-items: center; gap: .4rem; }
@@ -260,14 +263,11 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <span class="hero-badge">CENYCA Universidad</span>
-        <h1>Ingeniería Mecatrónica</h1>
+        <h1>Ingeniería <span class="accent">Mecatrónica</span></h1>
         <p>Diseña, construye y programa el futuro. Fórmate como ingeniero integral capaz de crear sistemas inteligentes que combinan mecánica, electrónica y programación.</p>
         <a href="#contacto" class="nav-cta" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
-        <div class="hero-badges">
-            <div class="hero-badge-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Titúlate en 3 años</div>
-            <div class="hero-badge-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg> RVOE SEP</div>
-            <div class="hero-badge-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 5 Planteles en B.C.</div>
-            <div class="hero-badge-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><circle cx="12" cy="8" r="7"/></svg> 18+ años formando profesionales</div>
+        <div class="hero-slogan">
+            <img src="assets/slogan.avif" alt="Donde tu potencial se vuelve éxito">
         </div>
     </div>
 </section>
