@@ -292,11 +292,11 @@
         .inversion-header { background: rgba(0,212,255,.12); color: var(--blanco); padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,.08); }
         .inversion-header h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
         .inversion-body { padding: 1.5rem; }
-        .inversion-row { display: flex; justify-content: space-between; align-items: center; padding: .65rem 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+        .inversion-row { display: flex; justify-content: space-between; align-items: center; padding: .65rem 0; border-bottom: 1px solid rgba(255,255,255,.08); gap: 1rem; }
         .inversion-row:last-child { border-bottom: none; }
-        .inversion-label { font-size: .9rem; color: rgba(255,255,255,.85); font-weight: 400; }
+        .inversion-label { font-size: .9rem; color: rgba(255,255,255,.85); font-weight: 400; flex: 1; }
         .inversion-label small { display: block; font-size: .75rem; color: rgba(255,255,255,.5); font-weight: 300; }
-        .inversion-value { font-size: 1.05rem; font-weight: 700; color: var(--cyan); }
+        .inversion-value { font-size: 1.05rem; font-weight: 700; color: var(--cyan); text-align: right; white-space: nowrap; flex-shrink: 0; }
         .inversion-beca { display: flex; align-items: center; gap: .75rem; justify-content: center; margin: 1.25rem 0 .5rem; }
         .beca-btn { padding: .5rem 1.25rem; border-radius: 50px; border: 2px solid rgba(0,212,255,.4); background: transparent; color: var(--blanco); font-family: montserrat, sans-serif; font-weight: 600; font-size: .85rem; cursor: pointer; transition: .3s; }
         .beca-btn.active { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
@@ -558,7 +558,7 @@
                     <span class="inversion-value">$950</span>
                 </div>
                 <div style="text-align:center; padding-top:.75rem;">
-                    <span style="font-size:.85rem; font-weight:600; color:var(--gris-oscuro);">Selecciona tu beca:</span>
+                    <span style="font-size:.85rem; font-weight:600; color:var(--blanco);">Selecciona tu beca:</span>
                     <div class="inversion-beca">
                         <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
                         <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
