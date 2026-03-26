@@ -35,7 +35,7 @@
         .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
         .hero-badge { display: inline-block; background: rgba(0,212,255,.15); backdrop-filter: blur(8px); padding: .4rem 1.2rem; border-radius: 50px; font-size: .85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: .5px; }
         .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 1px; }
-        .hero h1 .accent { color: var(--cyan); }
+        .hero h1 .accent { color: var(--cyan); font-weight: 900; }
         .hero-slogan { margin-top: 2rem; opacity: .8; }
         .hero-slogan img { height: 70px; }
         .hero p { font-size: 1.1rem; opacity: .92; max-width: 600px; margin: 0 auto 2.5rem; }
@@ -66,10 +66,8 @@
         .carousel-prev { left: 10px; }
         .carousel-next { right: 10px; }
 
-        .section-divider { display: flex; align-items: center; justify-content: center; padding: 0 1.5rem; }
-        .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,.3), rgba(0,212,255,.4)); max-width: 400px; }
-        .section-divider::after { background: linear-gradient(90deg, rgba(0,212,255,.4), rgba(0,212,255,.3), transparent); }
-        .section-divider .divider-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin: 0 1rem; color: var(--cyan); opacity: .5; }
+        .section-divider { display: block; max-width: 600px; margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,.35), transparent); }
+        .section-divider .divider-icon { display: none; }
         .section-title { text-align: center; margin-bottom: 3rem; }
         .section-title h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--negro); margin-bottom: .6rem; text-transform: uppercase; letter-spacing: 1px; }
         .highlight-word { position: relative; display: inline; }
@@ -400,7 +398,7 @@
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
-<section id="perfil" class="bg-flecha bg-flecha-left" style="padding:0;">
+<section id="perfil" class="bg-flecha bg-flecha-left" style="padding:0; background:#fff;">
     <div class="container">
         <div class="accordion-trigger" onclick="toggleAccordion(this)">
             <div class="section-title">
@@ -431,7 +429,7 @@
         </div>
     </div>
 </section>
-<div class="wave-divider"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#F5F5F5" d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z"/></svg></div>
+<div class="section-divider"></div>
 
 <section id="campo" class="bg-flecha bg-flecha-right" style="background:var(--gris-claro); padding:0;">
     <div class="container">
@@ -461,7 +459,7 @@
         </div>
     </div>
 </section>
-<div class="wave-divider flip"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#F5F5F5" d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z"/></svg></div>
+<div class="section-divider"></div>
 
 <section id="experiencias" class="bg-flecha bg-flecha-center" style="background: var(--gris-claro); padding-top:3rem;">
     <div class="container">
