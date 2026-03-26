@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería Mecatrónica | CENYCA Universidad</title>
+    <link rel="stylesheet" href="https://use.typekit.net/ntg4rac.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #1B2040; --navy-light: #252B52; --cyan: #00D4FF; --cyan-dark: #00B8DB;
+            --verde: #25D366; --blanco: #FFFFFF; --gris-claro: #F5F5F5;
+            --gris: #666666; --gris-oscuro: #333333; --negro: #1A1A1A;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: source-sans-pro, 'Segoe UI', sans-serif; font-weight: 400; color: var(--gris-oscuro); line-height: 1.6; }
+        h1, h2 { font-family: bebas-neue, sans-serif; font-weight: 400; letter-spacing: 1px; }
+        h3, h4 { font-family: montserrat, sans-serif; font-weight: 600; }
+        p, li, span, label, select, input, textarea { font-family: source-sans-pro, sans-serif; font-weight: 400; }
+
+        /* Header */
+        header { background: var(--navy); box-shadow: 0 2px 12px rgba(0,0,0,.15); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+        .logo-area { display: flex; align-items: center; gap: .75rem; }
+        .logo-img { height: 50px; width: auto; flex-shrink: 0; object-fit: contain; }
+        .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.4); flex-shrink: 0; }
+        .header-career { color: var(--blanco); font-family: montserrat, sans-serif; font-size: .95rem; font-weight: 600; letter-spacing: .3px; }
+        .nav-cta { display: inline-block; padding: .6rem 1.5rem; background: var(--cyan); color: var(--navy); font-family: montserrat, sans-serif; font-weight: 700; font-size: .9rem; border-radius: 50px; text-decoration: none; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; animation: cta-pulse 2s infinite; }
+        .nav-cta:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0,212,255,.4); }
+        .nav-cta::after { content: ""; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); transform: skewX(-20deg); animation: cta-shine 3s infinite; }
+        @keyframes cta-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,212,255,.4); } 50% { box-shadow: 0 0 15px 5px rgba(0,212,255,.2); } }
+        @keyframes cta-shine { 0% { left: -60%; } 100% { left: 120%; } }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { display: block; width: 26px; height: 3px; background: var(--blanco); border-radius: 2px; transition: .3s; }
+
+        /* Hero */
+        .hero { margin-top: 80px; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(27,32,64,.92), rgba(37,43,82,.88)), url("assets/hero-mecatronica.jpg"); background-size: cover; background-position: center; color: var(--blanco); padding: 7rem 1.5rem 6rem; text-align: center; }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .hero-badge { display: inline-block; background: rgba(0,212,255,.15); backdrop-filter: blur(8px); padding: .4rem 1.2rem; border-radius: 50px; font-size: .85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: .5px; border: 1px solid rgba(0,212,255,.3); }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.05; margin-bottom: 1.25rem; text-transform: uppercase; }
+        .hero h1 .accent { color: var(--cyan); }
+        .hero p { font-size: 1.1rem; opacity: .92; max-width: 600px; margin: 0 auto 2.5rem; }
+        .hero-badges { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
+        .hero-badge-item { background: rgba(255,255,255,.1); backdrop-filter: blur(6px); padding: .5rem 1rem; border-radius: 10px; font-size: .82rem; font-weight: 500; display: flex; align-items: center; gap: .4rem; border: 1px solid rgba(255,255,255,.1); }
+
+        /* Buttons */
+        .btn { display: inline-block; padding: .95rem 2.5rem; border-radius: 50px; font-size: 1rem; font-family: montserrat, sans-serif; font-weight: 600; text-decoration: none; transition: .3s; cursor: pointer; border: none; }
+        .btn-cyan { background: var(--cyan); color: var(--navy); box-shadow: 0 4px 20px rgba(0,212,255,.3); }
+        .btn-cyan:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,255,.4); background: var(--cyan-dark); }
+        .btn-navy { background: var(--navy); color: var(--blanco); }
+        .btn-navy:hover { background: var(--navy-light); transform: translateY(-2px); }
+
+        /* Sections */
+        section { padding: 5rem 1.5rem; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: clamp(2rem, 4vw, 3rem); color: var(--navy); margin-bottom: .6rem; text-transform: uppercase; }
+        .section-title p { color: var(--gris); max-width: 600px; margin: 0 auto; }
+        .section-title .accent-line { width: 60px; height: 4px; background: var(--cyan); border-radius: 2px; margin: .8rem auto 0; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        /* Beneficios */
+        .beneficios { background: var(--gris-claro); }
+        .beneficios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .beneficio-card { background: var(--blanco); padding: 2rem 1.5rem; border-radius: 16px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,.05); transition: .3s; }
+        .beneficio-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+        .beneficio-icon { width: 64px; height: 64px; background: linear-gradient(135deg, var(--navy), var(--navy-light)); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; color: var(--cyan); }
+        .beneficio-card h3 { font-size: 1.05rem; margin-bottom: .5rem; color: var(--navy); }
+        .beneficio-card p { font-size: .9rem; color: var(--gris); }
+
+        /* Perfil */
+        .perfil-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .perfil-image { border-radius: 20px; height: 420px; position: relative; overflow: hidden; }
+        .perfil-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .perfil-lista { list-style: none; }
+        .perfil-lista li { padding: .75rem 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start; gap: .75rem; font-size: .92rem; }
+        .perfil-lista li:last-child { border-bottom: none; }
+        .check-icon { width: 24px; height: 24px; background: rgba(0,212,255,.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--cyan); font-weight: 700; font-size: .8rem; margin-top: 2px; }
+
+        /* Campo laboral */
+        .campo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+        .campo-item { background: var(--blanco); padding: 1.5rem; border-radius: 14px; text-align: center; border-left: 4px solid var(--cyan); box-shadow: 0 2px 8px rgba(0,0,0,.04); transition: .3s; }
+        .campo-item:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+        .campo-item .campo-icon { margin-bottom: .6rem; display: flex; justify-content: center; color: var(--navy); }
+        .campo-item h3 { font-size: .95rem; color: var(--navy); }
+
+        /* Diferenciadores */
+        .diferencia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 3rem; }
+        .diferencia-item { display: flex; gap: .75rem; align-items: flex-start; padding: 1rem; background: var(--blanco); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+        .diferencia-item .dif-icon { width: 40px; height: 40px; min-width: 40px; background: rgba(0,212,255,.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--navy); }
+        .diferencia-item p { font-size: .9rem; line-height: 1.6; color: var(--gris-oscuro); margin: 0; }
+
+        /* Collage */
+        .collage { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+        .collage img { width: 100%; height: 280px; object-fit: cover; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,.1); }
+
+        /* Urgencia / CTA + Form */
+        .urgencia-banner { background: linear-gradient(135deg, var(--navy), var(--navy-light)); color: var(--blanco); padding: 3rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
+        .urgencia-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #00f0ff, var(--cyan)); }
+        .urgencia-lema { font-family: bebas-neue, sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; margin-bottom: .5rem; text-transform: uppercase; letter-spacing: 2px; }
+        .urgencia-lema span { color: var(--cyan); }
+        .urgencia-layout { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 2fr 3fr; gap: 2rem; align-items: start; }
+        .urgencia-left { text-align: left; }
+        .urgencia-left .urgencia-lema { text-align: left; }
+        .urgencia-item { display: inline-block; background: rgba(255,255,255,.08); border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; }
+        .urgencia-item-label { font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; opacity: .6; margin-bottom: .3rem; }
+        .urgencia-item-value { font-size: 1.3rem; font-family: montserrat, sans-serif; font-weight: 700; }
+        .urgencia-item-value.cyan { color: var(--cyan); }
+        .countdown { display: flex; justify-content: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+        .countdown-unit { background: var(--cyan); color: var(--navy); border-radius: 10px; padding: .75rem 1rem; min-width: 70px; text-align: center; }
+        .countdown-number { font-family: bebas-neue, sans-serif; font-size: 1.8rem; font-weight: 400; display: block; line-height: 1; }
+        .countdown-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 1px; opacity: .8; font-family: montserrat, sans-serif; font-weight: 600; }
+        .urgencia-lugares { font-size: .95rem; margin-bottom: 1rem; opacity: .85; }
+        .urgencia-lugares strong { color: var(--cyan); font-size: 1.3em; }
+        .urgencia-barra { width: 100%; max-width: 400px; height: 8px; background: rgba(255,255,255,.15); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; }
+        .urgencia-barra-inner { height: 100%; background: linear-gradient(90deg, var(--cyan), #00f0ff); border-radius: 4px; transition: width 1s ease; }
+
+        /* Form */
+        .form-card { background: var(--blanco); padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+        .form-card h3 { font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--navy); text-align: center; }
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .35rem; color: var(--gris-oscuro); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: .75rem 1rem; border: 2px solid #e8e8e8; border-radius: 10px; font-size: .95rem; font-family: inherit; transition: .2s; outline: none; background: var(--blanco); }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,212,255,.15); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-btn { width: 100%; padding: .85rem; font-size: 1rem; }
+
+        /* Ubicacion */
+        .mapa-wrapper { border-radius: 14px; overflow: hidden; margin-top: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+        .mapa-wrapper iframe { width: 100%; height: 250px; border: none; display: block; }
+        .info-item { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; color: var(--gris-oscuro); font-size: .95rem; }
+        .info-icon { width: 40px; height: 40px; background: rgba(0,212,255,.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem; }
+
+        /* Footer */
+        footer { background: var(--negro); color: rgba(255,255,255,.7); padding: 2rem 1.5rem 1.5rem; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+        .footer-logo { height: 40px; opacity: .8; }
+        .footer-slogan { height: 30px; opacity: .6; }
+        .footer-bottom { max-width: 1100px; margin: 1.5rem auto 0; text-align: center; font-size: .82rem; color: rgba(255,255,255,.4); }
+
+        /* Responsive 768px */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hamburger { display: flex; }
+            .hero { padding: 4.5rem 1.25rem 3.5rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .hero-badges { gap: .75rem; }
+            .hero-badge-item { font-size: .78rem; padding: .4rem .8rem; }
+            .perfil-content, .diferencia-grid { grid-template-columns: 1fr; }
+            .collage { grid-template-columns: 1fr; }
+            .collage img { height: 220px; }
+            .perfil-image { height: 280px; }
+            .beneficios-grid { grid-template-columns: repeat(2, 1fr); }
+            .campo-grid { grid-template-columns: repeat(2, 1fr); }
+            section { padding: 3.5rem 1.25rem; }
+            .section-title h2 { font-size: 2rem; }
+            .urgencia-layout { grid-template-columns: 1fr; text-align: center; }
+            .urgencia-left .urgencia-lema { text-align: center; }
+            .urgencia-left .countdown { justify-content: center; }
+            .urgencia-barra { margin: 0 auto 1.5rem; }
+            .countdown-unit { min-width: 60px; padding: .6rem .75rem; }
+            .countdown-number { font-size: 1.4rem; }
+            .footer-inner { justify-content: center; text-align: center; }
+        }
+
+        /* Responsive 480px */
+        @media (max-width: 480px) {
+            .header-inner { padding: .6rem .75rem; }
+            .logo-img { height: 34px; }
+            .header-divider { height: 22px; }
+            .header-career { font-size: .7rem; max-width: 120px; line-height: 1.2; }
+            .hero { margin-top: 62px; padding: 2.5rem 1rem 2rem; }
+            .hero h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+            .hero p { font-size: .88rem; margin-bottom: 1.5rem; }
+            .hero-badge { font-size: .72rem; padding: .3rem .8rem; margin-bottom: .8rem; }
+            .hero-badges { gap: .5rem; margin-top: 1.5rem; }
+            .hero-badge-item { font-size: .68rem; padding: .35rem .6rem; }
+            .btn { padding: .7rem 1.6rem; font-size: .88rem; }
+            section { padding: 2.5rem .85rem; }
+            .section-title { margin-bottom: 1.75rem; }
+            .section-title h2 { font-size: 1.6rem; }
+            .section-title p { font-size: .83rem; }
+            .beneficios-grid { grid-template-columns: 1fr; gap: .85rem; }
+            .beneficio-card { padding: 1.25rem 1rem; }
+            .beneficio-icon { width: 48px; height: 48px; font-size: 1.4rem; border-radius: 12px; margin-bottom: .8rem; }
+            .beneficio-card h3 { font-size: .95rem; }
+            .beneficio-card p { font-size: .83rem; }
+            .perfil-image { height: 200px; border-radius: 14px; }
+            .perfil-lista li { font-size: .83rem; padding: .6rem 0; gap: .6rem; }
+            .check-icon { width: 20px; height: 20px; font-size: .7rem; }
+            .campo-grid { grid-template-columns: 1fr; gap: .85rem; }
+            .campo-item { padding: 1rem; display: flex; align-items: center; gap: .75rem; text-align: left; border-left: 3px solid var(--cyan); }
+            .campo-item .campo-icon { font-size: 1.5rem; margin-bottom: 0; }
+            .campo-item h3 { font-size: .88rem; }
+            .form-card { padding: 1.25rem; border-radius: 12px; }
+            .form-card h3 { font-size: 1rem; margin-bottom: 1.25rem; }
+            .form-group { margin-bottom: .9rem; }
+            .form-group label { font-size: .8rem; }
+            .form-group input, .form-group textarea, .form-group select { padding: .6rem .8rem; font-size: .88rem; border-radius: 8px; }
+            .form-group textarea { min-height: 80px; }
+            .form-btn { padding: .75rem; font-size: .9rem; }
+            .footer-inner { flex-direction: column; gap: .75rem; }
+            .footer-bottom { font-size: .75rem; margin-top: 1rem; }
+        }
+
+        /* Scroll animations */
+        .anim { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
+        .anim-up { transform: translateY(40px); }
+        .anim-left { transform: translateX(-40px); }
+        .anim-right { transform: translateX(40px); }
+        .anim-scale { transform: scale(.85); }
+        .anim.visible { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+        .anim-delay-1 { transition-delay: .1s; }
+        .anim-delay-2 { transition-delay: .2s; }
+        .anim-delay-3 { transition-delay: .3s; }
+        .anim-delay-4 { transition-delay: .4s; }
+        .anim-delay-5 { transition-delay: .5s; }
+        .anim-delay-6 { transition-delay: .6s; }
+        .anim-delay-7 { transition-delay: .7s; }
+        .anim-delay-8 { transition-delay: .8s; }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-inner">
+        <div class="logo-area">
+            <img src="assets/logo.png" alt="CENYCA Universidad" class="logo-img">
+            <span class="header-divider"></span>
+            <span class="header-career">Ingeniería Mecatrónica</span>
+        </div>
+        <a href="#contacto" class="nav-cta">Inscríbete ahora</a>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-badge">CENYCA Universidad</span>
+        <h1>Ingeniería <span class="accent">Mecatrónica</span></h1>
+        <p>Diseña, construye y programa el futuro. Fórmate como ingeniero integral capaz de crear sistemas inteligentes que combinan mecánica, electrónica y programación.</p>
+        <a href="#contacto" class="btn btn-cyan" style="font-size:1.1rem; padding:.85rem 2.5rem;">Solicita información</a>
+        <div class="hero-badges">
+            <div class="hero-badge-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Titúlate en 3 años
+            </div>
+            <div class="hero-badge-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+                RVOE SEP
+            </div>
+            <div class="hero-badge-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                5 Planteles en B.C.
+            </div>
+            <div class="hero-badge-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><circle cx="12" cy="8" r="7"/></svg>
+                18+ años formando profesionales
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="beneficios" id="beneficios">
+    <div class="container">
+        <div class="section-title">
+            <h2>¿Por qué estudiar Mecatrónica?</h2>
+            <div class="accent-line"></div>
+        </div>
+        <div class="beneficios-grid">
+            <div class="beneficio-card">
+                <div class="beneficio-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+                </div>
+                <h3>Ingeniería multidisciplinaria</h3>
+                <p>Combina mecánica, electrónica, control y programación en una sola carrera para diseñar sistemas inteligentes y automatizados.</p>
+            </div>
+            <div class="beneficio-card">
+                <div class="beneficio-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Alta demanda laboral</h3>
+                <p>La industria manufacturera de Baja California requiere constantemente ingenieros mecatrónicos para automatización y mejora de procesos.</p>
+            </div>
+            <div class="beneficio-card">
+                <div class="beneficio-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <h3>Formación práctica</h3>
+                <p>Aprende con laboratorios equipados y proyectos reales desde el primer semestre. Manos a la obra desde el día uno.</p>
+            </div>
+            <div class="beneficio-card">
+                <div class="beneficio-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3>Innovación tecnológica</h3>
+                <p>Desarrolla competencias en robótica, IoT, inteligencia artificial aplicada y manufactura inteligente para liderar la industria 4.0.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PERFIL DEL EGRESADO -->
+<section id="perfil">
+    <div class="container">
+        <div class="section-title">
+            <h2>Perfil del egresado</h2>
+            <p>Al finalizar la carrera serás capaz de:</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="perfil-content">
+            <div class="perfil-image">
+                <img src="assets/perfil-mecatronica.jpg" alt="Estudiante de Ingeniería Mecatrónica trabajando con robot industrial">
+            </div>
+            <div>
+                <ul class="perfil-lista">
+                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Diseñar y desarrollar sistemas mecatrónicos integrando mecánica, electrónica y control.</span></li>
+                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Programar controladores, PLCs y sistemas embebidos para automatización industrial.</span></li>
+                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Implementar soluciones de robótica y manufactura inteligente en entornos industriales.</span></li>
+                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Gestionar proyectos de innovación tecnológica con visión estratégica y sustentable.</span></li>
+                    <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Liderar equipos multidisciplinarios en el desarrollo de productos y procesos automatizados.</span></li>
+                    <li style="border-bottom:none; padding-top:1rem;"><span></span><span style="font-style:italic; opacity:.85;">Tu formación te preparará para ser un ingeniero competitivo en la industria manufacturera y tecnológica de la región.</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CAMPO LABORAL -->
+<section id="campo" style="background: var(--gris-claro);">
+    <div class="container">
+        <div class="section-title">
+            <h2>Campo laboral</h2>
+            <p>Un amplio abanico de oportunidades profesionales te espera al egresar.</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="campo-grid">
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></span><h3>Automatización industrial</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg></span><h3>Robótica y sistemas inteligentes</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><h3>Manufactura avanzada</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span><h3>Desarrollo de software embebido</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M5 20V8l7-4 7 4v12"/><path d="M9 20v-4h6v4M9 12h6"/></svg></span><h3>Industria aeroespacial</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><h3>Diseño de productos tecnológicos</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><h3>Consultoría en ingeniería</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><h3>Investigación y desarrollo</h3></div>
+            <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><h3>Control de calidad y procesos</h3></div>
+        </div>
+    </div>
+</section>
+
+<!-- DIFERENCIADORES -->
+<section id="diferenciadores">
+    <div class="container">
+        <div class="section-title">
+            <h2>Lo que nos diferencia</h2>
+            <div class="accent-line"></div>
+        </div>
+        <div class="diferencia-grid">
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <p>Titúlate en solo 3 años con un modelo educativo intensivo y enfocado en competencias reales del mercado laboral.</p>
+            </div>
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+                <p>Laboratorios equipados con tecnología industrial: brazos robóticos, PLCs, impresoras 3D y estaciones de soldadura.</p>
+            </div>
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <p>Docentes con experiencia activa en la industria manufacturera y tecnológica de la región fronteriza.</p>
+            </div>
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M5 20V8l7-4 7 4v12"/><path d="M9 20v-4h6v4"/></svg></div>
+                <p>Vinculación directa con empresas del sector industrial para prácticas profesionales y bolsa de trabajo.</p>
+            </div>
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                <p>Plan de estudios actualizado y alineado a las necesidades de la Industria 4.0 y la manufactura inteligente.</p>
+            </div>
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <p>5 planteles en Baja California con ubicaciones estratégicas cerca de los principales parques industriales.</p>
+            </div>
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                <p>Esquemas de becas y financiamiento accesibles para que tu inversión educativa sea alcanzable.</p>
+            </div>
+            <div class="diferencia-item">
+                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><circle cx="12" cy="8" r="7"/></svg></div>
+                <p>Más de 18 años de experiencia formando profesionales competitivos que transforman la industria.</p>
+            </div>
+        </div>
+        <div class="collage">
+            <img src="assets/collage-1.jpg" alt="Estudiantes de mecatrónica en laboratorio" loading="lazy">
+            <img src="assets/collage-2.jpg" alt="Proyecto de robótica CENYCA" loading="lazy">
+            <img src="assets/collage-3.jpg" alt="Instalaciones CENYCA Universidad" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<!-- URGENCIA + FORMULARIO -->
+<section class="urgencia-banner" id="contacto">
+    <div class="urgencia-layout">
+        <div class="urgencia-left">
+            <div class="urgencia-lema">Tu futuro empieza <span>ahora</span></div>
+            <p style="font-size:clamp(1rem, 2vw, 1.25rem); font-weight:300; opacity:.9; margin-bottom:1rem; line-height:1.7;">La industria necesita <strong style="font-weight:700;">ingenieros mecatrónicos preparados</strong> para liderar la transformación tecnológica.</p>
+            <p style="font-size:clamp(.95rem, 1.8vw, 1.1rem); font-weight:300; opacity:.8; margin-bottom:1.5rem; line-height:1.7;">En <strong style="font-weight:700;">CENYCA Universidad</strong> te formamos para ser ese profesional.</p>
+            <div class="urgencia-item">
+                <div class="urgencia-item-label">Próximo inicio de clases</div>
+                <div class="urgencia-item-value cyan">Mayo 2026</div>
+            </div>
+            <p style="font-size:.95rem; margin-bottom:.75rem; opacity:.85;">Las inscripciones cierran en:</p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-unit"><span class="countdown-number" id="cd-dias">00</span><span class="countdown-label">Días</span></div>
+                <div class="countdown-unit"><span class="countdown-number" id="cd-horas">00</span><span class="countdown-label">Horas</span></div>
+                <div class="countdown-unit"><span class="countdown-number" id="cd-min">00</span><span class="countdown-label">Min</span></div>
+                <div class="countdown-unit"><span class="countdown-number" id="cd-seg">00</span><span class="countdown-label">Seg</span></div>
+            </div>
+            <div class="urgencia-lugares">Lugares disponibles: <strong id="lugares-count">15</strong> de 30</div>
+            <div class="urgencia-barra"><div class="urgencia-barra-inner" id="barra-lugares" style="width:50%"></div></div>
+            <p style="font-size:clamp(1rem, 2vw, 1.15rem); margin-top:1.25rem; line-height:1.6; background:rgba(0,212,255,.15); border-left:4px solid var(--cyan); padding:.75rem 1rem; border-radius:0 8px 8px 0;">Solicita información y conoce nuestro <strong style="font-weight:700;">esquema de becas y descuentos</strong> para nuevo ingreso.</p>
+        </div>
+        <div class="urgencia-form">
+            <div class="form-card">
+                <h3>Solicita información</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="(664) 000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="plantel">Plantel de interés</label>
+                        <select id="plantel" name="plantel" required>
+                            <option value="" disabled selected>Selecciona un plantel</option>
+                            <option value="casablanca">CENYCA Casablanca</option>
+                            <option value="otay">CENYCA Otay</option>
+                            <option value="rosarito">CENYCA Rosarito</option>
+                            <option value="ensenada">CENYCA Ensenada</option>
+                            <option value="mexicali">CENYCA Mexicali</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">¿Tienes alguna pregunta?</label>
+                        <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-cyan form-btn">Enviar solicitud</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- UBICACION -->
+<section id="ubicacion">
+    <div class="container">
+        <div class="section-title">
+            <h2>Ubicación</h2>
+            <p>Visítanos y conoce nuestras instalaciones.</p>
+            <div class="accent-line"></div>
+        </div>
+        <div style="max-width:700px; margin:0 auto;">
+            <div class="info-item">
+                <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <span>CENYCA Casablanca, Tijuana, B.C.</span>
+            </div>
+            <div class="info-item">
+                <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <span>Lunes a Viernes: 8:00 a 20:00 hrs | Sábados: 8:00 a 14:00 hrs</span>
+            </div>
+            <div class="info-item">
+                <div class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                <span>Contáctanos por WhatsApp para más información</span>
+            </div>
+            <div class="mapa-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1414.7764566883595!2d-116.8976982301636!3d32.50144817929559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9390065c3b3b7%3A0x95f0ebbec800266d!2sCENYCA%20Casablanca!5e0!3m2!1ses!2smx!4v1774498893847!5m2!1ses!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <img src="assets/logo.png" alt="CENYCA Universidad" class="footer-logo">
+        <img src="assets/slogan.png" alt="Donde tu potencial se vuelve éxito" class="footer-slogan">
+    </div>
+    <div class="footer-bottom">&copy; 2026 CENYCA Universidad. Todos los derechos reservados.</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+    // Form handler
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.textContent = '¡Enviado correctamente!';
+        btn.style.background = '#25D366';
+        btn.style.color = '#fff';
+        e.target.reset();
+        setTimeout(() => { btn.textContent = 'Enviar solicitud'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+    }
+
+    // Countdown - Mayo 2026
+    (function() {
+        const target = new Date('2026-05-04T09:00:00-07:00').getTime();
+        function update() {
+            const now = Date.now();
+            let diff = target - now;
+            if (diff < 0) diff = 0;
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('cd-dias').textContent = String(d).padStart(2, '0');
+            document.getElementById('cd-horas').textContent = String(h).padStart(2, '0');
+            document.getElementById('cd-min').textContent = String(m).padStart(2, '0');
+            document.getElementById('cd-seg').textContent = String(s).padStart(2, '0');
+        }
+        update();
+        setInterval(update, 1000);
+    })();
+
+    // Simulador de lugares
+    (function() {
+        const total = 30;
+        const startDate = new Date('2026-03-20').getTime();
+        const endDate = new Date('2026-05-04').getTime();
+        const now = Date.now();
+        const progress = Math.min(1, Math.max(0, (now - startDate) / (endDate - startDate)));
+        const taken = Math.floor(progress * 20) + Math.floor(Math.random() * 2);
+        const remaining = Math.max(5, total - taken);
+        document.getElementById('lugares-count').textContent = remaining;
+        const pct = ((total - remaining) / total) * 100;
+        document.getElementById('barra-lugares').style.width = pct + '%';
+    })();
+
+    // Scroll animations
+    (function() {
+        document.querySelectorAll('.section-title').forEach(el => el.classList.add('anim', 'anim-up'));
+        document.querySelectorAll('.beneficio-card').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + (i + 1)));
+        document.querySelectorAll('.diferencia-item').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + (i + 1)));
+        document.querySelectorAll('.collage img').forEach((el, i) => el.classList.add('anim', 'anim-scale', 'anim-delay-' + (i + 1)));
+        document.querySelectorAll('.campo-item').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + Math.min(i + 1, 8)));
+        document.querySelectorAll('.perfil-content > *').forEach((el, i) => el.classList.add('anim', i === 0 ? 'anim-left' : 'anim-right'));
+        document.querySelectorAll('.perfil-lista li').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + (i + 1)));
+        document.querySelectorAll('.urgencia-left').forEach(el => el.classList.add('anim', 'anim-left'));
+        document.querySelectorAll('.urgencia-form').forEach(el => el.classList.add('anim', 'anim-right'));
+        document.querySelectorAll('#ubicacion .info-item').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + (i + 1)));
+        document.querySelectorAll('.mapa-wrapper').forEach(el => el.classList.add('anim', 'anim-scale'));
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+    })();
+
+    // Hamburger menu
+    document.querySelector('.hamburger')?.addEventListener('click', () => {
+        document.querySelector('nav')?.classList.toggle('active');
+    });
+</script>
+</body>
+</html>
