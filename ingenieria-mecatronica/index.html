@@ -316,25 +316,26 @@
         .accordion-body-inner { padding: 0 1.5rem 3rem; }
 
         /* Popups snackbar */
-        .snackbar { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); z-index: 999; background: var(--navy); color: var(--blanco); border-radius: 14px 14px 0 0; box-shadow: 0 -4px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; max-width: 700px; width: 95%; transition: bottom .5s ease; }
+        .snackbar { position: fixed; bottom: -150px; left: 0; right: 0; z-index: 999; background: var(--navy); color: var(--blanco); box-shadow: 0 -4px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 1rem; padding: 1rem 2.5rem 1rem 1.5rem; transition: bottom .5s ease; }
         .snackbar.show { bottom: 0; }
         .snackbar-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .snackbar-text { flex: 1; }
+        .snackbar-text { flex: 1; min-width: 0; }
         .snackbar-text strong { display: block; font-size: .95rem; font-weight: 700; margin-bottom: .15rem; }
-        .snackbar-text span { font-size: .8rem; font-weight: 300; opacity: .8; }
-        .snackbar-btn { padding: .55rem 1.25rem; border-radius: 50px; border: none; font-family: montserrat, sans-serif; font-weight: 700; font-size: .8rem; cursor: pointer; transition: .3s; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+        .snackbar-text span { font-size: .8rem; font-weight: 300; opacity: .8; display: block; }
+        .snackbar-btn { display: inline-block; padding: .55rem 1.25rem; border-radius: 50px; border: none; font-family: montserrat, sans-serif; font-weight: 700; font-size: .8rem; cursor: pointer; transition: .3s; text-decoration: none; white-space: nowrap; flex-shrink: 0; text-align: center; }
         .snackbar-btn.cyan { background: var(--cyan); color: var(--navy); }
         .snackbar-btn.cyan:hover { background: var(--cyan-oscuro); }
         .snackbar-btn.green { background: #25D366; color: var(--blanco); }
         .snackbar-btn.green:hover { background: #1da851; }
-        .snackbar-close { position: absolute; top: .5rem; right: .75rem; background: none; border: none; color: rgba(255,255,255,.5); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: .25rem; transition: .2s; }
+        .snackbar-close { position: absolute; top: .5rem; right: .5rem; background: none; border: none; color: rgba(255,255,255,.5); cursor: pointer; font-size: 1.4rem; line-height: 1; padding: .35rem; transition: .2s; z-index: 1; }
         .snackbar-close:hover { color: var(--blanco); }
         .snackbar-urgencia { background: linear-gradient(135deg, #1A1A1A, #2a2a2a); border-top: 3px solid var(--cyan); }
-        @media (max-width: 480px) {
-            .snackbar { flex-wrap: wrap; padding: .85rem 1rem; gap: .6rem; border-radius: 12px 12px 0 0; }
-            .snackbar-text strong { font-size: .85rem; }
-            .snackbar-text span { font-size: .72rem; }
-            .snackbar-btn { width: 100%; text-align: center; padding: .5rem; }
+        @media (max-width: 768px) {
+            .snackbar { flex-wrap: wrap; padding: .85rem 1rem 1rem; gap: .5rem; padding-right: 2rem; }
+            .snackbar-icon { font-size: 1.2rem; }
+            .snackbar-text strong { font-size: .82rem; }
+            .snackbar-text span { font-size: .7rem; }
+            .snackbar-btn { width: 100%; padding: .6rem; font-size: .8rem; margin-top: .25rem; }
         }
 
         /* Scroll animations */
@@ -667,7 +668,7 @@
         <strong>Mensualidad desde $3,200/mes</strong>
         <span>Inscripción única de $2,000 · Becas hasta 20%</span>
     </div>
-    <a href="#inversion" class="snackbar-btn cyan" onclick="closeSnackbar('snackbar-inversion')">Ver costos</a>
+    <a href="#inversion" class="snackbar-btn cyan" onclick="setTimeout(function(){closeSnackbar('snackbar-inversion')},300)">Ver costos</a>
 </div>
 
 <!-- Snackbar Urgencia -->
@@ -678,7 +679,7 @@
         <strong>¡Solo 10 lugares con 30% OFF en inscripción!</strong>
         <span>Registra tus datos y asegura tu descuento antes de que se agoten</span>
     </div>
-    <a href="#contacto" class="snackbar-btn green" onclick="closeSnackbar('snackbar-urgencia')">¡Lo quiero!</a>
+    <a href="#contacto" class="snackbar-btn green" onclick="setTimeout(function(){closeSnackbar('snackbar-urgencia')},300)">¡Lo quiero!</a>
 </div>
 
 <footer style="padding:2rem 1.5rem; text-align:center;">
