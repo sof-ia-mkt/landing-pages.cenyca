@@ -66,7 +66,8 @@
         .carousel-prev { left: 10px; }
         .carousel-next { right: 10px; }
 
-        .section-divider { display: block; max-width: 600px; margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,.35), transparent); }
+        .section-divider { display: flex; align-items: center; justify-content: center; background: #fff; padding: 0; }
+        .section-divider::before { content: ''; display: block; width: 100%; max-width: 600px; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,.35), transparent); }
         .section-divider .divider-icon { display: none; }
         .section-title { text-align: center; margin-bottom: 3rem; }
         .section-title h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--negro); margin-bottom: .6rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -380,9 +381,9 @@
         <a href="#contacto" class="nav-cta" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
     </div>
 </section>
-<div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
+<div class="section-divider" style="background:var(--gris-claro);"></div>
 
-<section class="beneficios bg-flecha bg-flecha-right" id="beneficios">
+<section class="beneficios bg-flecha bg-flecha-right" id="beneficios" style="background:var(--gris-claro);">
     <div class="container">
         <div class="section-title">
             <h2>¿Por qué estudiar Mecatrónica?</h2>
@@ -459,7 +460,7 @@
         </div>
     </div>
 </section>
-<div class="section-divider"></div>
+<div class="section-divider" style="background:var(--gris-claro);"></div>
 
 <section id="experiencias" class="bg-flecha bg-flecha-center" style="background: var(--gris-claro); padding-top:3rem;">
     <div class="container">
@@ -510,7 +511,7 @@
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
-<section id="instalaciones">
+<section id="instalaciones" style="background:#fff;">
     <div class="container">
         <div class="section-title">
             <h2>Aprende con <span class="highlight-word">tecnología real</span> en nuestros laboratorios</h2>
@@ -573,7 +574,7 @@
         <p class="inversion-nota">⚠ Los costos pueden variar. Esta simulación no es oficial hasta haber sido atendido por un asesor educativo, quien podrá aclarar dudas, confirmar becas disponibles y validar el plan de pagos personalizado.</p>
     </div>
 </section>
-<div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
+<div class="section-divider" style="background:var(--navy);"></div>
 
 <section class="urgencia-banner" id="contacto">
     <div class="urgencia-layout">
@@ -633,7 +634,7 @@
         </div>
     </div>
 </section>
-<div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
+<div class="section-divider" style="background:var(--navy);"></div>
 
 <section id="ubicacion" class="bg-flecha bg-flecha-left">
     <div class="container">
