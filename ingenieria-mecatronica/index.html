@@ -315,6 +315,28 @@
         .accordion-body.open { max-height: 2000px; }
         .accordion-body-inner { padding: 0 1.5rem 3rem; }
 
+        /* Popups snackbar */
+        .snackbar { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); z-index: 999; background: var(--navy); color: var(--blanco); border-radius: 14px 14px 0 0; box-shadow: 0 -4px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; max-width: 700px; width: 95%; transition: bottom .5s ease; }
+        .snackbar.show { bottom: 0; }
+        .snackbar-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .snackbar-text { flex: 1; }
+        .snackbar-text strong { display: block; font-size: .95rem; font-weight: 700; margin-bottom: .15rem; }
+        .snackbar-text span { font-size: .8rem; font-weight: 300; opacity: .8; }
+        .snackbar-btn { padding: .55rem 1.25rem; border-radius: 50px; border: none; font-family: montserrat, sans-serif; font-weight: 700; font-size: .8rem; cursor: pointer; transition: .3s; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+        .snackbar-btn.cyan { background: var(--cyan); color: var(--navy); }
+        .snackbar-btn.cyan:hover { background: var(--cyan-oscuro); }
+        .snackbar-btn.green { background: #25D366; color: var(--blanco); }
+        .snackbar-btn.green:hover { background: #1da851; }
+        .snackbar-close { position: absolute; top: .5rem; right: .75rem; background: none; border: none; color: rgba(255,255,255,.5); cursor: pointer; font-size: 1.2rem; line-height: 1; padding: .25rem; transition: .2s; }
+        .snackbar-close:hover { color: var(--blanco); }
+        .snackbar-urgencia { background: linear-gradient(135deg, #1A1A1A, #2a2a2a); border-top: 3px solid var(--cyan); }
+        @media (max-width: 480px) {
+            .snackbar { flex-wrap: wrap; padding: .85rem 1rem; gap: .6rem; border-radius: 12px 12px 0 0; }
+            .snackbar-text strong { font-size: .85rem; }
+            .snackbar-text span { font-size: .72rem; }
+            .snackbar-btn { width: 100%; text-align: center; padding: .5rem; }
+        }
+
         /* Scroll animations */
         .anim { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
         .anim-up { transform: translateY(40px); }
@@ -636,6 +658,29 @@
         </div>
     </div>
 </section>
+
+<!-- Snackbar Inversión -->
+<div class="snackbar" id="snackbar-inversion">
+    <button class="snackbar-close" onclick="closeSnackbar('snackbar-inversion')">&times;</button>
+    <div class="snackbar-icon">💰</div>
+    <div class="snackbar-text">
+        <strong>Mensualidad desde $3,200/mes</strong>
+        <span>Inscripción única de $2,000 · Becas hasta 20%</span>
+    </div>
+    <a href="#inversion" class="snackbar-btn cyan" onclick="closeSnackbar('snackbar-inversion')">Ver costos</a>
+</div>
+
+<!-- Snackbar Urgencia -->
+<div class="snackbar snackbar-urgencia" id="snackbar-urgencia">
+    <button class="snackbar-close" onclick="closeSnackbar('snackbar-urgencia')">&times;</button>
+    <div class="snackbar-icon">🔥</div>
+    <div class="snackbar-text">
+        <strong>¡Solo 10 lugares con 30% OFF en inscripción!</strong>
+        <span>Registra tus datos y asegura tu descuento antes de que se agoten</span>
+    </div>
+    <a href="#contacto" class="snackbar-btn green" onclick="closeSnackbar('snackbar-urgencia')">¡Lo quiero!</a>
+</div>
+
 <footer style="padding:2rem 1.5rem; text-align:center;">
     <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,.1);">
         <img src="assets/logo.avif" alt="CENYCA Universidad" style="height:45px; opacity:.8;">
@@ -644,6 +689,60 @@
     <div class="footer-bottom">&copy; 2026 CENYCA Universidad. Todos los derechos reservados.</div>
 </footer>
 <script>
+    // Snackbar popups
+    (function() {
+        let currentSnackbar = null;
+        let snackbar1Closed = false;
+        let snackbar2Closed = false;
+        let scrollTriggered = false;
+
+        window.closeSnackbar = function(id) {
+            const el = document.getElementById(id);
+            el.classList.remove('show');
+            currentSnackbar = null;
+            if (id === 'snackbar-inversion') {
+                snackbar1Closed = true;
+                if (!snackbar2Closed) {
+                    setTimeout(() => {
+                        if (!currentSnackbar) {
+                            document.getElementById('snackbar-urgencia').classList.add('show');
+                            currentSnackbar = 'snackbar-urgencia';
+                        }
+                    }, 4000);
+                }
+            } else {
+                snackbar2Closed = true;
+                if (!snackbar1Closed) {
+                    setTimeout(() => {
+                        if (!currentSnackbar) {
+                            document.getElementById('snackbar-inversion').classList.add('show');
+                            currentSnackbar = 'snackbar-inversion';
+                        }
+                    }, 4000);
+                }
+            }
+        };
+
+        // Popup 1: aparece a los 5 segundos
+        setTimeout(() => {
+            if (!currentSnackbar) {
+                document.getElementById('snackbar-inversion').classList.add('show');
+                currentSnackbar = 'snackbar-inversion';
+            }
+        }, 5000);
+
+        // Popup 2: aparece al scrollear 35% de la página (si el 1 ya se cerró)
+        window.addEventListener('scroll', function() {
+            if (scrollTriggered) return;
+            const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            if (scrollPct > 0.35 && snackbar1Closed && !snackbar2Closed && !currentSnackbar) {
+                scrollTriggered = true;
+                document.getElementById('snackbar-urgencia').classList.add('show');
+                currentSnackbar = 'snackbar-urgencia';
+            }
+        });
+    })();
+
     // Acordeón toggle
     function toggleAccordion(trigger) {
         trigger.classList.toggle('open');
