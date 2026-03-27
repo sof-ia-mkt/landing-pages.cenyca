@@ -158,10 +158,16 @@
         .urgencia-form .form-btn::after { content: ''; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transform: skewX(-20deg); animation: cta-shine 3s infinite; }
         .form-trust { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1rem; font-size: .78rem; color: rgba(255,255,255,.5); }
         .form-trust svg { width: 14px; height: 14px; color: var(--cyan); flex-shrink: 0; }
-        .form-urgencia-badge { background: linear-gradient(135deg, rgba(0,212,255,.15), rgba(0,212,255,.05)); border: 1px solid rgba(0,212,255,.25); border-radius: 12px; padding: .85rem 1rem; margin-bottom: 1.5rem; text-align: center; }
-        .form-urgencia-badge .badge-icon { font-size: 1.5rem; margin-bottom: .25rem; }
-        .form-urgencia-badge p { font-size: .85rem; color: rgba(255,255,255,.9); line-height: 1.4; margin: 0; }
-        .form-urgencia-badge strong { color: var(--cyan); font-weight: 700; }
+        .form-lugares { background: linear-gradient(135deg, rgba(0,212,255,.12), rgba(0,212,255,.03)); border: 1px solid rgba(0,212,255,.2); border-radius: 14px; padding: 1rem 1.15rem; margin-bottom: 1.5rem; }
+        .form-lugares-header { display: flex; align-items: center; gap: .5rem; margin-bottom: .6rem; }
+        .form-lugares-icon { font-size: 1.2rem; }
+        .form-lugares-text { font-size: .9rem; color: rgba(255,255,255,.9); }
+        .form-lugares-text strong { color: var(--cyan); font-weight: 700; font-size: 1.1em; }
+        .form-lugares-barra { width: 100%; height: 10px; background: rgba(255,255,255,.1); border-radius: 6px; overflow: hidden; margin-bottom: .7rem; }
+        .form-lugares-barra-inner { height: 100%; border-radius: 6px; transition: width 1.5s ease; background: linear-gradient(90deg, var(--cyan), #00f0ff, #ff9500); background-size: 200% 100%; animation: barra-pulse 2s ease infinite; }
+        @keyframes barra-pulse { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .form-lugares-promo { font-size: .82rem; color: rgba(255,255,255,.75); line-height: 1.4; margin: 0; text-align: center; }
+        .form-lugares-promo strong { color: var(--cyan); font-weight: 700; }
         .cta-banner { background: linear-gradient(135deg, var(--cyan), var(--cyan-oscuro)); color: var(--navy); text-align: center; padding: 4rem 1.5rem; }
         .cta-banner h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: .75rem; }
         .cta-banner p { opacity: .9; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
@@ -294,9 +300,10 @@
             .urgencia-form .form-group select { padding-left: 2.5rem; }
             .form-group textarea { min-height: 60px; }
             .form-btn { padding: .75rem; font-size: .9rem; }
-            .form-urgencia-badge { padding: .7rem .85rem; }
-            .form-urgencia-badge .badge-icon { font-size: 1.2rem; }
-            .form-urgencia-badge p { font-size: .8rem; }
+            .form-lugares { padding: .8rem .9rem; border-radius: 10px; }
+            .form-lugares-text { font-size: .82rem; }
+            .form-lugares-promo { font-size: .78rem; }
+            .form-lugares-barra { height: 8px; }
             .form-trust { font-size: .72rem; }
             .accordion-trigger { padding: 1.25rem .85rem; gap: .5rem; }
             .accordion-chevron { width: 32px; height: 32px; min-width: 32px; }
@@ -632,14 +639,18 @@
                 <div class="countdown-unit"><span class="countdown-number" id="cd-min">00</span><span class="countdown-label">Min</span></div>
                 <div class="countdown-unit"><span class="countdown-number" id="cd-seg">00</span><span class="countdown-label">Seg</span></div>
             </div>
-            <div class="urgencia-lugares">Lugares disponibles: <strong id="lugares-count">15</strong> de 30</div>
-            <div class="urgencia-barra"><div class="urgencia-barra-inner" id="barra-lugares" style="width:50%"></div></div>
         </div>
         <div class="urgencia-form">
             <div class="form-card">
-                <div class="form-urgencia-badge">
-                    <div class="badge-icon">🔥</div>
-                    <p>Sé de los <strong>primeros 10 registros</strong> y obtén un <strong>descuento del 30%</strong> en tu inscripción</p>
+                <div class="form-lugares">
+                    <div class="form-lugares-header">
+                        <span class="form-lugares-icon">🔥</span>
+                        <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">12</strong> de <strong>40</strong> lugares</span>
+                    </div>
+                    <div class="form-lugares-barra">
+                        <div class="form-lugares-barra-inner" id="barra-form-lugares"></div>
+                    </div>
+                    <p class="form-lugares-promo">Sé de los <strong>primeros 10 registros</strong> y obtén un <strong>descuento del 30%</strong> en tu inscripción</p>
                 </div>
                 <h3>Regístrate ahora</h3>
                 <p class="form-subtitle">Completa tus datos y un asesor te contactará</p>
@@ -873,16 +884,18 @@
 
     // Simulador de lugares disponibles
     (function() {
-        const total = 30;
+        const total = 40;
         const startDate = new Date('2026-03-20').getTime();
         const endDate = new Date('2026-05-04').getTime();
         const now = Date.now();
         const progress = Math.min(1, Math.max(0, (now - startDate) / (endDate - startDate)));
-        const taken = Math.floor(progress * 20) + Math.floor(Math.random() * 2);
-        const remaining = Math.max(5, total - taken);
-        document.getElementById('lugares-count').textContent = remaining;
+        const taken = Math.floor(progress * 22) + Math.floor(Math.random() * 3);
+        const remaining = Math.max(8, total - taken);
+        const el = document.getElementById('lugares-form-count');
+        if (el) el.textContent = remaining;
         const pct = ((total - remaining) / total) * 100;
-        document.getElementById('barra-lugares').style.width = pct + '%';
+        const barra = document.getElementById('barra-form-lugares');
+        if (barra) barra.style.width = pct + '%';
     })();
 </script>
 <script>
