@@ -488,13 +488,10 @@
         </div>
     </div>
 </section>
-<!-- Robot 3D Disassembly Section -->
-<section id="robot-section" style="position:relative; height:150vh; background:linear-gradient(180deg, var(--gris-claro) 0%, var(--navy) 40%, var(--navy) 60%, #0a0e1a 100%); overflow:hidden;">
-    <div id="robot-sticky" style="position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
-        <canvas id="robotCanvas"></canvas>
-        <div id="robot-text" style="position:absolute; bottom:12%; text-align:center; color:var(--blanco); opacity:0; transition:opacity .8s ease;">
-            <p style="font-size:clamp(.9rem,2vw,1.15rem); font-weight:300; letter-spacing:2px; text-transform:uppercase; opacity:.7;">Donde la tecnología cobra vida</p>
-        </div>
+<!-- Robotic Arm 3D Disassembly -->
+<section id="robot-section" style="position:relative; height:80vh; background:linear-gradient(180deg, var(--gris-claro) 0%, var(--navy) 50%, #0a0e1a 100%); overflow:hidden;">
+    <div id="robot-sticky" style="position:sticky; top:0; height:60vh; display:flex; align-items:center; justify-content:center;">
+        <canvas id="robotCanvas" style="max-height:55vh;"></canvas>
     </div>
 </section>
 
@@ -1069,29 +1066,36 @@
 (function(){
     const canvas = document.getElementById('robotCanvas');
     const section = document.getElementById('robot-section');
-    const robotText = document.getElementById('robot-text');
     if (!canvas || !section) return;
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    camera.position.set(0, 1, 8);
-    camera.lookAt(0, 1, 0);
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.set(3, 3, 6);
+    camera.lookAt(0, 1.8, 0);
 
     // Lighting
-    const amb = new THREE.AmbientLight(0xffffff, 0.4);
-    scene.add(amb);
-    const dir = new THREE.DirectionalLight(0xffffff, 0.8);
-    dir.position.set(5, 10, 7);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const dir = new THREE.DirectionalLight(0xffffff, 0.9);
+    dir.position.set(5, 8, 6);
     scene.add(dir);
-    const cyan = new THREE.PointLight(0x00d4ff, 1.2, 15);
-    cyan.position.set(-3, 3, 4);
-    scene.add(cyan);
+    const cyanLight = new THREE.PointLight(0x00d4ff, 1.5, 12);
+    cyanLight.position.set(-2, 4, 3);
+    scene.add(cyanLight);
+    const rimLight = new THREE.PointLight(0x00d4ff, 0.6, 10);
+    rimLight.position.set(3, 1, -2);
+    scene.add(rimLight);
 
-    const mat = new THREE.MeshStandardMaterial({ color: 0x1B2040, metalness: 0.8, roughness: 0.2 });
-    const matCyan = new THREE.MeshStandardMaterial({ color: 0x00D4FF, metalness: 0.6, roughness: 0.3, emissive: 0x00D4FF, emissiveIntensity: 0.3 });
-    const matDark = new THREE.MeshStandardMaterial({ color: 0x252B52, metalness: 0.7, roughness: 0.25 });
+    // Materials
+    const matBody = new THREE.MeshStandardMaterial({ color: 0x1B2040, metalness: 0.85, roughness: 0.15 });
+    const matCyan = new THREE.MeshStandardMaterial({ color: 0x00D4FF, metalness: 0.5, roughness: 0.3, emissive: 0x00D4FF, emissiveIntensity: 0.4 });
+    const matDark = new THREE.MeshStandardMaterial({ color: 0x252B52, metalness: 0.75, roughness: 0.2 });
+    const matAccent = new THREE.MeshStandardMaterial({ color: 0x00D4FF, metalness: 0.3, roughness: 0.4, emissive: 0x00D4FF, emissiveIntensity: 0.15 });
+
+    // Cache materials for opacity changes
+    const matStore = new Map();
+    [matBody, matCyan, matDark, matAccent].forEach(m => { m.transparent = true; });
 
     const parts = [];
     function addPart(geo, material, pos, rot) {
@@ -1100,80 +1104,84 @@
         if (rot) mesh.rotation.set(rot[0], rot[1], rot[2]);
         mesh.userData.origPos = mesh.position.clone();
         mesh.userData.origRot = mesh.rotation.clone();
-        mesh.userData.explodeDir = new THREE.Vector3((Math.random()-.5)*8, (Math.random()-.5)*6+2, (Math.random()-.5)*8);
-        mesh.userData.explodeRot = new THREE.Vector3((Math.random()-.5)*4, (Math.random()-.5)*4, (Math.random()-.5)*4);
+        mesh.userData.explodeDir = new THREE.Vector3(
+            (Math.random()-.5)*5,
+            (Math.random()-.5)*4+1.5,
+            (Math.random()-.5)*5
+        );
+        mesh.userData.explodeRot = new THREE.Vector3(
+            (Math.random()-.5)*3,
+            (Math.random()-.5)*3,
+            (Math.random()-.5)*3
+        );
         scene.add(mesh);
         parts.push(mesh);
         return mesh;
     }
 
-    // === BUILD ROBOT ===
-    // Head
-    addPart(new THREE.BoxGeometry(.9,.7,.8), mat, [0,3.1,0]);
-    // Eyes
-    addPart(new THREE.SphereGeometry(.12,16,16), matCyan, [-.22,3.2,.41]);
-    addPart(new THREE.SphereGeometry(.12,16,16), matCyan, [.22,3.2,.41]);
-    // Antenna
-    addPart(new THREE.CylinderGeometry(.04,.04,.4,8), matCyan, [0,3.65,0]);
-    addPart(new THREE.SphereGeometry(.08,8,8), matCyan, [0,3.88,0]);
-    // Neck
-    addPart(new THREE.CylinderGeometry(.18,.22,.25,12), matDark, [0,2.65,0]);
-    // Torso
-    addPart(new THREE.BoxGeometry(1.4,1.4,.9), mat, [0,1.8,0]);
-    // Chest plate
-    addPart(new THREE.BoxGeometry(.6,.5,.1), matCyan, [0,2,.46]);
-    // Core light
-    addPart(new THREE.SphereGeometry(.12,12,12), matCyan, [0,1.8,.5]);
-    // Shoulders
-    addPart(new THREE.SphereGeometry(.25,12,12), matDark, [-.9,2.35,0]);
-    addPart(new THREE.SphereGeometry(.25,12,12), matDark, [.9,2.35,0]);
-    // Upper arms
-    addPart(new THREE.CylinderGeometry(.14,.12,.7,8), mat, [-1.05,1.85,0]);
-    addPart(new THREE.CylinderGeometry(.14,.12,.7,8), mat, [1.05,1.85,0]);
-    // Elbows
-    addPart(new THREE.SphereGeometry(.15,8,8), matCyan, [-1.05,1.45,0]);
-    addPart(new THREE.SphereGeometry(.15,8,8), matCyan, [1.05,1.45,0]);
-    // Forearms
-    addPart(new THREE.CylinderGeometry(.12,.1,.65,8), matDark, [-1.05,.95,0]);
-    addPart(new THREE.CylinderGeometry(.12,.1,.65,8), matDark, [1.05,.95,0]);
-    // Hands
-    addPart(new THREE.BoxGeometry(.22,.22,.18), mat, [-1.05,.58,0]);
-    addPart(new THREE.BoxGeometry(.22,.22,.18), mat, [1.05,.58,0]);
-    // Waist
-    addPart(new THREE.CylinderGeometry(.5,.4,.3,12), matDark, [0,1,0]);
-    // Upper legs
-    addPart(new THREE.CylinderGeometry(.18,.15,.8,8), mat, [-.35,.45,0]);
-    addPart(new THREE.CylinderGeometry(.18,.15,.8,8), mat, [.35,.45,0]);
-    // Knees
-    addPart(new THREE.SphereGeometry(.17,8,8), matCyan, [-.35,.0,0]);
-    addPart(new THREE.SphereGeometry(.17,8,8), matCyan, [.35,.0,0]);
-    // Lower legs
-    addPart(new THREE.CylinderGeometry(.15,.13,.75,8), matDark, [-.35,-.45,0]);
-    addPart(new THREE.CylinderGeometry(.15,.13,.75,8), matDark, [.35,-.45,0]);
-    // Feet
-    addPart(new THREE.BoxGeometry(.3,.15,.45), mat, [-.35,-.88,.05]);
-    addPart(new THREE.BoxGeometry(.3,.15,.45), mat, [.35,-.88,.05]);
+    // === ROBOTIC ARM ===
+    // Base platform
+    addPart(new THREE.CylinderGeometry(1, 1.1, .25, 24), matDark, [0, .12, 0]);
+    addPart(new THREE.CylinderGeometry(.85, .85, .08, 24), matAccent, [0, .28, 0]);
+    // Base turret
+    addPart(new THREE.CylinderGeometry(.6, .7, .5, 16), matBody, [0, .57, 0]);
+    // Joint 1 ring
+    addPart(new THREE.TorusGeometry(.35, .08, 8, 24), matCyan, [0, .85, 0], [Math.PI/2, 0, 0]);
+    // Shoulder housing
+    addPart(new THREE.BoxGeometry(.7, .5, .6), matBody, [0, 1.15, 0]);
+    addPart(new THREE.SphereGeometry(.2, 12, 12), matCyan, [-.38, 1.15, 0]);
+    addPart(new THREE.SphereGeometry(.2, 12, 12), matCyan, [.38, 1.15, 0]);
+    // Upper arm
+    addPart(new THREE.CylinderGeometry(.18, .16, 1.2, 12), matBody, [0, 2, 0]);
+    // Hydraulic detail
+    addPart(new THREE.CylinderGeometry(.06, .06, 1, 8), matDark, [.22, 1.95, 0]);
+    addPart(new THREE.CylinderGeometry(.06, .06, 1, 8), matDark, [-.22, 1.95, 0]);
+    // Elbow joint
+    addPart(new THREE.SphereGeometry(.22, 12, 12), matCyan, [0, 2.65, 0]);
+    addPart(new THREE.TorusGeometry(.25, .05, 8, 20), matAccent, [0, 2.65, 0], [0, 0, Math.PI/2]);
+    // Forearm
+    addPart(new THREE.CylinderGeometry(.14, .12, 1, 12), matBody, [0, 3.2, 0], [0, 0, .15]);
+    // Forearm cable
+    addPart(new THREE.CylinderGeometry(.04, .04, .9, 8), matAccent, [.15, 3.18, 0], [0, 0, .15]);
+    // Wrist joint
+    addPart(new THREE.CylinderGeometry(.15, .15, .15, 16), matCyan, [.12, 3.72, 0]);
+    addPart(new THREE.TorusGeometry(.12, .04, 8, 16), matDark, [.12, 3.72, 0]);
+    // Gripper base
+    addPart(new THREE.BoxGeometry(.35, .2, .3), matBody, [.12, 3.9, 0]);
+    // Gripper fingers
+    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [-.02, 4.1, .12]);
+    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [.26, 4.1, .12]);
+    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [-.02, 4.1, -.12]);
+    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [.26, 4.1, -.12]);
+    // Finger tips
+    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [-.02, 4.32, .12]);
+    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [.26, 4.32, .12]);
+    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [-.02, 4.32, -.12]);
+    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [.26, 4.32, -.12]);
+    // Status LEDs on base
+    addPart(new THREE.SphereGeometry(.05, 8, 8), matCyan, [.5, .35, .5]);
+    addPart(new THREE.SphereGeometry(.05, 8, 8), matCyan, [-.5, .35, .5]);
+    addPart(new THREE.SphereGeometry(.05, 8, 8), matCyan, [.5, .35, -.5]);
 
     // === PARTICLES ===
-    const particleCount = 600;
+    const particleCount = 350;
     const particleGeo = new THREE.BufferGeometry();
     const pPos = new Float32Array(particleCount * 3);
     const pVel = [];
     for (let i = 0; i < particleCount; i++) {
-        pPos[i*3] = (Math.random()-.5)*3;
-        pPos[i*3+1] = Math.random()*4;
-        pPos[i*3+2] = (Math.random()-.5)*3;
-        pVel.push(new THREE.Vector3((Math.random()-.5)*.02, (Math.random()-.5)*.02, (Math.random()-.5)*.02));
+        pPos[i*3] = (Math.random()-.5)*2.5;
+        pPos[i*3+1] = Math.random()*4.5;
+        pPos[i*3+2] = (Math.random()-.5)*2.5;
+        pVel.push(new THREE.Vector3((Math.random()-.5)*.015, (Math.random()-.5)*.015, (Math.random()-.5)*.015));
     }
     particleGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    const particleMat = new THREE.PointsMaterial({ color: 0x00D4FF, size: 0.04, transparent: true, opacity: 0 });
-    const particleSystem = new THREE.Points(particleGeo, particleMat);
-    scene.add(particleSystem);
+    const particleMat = new THREE.PointsMaterial({ color: 0x00D4FF, size: 0.035, transparent: true, opacity: 0 });
+    scene.add(new THREE.Points(particleGeo, particleMat));
 
     // Resize
     function resize() {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
+        const w = canvas.parentElement.offsetWidth;
+        const h = canvas.parentElement.offsetHeight;
         renderer.setSize(w, h);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
@@ -1181,16 +1189,15 @@
     resize();
     window.addEventListener('resize', resize);
 
-    // Scroll progress
+    // Scroll
     let scrollProgress = 0;
     function updateScroll() {
         const rect = section.getBoundingClientRect();
-        const sectionH = section.offsetHeight - window.innerHeight;
-        const raw = -rect.top / sectionH;
-        scrollProgress = Math.max(0, Math.min(1, raw));
+        const sH = section.offsetHeight - window.innerHeight;
+        scrollProgress = Math.max(0, Math.min(1, -rect.top / Math.max(sH, 1)));
     }
 
-    // Animation loop
+    // Animate
     let time = 0;
     function animate() {
         requestAnimationFrame(animate);
@@ -1198,51 +1205,43 @@
         updateScroll();
 
         const t = scrollProgress;
-        const explode = Math.pow(Math.max(0, (t - 0.15) / 0.85), 1.5);
-
-        // Rotate robot gently
-        const groupRotY = Math.sin(time * 0.5) * 0.15;
+        const explode = Math.pow(Math.max(0, (t - 0.1) / 0.9), 1.8);
+        const rotY = Math.sin(time * 0.4) * 0.2 * (1 - explode);
 
         parts.forEach(p => {
-            const orig = p.userData.origPos;
-            const origR = p.userData.origRot;
-            const dir = p.userData.explodeDir;
-            const dirR = p.userData.explodeRot;
+            const o = p.userData.origPos;
+            const oR = p.userData.origRot;
+            const eD = p.userData.explodeDir;
+            const eR = p.userData.explodeRot;
 
-            p.position.x = orig.x + dir.x * explode;
-            p.position.y = orig.y + dir.y * explode;
-            p.position.z = orig.z + dir.z * explode;
+            p.position.x = o.x + eD.x * explode;
+            p.position.y = o.y + eD.y * explode;
+            p.position.z = o.z + eD.z * explode;
 
-            p.rotation.x = origR.x + dirR.x * explode;
-            p.rotation.y = origR.y + dirR.y * explode + groupRotY * (1 - explode);
-            p.rotation.z = origR.z + dirR.z * explode;
+            p.rotation.x = oR.x + eR.x * explode;
+            p.rotation.y = oR.y + eR.y * explode + rotY;
+            p.rotation.z = oR.z + eR.z * explode;
 
-            // Fade out parts
-            p.material = p.material.clone();
-            p.material.transparent = true;
-            p.material.opacity = Math.max(0, 1 - explode * 1.8);
-
-            // Scale down as they fly
-            const s = Math.max(0.01, 1 - explode * 0.8);
+            p.material.opacity = Math.max(0, 1 - explode * 1.6);
+            const s = Math.max(0.01, 1 - explode * 0.7);
             p.scale.set(s, s, s);
         });
 
-        // Particles appear as robot explodes
-        particleMat.opacity = Math.min(1, explode * 2);
-        const positions = particleGeo.attributes.position.array;
+        // Particles
+        particleMat.opacity = Math.min(.8, explode * 2);
+        const pos = particleGeo.attributes.position.array;
         for (let i = 0; i < particleCount; i++) {
-            positions[i*3] += pVel[i].x + Math.sin(time + i) * 0.003;
-            positions[i*3+1] += pVel[i].y + Math.cos(time + i * 0.5) * 0.003;
-            positions[i*3+2] += pVel[i].z;
-            // Contain particles
-            if (Math.abs(positions[i*3]) > 6) pVel[i].x *= -1;
-            if (positions[i*3+1] > 7 || positions[i*3+1] < -2) pVel[i].y *= -1;
-            if (Math.abs(positions[i*3+2]) > 6) pVel[i].z *= -1;
+            pos[i*3] += pVel[i].x + Math.sin(time + i) * 0.002;
+            pos[i*3+1] += pVel[i].y + Math.cos(time + i*.5) * 0.002;
+            pos[i*3+2] += pVel[i].z;
+            if (Math.abs(pos[i*3]) > 5) pVel[i].x *= -1;
+            if (pos[i*3+1] > 6 || pos[i*3+1] < -1) pVel[i].y *= -1;
+            if (Math.abs(pos[i*3+2]) > 5) pVel[i].z *= -1;
         }
         particleGeo.attributes.position.needsUpdate = true;
 
-        // Text reveal
-        if (robotText) robotText.style.opacity = Math.max(0, (t - 0.6) / 0.3);
+        // Cyan light pulses
+        cyanLight.intensity = 1.5 + Math.sin(time * 2) * 0.3;
 
         renderer.render(scene, camera);
     }
