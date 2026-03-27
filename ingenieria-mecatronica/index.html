@@ -1093,13 +1093,11 @@
     const matDark = new THREE.MeshStandardMaterial({ color: 0x252B52, metalness: 0.75, roughness: 0.2 });
     const matAccent = new THREE.MeshStandardMaterial({ color: 0x00D4FF, metalness: 0.3, roughness: 0.4, emissive: 0x00D4FF, emissiveIntensity: 0.15 });
 
-    // Cache materials for opacity changes
-    const matStore = new Map();
-    [matBody, matCyan, matDark, matAccent].forEach(m => { m.transparent = true; });
-
     const parts = [];
     function addPart(geo, material, pos, rot) {
-        const mesh = new THREE.Mesh(geo, material);
+        const clonedMat = material.clone();
+        clonedMat.transparent = true;
+        const mesh = new THREE.Mesh(geo, clonedMat);
         mesh.position.set(pos[0], pos[1], pos[2]);
         if (rot) mesh.rotation.set(rot[0], rot[1], rot[2]);
         mesh.userData.origPos = mesh.position.clone();
@@ -1180,8 +1178,8 @@
 
     // Resize
     function resize() {
-        const w = canvas.parentElement.offsetWidth;
-        const h = canvas.parentElement.offsetHeight;
+        const w = window.innerWidth;
+        const h = window.innerHeight * 0.6;
         renderer.setSize(w, h);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
