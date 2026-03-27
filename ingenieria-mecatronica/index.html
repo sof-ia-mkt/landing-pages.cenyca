@@ -104,10 +104,13 @@
         .diferencia-item p { font-size: .9rem; line-height: 1.6; color: var(--gris-oscuro); margin: 0; }
         .collage { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
         .collage img { width: 100%; height: 280px; object-fit: cover; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,.1); }
-        .urgencia-banner { background: linear-gradient(135deg, #1A1A1A, #2a2a2a); color: var(--blanco); padding: 3rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
+        .urgencia-banner { background: linear-gradient(135deg, var(--navy), #0d1025); color: var(--blanco); padding: 4rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
         .urgencia-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #00f0ff, var(--cyan)); }
-        .urgencia-lema { font-family: montserrat, sans-serif; font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: .5rem; text-transform: uppercase; letter-spacing: 2px; }
-        .urgencia-lema span { color: var(--cyan); font-weight: 400; }
+        .urgencia-banner::after { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,212,255,.08) 0%, transparent 70%); pointer-events: none; }
+        .urgencia-lema { font-family: montserrat, sans-serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 3px; line-height: 1.15; }
+        .urgencia-lema span { color: var(--cyan); font-weight: 900; }
+        .urgencia-lema .accent-underline { position: relative; display: inline-block; }
+        .urgencia-lema .accent-underline::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 100%; height: 4px; background: var(--cyan); border-radius: 2px; }
         .urgencia-precio { font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 300; margin-bottom: 1.5rem; opacity: .9; }
         .urgencia-precio strong { font-size: 1.4em; font-weight: 700; color: var(--cyan); }
         .urgencia-precio .precio-tachado { text-decoration: line-through; opacity: .5; font-size: .85em; margin-right: .5rem; }
@@ -117,23 +120,48 @@
         .urgencia-item-value { font-size: 1.3rem; font-family: montserrat, sans-serif; font-weight: 700; }
         .urgencia-item-value.cyan { color: var(--cyan); }
         .countdown { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .countdown-unit { background: var(--cyan); color: var(--navy); border-radius: 10px; padding: .75rem 1rem; min-width: 70px; }
-        .countdown-number { font-family: montserrat, sans-serif; font-size: 1.8rem; font-weight: 700; display: block; line-height: 1; }
-        .countdown-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 1px; opacity: .8; }
+        .countdown-unit { background: rgba(0,212,255,.15); border: 1px solid rgba(0,212,255,.3); color: var(--blanco); border-radius: 12px; padding: .75rem 1rem; min-width: 70px; }
+        .countdown-number { font-family: montserrat, sans-serif; font-size: 1.8rem; font-weight: 700; display: block; line-height: 1; color: var(--cyan); }
+        .countdown-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 1px; opacity: .7; }
         .urgencia-lugares { font-size: .95rem; margin-bottom: 1rem; opacity: .85; }
         .urgencia-lugares strong { color: var(--cyan); font-size: 1.3em; }
         .urgencia-barra { width: 100%; max-width: 400px; height: 8px; background: rgba(255,255,255,.15); border-radius: 4px; margin: 0 auto 1.5rem; overflow: hidden; }
         .urgencia-barra-inner { height: 100%; background: linear-gradient(90deg, var(--cyan), #00f0ff); border-radius: 4px; transition: width 1s ease; }
         .urgencia-nota { font-size: .8rem; opacity: .5; margin-top: 1rem; }
-        .urgencia-layout { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 2fr 3fr; gap: 2rem; align-items: start; }
+        .urgencia-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
         .urgencia-left { text-align: left; }
         .urgencia-left .urgencia-lema { text-align: left; }
         .urgencia-left .urgencia-precio { text-align: left; }
         .urgencia-left .countdown { justify-content: flex-start; }
         .urgencia-left .urgencia-lugares { text-align: left; }
         .urgencia-left .urgencia-barra { margin: 0 0 1.5rem; }
-        .urgencia-form .form-card { background: var(--blanco); color: var(--gris-oscuro); }
-        .urgencia-form .form-card h3 { color: var(--negro); }
+        /* Form card rediseñado */
+        .urgencia-form .form-card { background: linear-gradient(160deg, #1e2348, #161a35); color: var(--blanco); border: 1px solid rgba(0,212,255,.15); box-shadow: 0 8px 40px rgba(0,0,0,.3), 0 0 80px rgba(0,212,255,.05); }
+        .urgencia-form .form-card h3 { color: var(--blanco); font-size: 1.25rem; text-align: center; }
+        .urgencia-form .form-card .form-subtitle { text-align: center; font-size: .88rem; color: rgba(255,255,255,.6); margin-top: -.75rem; margin-bottom: 1.5rem; }
+        .urgencia-form .form-group label { color: rgba(255,255,255,.85); font-size: .82rem; }
+        .urgencia-form .form-group .input-wrapper { position: relative; }
+        .urgencia-form .form-group .input-icon { position: absolute; left: .85rem; top: 50%; transform: translateY(-50%); color: var(--cyan); pointer-events: none; opacity: .7; }
+        .urgencia-form .form-group .input-icon svg { width: 18px; height: 18px; }
+        .urgencia-form .form-group input,
+        .urgencia-form .form-group select { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); color: var(--blanco); padding-left: 2.75rem; border-radius: 12px; }
+        .urgencia-form .form-group input::placeholder { color: rgba(255,255,255,.35); }
+        .urgencia-form .form-group input:focus,
+        .urgencia-form .form-group select:focus { border-color: var(--cyan); background: rgba(0,212,255,.06); box-shadow: 0 0 0 3px rgba(0,212,255,.1); }
+        .urgencia-form .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300D4FF' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+        .urgencia-form .form-group select option { background: var(--navy); color: var(--blanco); }
+        .urgencia-form .form-group textarea { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); color: var(--blanco); border-radius: 12px; min-height: 70px; }
+        .urgencia-form .form-group textarea::placeholder { color: rgba(255,255,255,.35); }
+        .urgencia-form .form-group textarea:focus { border-color: var(--cyan); background: rgba(0,212,255,.06); box-shadow: 0 0 0 3px rgba(0,212,255,.1); }
+        .urgencia-form .form-btn { background: var(--cyan); color: var(--navy); font-weight: 700; font-size: 1.05rem; padding: .95rem; border-radius: 12px; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+        .urgencia-form .form-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,212,255,.4); }
+        .urgencia-form .form-btn::after { content: ''; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transform: skewX(-20deg); animation: cta-shine 3s infinite; }
+        .form-trust { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1rem; font-size: .78rem; color: rgba(255,255,255,.5); }
+        .form-trust svg { width: 14px; height: 14px; color: var(--cyan); flex-shrink: 0; }
+        .form-urgencia-badge { background: linear-gradient(135deg, rgba(0,212,255,.15), rgba(0,212,255,.05)); border: 1px solid rgba(0,212,255,.25); border-radius: 12px; padding: .85rem 1rem; margin-bottom: 1.5rem; text-align: center; }
+        .form-urgencia-badge .badge-icon { font-size: 1.5rem; margin-bottom: .25rem; }
+        .form-urgencia-badge p { font-size: .85rem; color: rgba(255,255,255,.9); line-height: 1.4; margin: 0; }
+        .form-urgencia-badge strong { color: var(--cyan); font-weight: 700; }
         .cta-banner { background: linear-gradient(135deg, var(--cyan), var(--cyan-oscuro)); color: var(--navy); text-align: center; padding: 4rem 1.5rem; }
         .cta-banner h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: .75rem; }
         .cta-banner p { opacity: .9; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
@@ -188,10 +216,11 @@
             section { padding: 3.5rem 1.25rem; }
             .section-title h2 { font-size: 1.5rem; }
             .cta-banner { padding: 3rem 1.25rem; }
-            .urgencia-layout { grid-template-columns: 1fr; text-align: center; }
+            .urgencia-layout { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
             .urgencia-left .urgencia-lema, .urgencia-left .urgencia-precio, .urgencia-left .urgencia-lugares { text-align: center; }
             .urgencia-left .countdown { justify-content: center; }
             .urgencia-left .urgencia-barra { margin: 0 auto 1.5rem; }
+            .urgencia-form .form-card { padding: 1.5rem; }
             .countdown-unit { min-width: 60px; padding: .6rem .75rem; }
             .countdown-number { font-size: 1.4rem; }
             .urgencia-item { min-width: 140px; padding: .75rem 1rem; }
@@ -261,8 +290,14 @@
             .form-group { margin-bottom: .9rem; }
             .form-group label { font-size: .8rem; }
             .form-group input, .form-group textarea, .form-group select { padding: .6rem .8rem; font-size: .88rem; border-radius: 8px; }
-            .form-group textarea { min-height: 80px; }
+            .urgencia-form .form-group input,
+            .urgencia-form .form-group select { padding-left: 2.5rem; }
+            .form-group textarea { min-height: 60px; }
             .form-btn { padding: .75rem; font-size: .9rem; }
+            .form-urgencia-badge { padding: .7rem .85rem; }
+            .form-urgencia-badge .badge-icon { font-size: 1.2rem; }
+            .form-urgencia-badge p { font-size: .8rem; }
+            .form-trust { font-size: .72rem; }
             .accordion-trigger { padding: 1.25rem .85rem; gap: .5rem; }
             .accordion-chevron { width: 32px; height: 32px; min-width: 32px; }
             .accordion-chevron svg { width: 16px; height: 16px; }
@@ -583,7 +618,7 @@
 <section class="urgencia-banner" id="contacto">
     <div class="urgencia-layout">
         <div class="urgencia-left">
-            <div class="urgencia-lema">Tu futuro empieza <span>ahora</span></div>
+            <div class="urgencia-lema">Donde tu potencial <br>se vuelve <span class="accent-underline">éxito</span></div>
             <p style="font-size:clamp(1rem, 2vw, 1.25rem); font-weight:300; opacity:.9; margin-bottom:1rem; line-height:1.7;">La industria necesita <strong style="font-weight:700;">ingenieros mecatrónicos preparados para liderar la transformación tecnológica.</strong></p>
             <p style="font-size:clamp(.95rem, 1.8vw, 1.1rem); font-weight:300; opacity:.8; margin-bottom:1.5rem; line-height:1.7;">En <strong style="font-weight:700;">CENYCA Universidad</strong> te formamos para ser ese profesional.</p>
             <div class="urgencia-item" style="display:inline-block; margin-bottom:1.5rem;">
@@ -599,41 +634,61 @@
             </div>
             <div class="urgencia-lugares">Lugares disponibles: <strong id="lugares-count">15</strong> de 30</div>
             <div class="urgencia-barra"><div class="urgencia-barra-inner" id="barra-lugares" style="width:50%"></div></div>
-            <p style="font-size:clamp(1rem, 2vw, 1.15rem); margin-top:1.25rem; line-height:1.6; background:rgba(0,212,255,.15); border-left:4px solid var(--cyan); padding:.75rem 1rem; border-radius:0 8px 8px 0;">Sé de los <strong style="font-weight:700; color:var(--cyan); font-size:1.2em;">primeros 30</strong> en inscribirte y conoce nuestro <strong style="font-weight:700;">esquema de becas y descuentos para nuevo ingreso.</strong></p>
         </div>
         <div class="urgencia-form">
             <div class="form-card">
-                <h3>Solicita información</h3>
+                <div class="form-urgencia-badge">
+                    <div class="badge-icon">🔥</div>
+                    <p>Sé de los <strong>primeros 10 registros</strong> y obtén un <strong>descuento del 30%</strong> en tu inscripción</p>
+                </div>
+                <h3>Regístrate ahora</h3>
+                <p class="form-subtitle">Completa tus datos y un asesor te contactará</p>
                 <form onsubmit="handleSubmit(event)">
                     <div class="form-group">
                         <label for="nombre">Nombre completo</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+                            <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="(664) 000-0000" required>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                            <input type="tel" id="telefono" name="telefono" placeholder="(664) 000-0000" required>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="plantel">Plantel de interés</label>
-                        <select id="plantel" name="plantel" required>
-                            <option value="" disabled selected>Selecciona un plantel</option>
-                            <option value="casablanca">CENYCA Casablanca</option>
-                            <option value="otay">CENYCA Otay</option>
-                            <option value="rosarito">CENYCA Rosarito</option>
-                            <option value="ensenada">CENYCA Ensenada</option>
-                            <option value="mexicali">CENYCA Mexicali</option>
-                        </select>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                            <select id="plantel" name="plantel" required>
+                                <option value="" disabled selected>Selecciona un plantel</option>
+                                <option value="casablanca">CENYCA Casablanca</option>
+                                <option value="otay">CENYCA Otay</option>
+                                <option value="rosarito">CENYCA Rosarito</option>
+                                <option value="ensenada">CENYCA Ensenada</option>
+                                <option value="mexicali">CENYCA Mexicali</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="mensaje">¿Tienes alguna pregunta?</label>
-                        <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+                        <label for="mensaje">¿Tienes alguna pregunta? (opcional)</label>
+                        <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-cyan form-btn">Enviar solicitud</button>
+                    <button type="submit" class="btn btn-cyan form-btn">Quiero mi lugar con descuento</button>
                 </form>
+                <div class="form-trust">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Tus datos están protegidos. Respuesta en menos de 24 hrs.
+                </div>
             </div>
         </div>
     </div>
