@@ -158,7 +158,7 @@
         .urgencia-form .form-btn::after { content: ''; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transform: skewX(-20deg); animation: cta-shine 3s infinite; }
         .form-trust { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1rem; font-size: .78rem; color: rgba(255,255,255,.5); }
         .form-trust svg { width: 14px; height: 14px; color: var(--cyan); flex-shrink: 0; }
-        .form-lugares { background: linear-gradient(135deg, rgba(0,212,255,.12), rgba(0,212,255,.03)); border: 1px solid rgba(0,212,255,.2); border-radius: 14px; padding: 1rem 1.15rem; margin-bottom: 1.5rem; }
+        .form-lugares { background: rgba(255,255,255,.06); border: 1px solid rgba(0,212,255,.2); border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
         .form-lugares-header { display: flex; align-items: center; gap: .5rem; margin-bottom: .6rem; }
         .form-lugares-icon { font-size: 1.2rem; }
         .form-lugares-text { font-size: .9rem; color: rgba(255,255,255,.9); }
@@ -639,19 +639,19 @@
                 <div class="countdown-unit"><span class="countdown-number" id="cd-min">00</span><span class="countdown-label">Min</span></div>
                 <div class="countdown-unit"><span class="countdown-number" id="cd-seg">00</span><span class="countdown-label">Seg</span></div>
             </div>
+            <div class="form-lugares" style="margin-top:1.5rem;">
+                <div class="form-lugares-header">
+                    <span class="form-lugares-icon">🔥</span>
+                    <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">12</strong> de <strong>40</strong> lugares</span>
+                </div>
+                <div class="form-lugares-barra">
+                    <div class="form-lugares-barra-inner" id="barra-form-lugares"></div>
+                </div>
+                <p class="form-lugares-promo">Sé de los <strong>primeros 10 registros</strong> y obtén un <strong>descuento del 30%</strong> en tu inscripción</p>
+            </div>
         </div>
         <div class="urgencia-form">
             <div class="form-card">
-                <div class="form-lugares">
-                    <div class="form-lugares-header">
-                        <span class="form-lugares-icon">🔥</span>
-                        <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">12</strong> de <strong>40</strong> lugares</span>
-                    </div>
-                    <div class="form-lugares-barra">
-                        <div class="form-lugares-barra-inner" id="barra-form-lugares"></div>
-                    </div>
-                    <p class="form-lugares-promo">Sé de los <strong>primeros 10 registros</strong> y obtén un <strong>descuento del 30%</strong> en tu inscripción</p>
-                </div>
                 <h3>Regístrate ahora</h3>
                 <p class="form-subtitle">Completa tus datos y un asesor te contactará</p>
                 <form onsubmit="handleSubmit(event)">
