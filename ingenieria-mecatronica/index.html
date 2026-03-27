@@ -667,7 +667,7 @@
             <div class="form-lugares" style="margin-top:1.5rem;">
                 <div class="form-lugares-header">
                     <span class="form-lugares-icon">🔥</span>
-                    <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">12</strong> de <strong>25</strong> lugares</span>
+                    <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">10</strong> de <strong>30</strong> lugares</span>
                 </div>
                 <div class="form-lugares-barra">
                     <div class="form-lugares-barra-inner" id="barra-form-lugares"></div>
@@ -909,13 +909,8 @@
 
     // Simulador de lugares disponibles
     (function() {
-        const total = 25;
-        const startDate = new Date('2026-03-20').getTime();
-        const endDate = new Date('2026-05-04').getTime();
-        const now = Date.now();
-        const progress = Math.min(1, Math.max(0, (now - startDate) / (endDate - startDate)));
-        const taken = Math.floor(progress * 13) + Math.floor(Math.random() * 3);
-        const remaining = Math.max(5, total - taken);
+        const total = 30;
+        const remaining = 8 + Math.floor(Math.random() * 5); // siempre entre 8 y 12
         const el = document.getElementById('lugares-form-count');
         if (el) el.textContent = remaining;
         const pct = ((total - remaining) / total) * 100;
