@@ -97,6 +97,30 @@
         .campo-item:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
         .campo-item .campo-icon { margin-bottom: .6rem; display: flex; justify-content: center; color: var(--cyan); }
         .campo-item h3 { font-size: .95rem; color: var(--negro); }
+        /* Modalidades - sección destacada */
+        .modalidades-section { background: linear-gradient(135deg, var(--navy) 0%, #0a0e2a 100%); color: var(--blanco); padding: 5rem 1.5rem; position: relative; overflow: hidden; }
+        .modalidades-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #00f0ff, var(--cyan)); }
+        .modalidades-section::after { content: ''; position: absolute; bottom: -30%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,.06) 0%, transparent 70%); pointer-events: none; }
+        .modalidades-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.3); border-radius: 50px; padding: .4rem 1.2rem; font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); margin-bottom: 1.5rem; }
+        .modalidades-title { font-family: montserrat, sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 2px; }
+        .modalidades-title span { color: var(--cyan); }
+        .modalidades-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; opacity: .8; margin-bottom: 3rem; max-width: 600px; }
+        .modalidades-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+        .modalidad-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; position: relative; transition: transform .3s, box-shadow .3s, border-color .3s; }
+        .modalidad-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,212,255,.15); border-color: rgba(0,212,255,.4); }
+        .modalidad-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; }
+        .modalidad-card:first-child .modalidad-icon { background: linear-gradient(135deg, rgba(0,212,255,.2), rgba(0,212,255,.05)); }
+        .modalidad-card:last-child .modalidad-icon { background: linear-gradient(135deg, rgba(255,149,0,.2), rgba(255,149,0,.05)); }
+        .modalidad-card h3 { font-family: montserrat, sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .5rem; }
+        .modalidad-card .modalidad-dia { font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 900; color: var(--cyan); margin-bottom: 1rem; font-family: montserrat, sans-serif; }
+        .modalidad-card:last-child .modalidad-dia { color: #ff9500; }
+        .modalidad-card p { font-size: .92rem; line-height: 1.7; opacity: .8; margin: 0; }
+        .modalidad-tag { display: inline-block; background: rgba(0,212,255,.15); color: var(--cyan); border-radius: 8px; padding: .3rem .8rem; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+        .modalidad-card:last-child .modalidad-tag { background: rgba(255,149,0,.15); color: #ff9500; }
+        .modalidades-cta { text-align: center; margin-top: 2.5rem; }
+        .modalidades-cta p { font-size: 1.1rem; opacity: .7; margin-bottom: 1rem; }
+        .modalidades-cta strong { color: var(--cyan); font-weight: 700; }
+
         .experiencias-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
         .diferencia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 3rem; }
         .diferencia-item { display: flex; gap: .75rem; align-items: flex-start; padding: 1rem; background: var(--blanco); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
@@ -211,6 +235,9 @@
             .hero-badge-item { font-size: .78rem; padding: .4rem .8rem; }
             .perfil-content, .contacto-grid, .experiencias-content { grid-template-columns: 1fr; }
             .diferencia-grid { grid-template-columns: 1fr; }
+            .modalidades-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .modalidad-card { padding: 2rem 1.5rem; }
+            .modalidades-section { padding: 3.5rem 1.25rem; }
             .collage { grid-template-columns: 1fr; }
             .collage img { height: 220px; }
             .carousel-track img { flex: 0 0 calc(50% - .5rem); width: calc(50% - .5rem); height: 220px; }
@@ -445,6 +472,36 @@
 </section>
 <div class="section-divider" style="background:var(--gris-claro);"></div>
 
+<section class="modalidades-section">
+    <div class="container" style="text-align:center;">
+        <div class="modalidades-badge">Lo que nos hace diferentes</div>
+        <div class="modalidades-title">Estudia <span>1 día a la semana</span></div>
+        <p class="modalidades-subtitle" style="margin-left:auto; margin-right:auto;">Sí, leíste bien. Obtén tu título universitario asistiendo solo un día. Tú eliges la modalidad que se adapte a tu vida.</p>
+        <div class="modalidades-grid">
+            <div class="modalidad-card">
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                <span class="modalidad-tag">Escolarizado</span>
+                <h3>Entre semana</h3>
+                <div class="modalidad-dia">1 día hábil</div>
+                <p>Asiste un día entre lunes y viernes. Ideal si trabajas y quieres avanzar tu carrera profesional sin sacrificar tu empleo.</p>
+            </div>
+            <div class="modalidad-card">
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <span class="modalidad-tag">Ejecutivo</span>
+                <h3>Fin de semana</h3>
+                <div class="modalidad-dia">Sábado o Domingo</div>
+                <p>Dedica tu sábado o domingo a formarte. Perfecto para quienes tienen compromisos de lunes a viernes.</p>
+            </div>
+        </div>
+        <div class="modalidades-cta">
+            <p>Sin importar la modalidad, obtienes el <strong>mismo título con validez oficial</strong></p>
+            <a href="#contacto" class="btn btn-cyan">Quiero más información</a>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider" style="background:var(--gris-claro);"></div>
+
 <section id="perfil" class="bg-flecha bg-flecha-left" style="padding:0; background:var(--gris-claro);">
     <div class="container">
         <div class="accordion-trigger" onclick="toggleAccordion(this)">
@@ -642,7 +699,7 @@
             <div class="form-lugares" style="margin-top:1.5rem;">
                 <div class="form-lugares-header">
                     <span class="form-lugares-icon">🔥</span>
-                    <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">12</strong> de <strong>40</strong> lugares</span>
+                    <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">12</strong> de <strong>25</strong> lugares</span>
                 </div>
                 <div class="form-lugares-barra">
                     <div class="form-lugares-barra-inner" id="barra-form-lugares"></div>
@@ -884,13 +941,13 @@
 
     // Simulador de lugares disponibles
     (function() {
-        const total = 40;
+        const total = 25;
         const startDate = new Date('2026-03-20').getTime();
         const endDate = new Date('2026-05-04').getTime();
         const now = Date.now();
         const progress = Math.min(1, Math.max(0, (now - startDate) / (endDate - startDate)));
-        const taken = Math.floor(progress * 22) + Math.floor(Math.random() * 3);
-        const remaining = Math.max(8, total - taken);
+        const taken = Math.floor(progress * 13) + Math.floor(Math.random() * 3);
+        const remaining = Math.max(5, total - taken);
         const el = document.getElementById('lugares-form-count');
         if (el) el.textContent = remaining;
         const pct = ((total - remaining) / total) * 100;
