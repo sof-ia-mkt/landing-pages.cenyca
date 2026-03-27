@@ -57,7 +57,7 @@
         .carousel-wrapper { position: relative; max-width: 1100px; margin: 0 auto; overflow: hidden; border-radius: 16px; }
         .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; gap: 1rem; padding-bottom: .5rem; scrollbar-width: none; }
         .carousel-track::-webkit-scrollbar { display: none; }
-        .carousel-track img { flex: 0 0 calc(33.333% - .67rem); scroll-snap-align: start; width: calc(33.333% - .67rem); height: 280px; object-fit: cover; border-radius: 14px; }
+        .carousel-track img { flex: 0 0 calc(33.333% - .67rem); scroll-snap-align: start; width: calc(33.333% - .67rem); aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; }
         .carousel-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1.25rem; }
         .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,212,255,.25); border: none; cursor: pointer; transition: .3s; padding: 0; }
         .carousel-dot.active { background: var(--cyan); transform: scale(1.2); }
@@ -244,7 +244,7 @@
             .modalidades-section { padding: 3.5rem 1.25rem; }
             .collage { grid-template-columns: 1fr; }
             .collage img { height: 220px; }
-            .carousel-track img { flex: 0 0 calc(50% - .5rem); width: calc(50% - .5rem); height: 220px; }
+            .carousel-track img { flex: 0 0 calc(50% - .5rem); width: calc(50% - .5rem); aspect-ratio: 4/3; }
             .carousel-nav { width: 34px; height: 34px; }
             #ubicacion .container > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
             .perfil-image { height: 280px; }
@@ -304,7 +304,7 @@
             .campo-item { padding: 1rem; display: flex; align-items: center; gap: .75rem; text-align: left; border-left: 3px solid var(--cyan); }
             .campo-item .campo-icon { font-size: 1.5rem; margin-bottom: 0; }
             .campo-item h3 { font-size: .88rem; }
-            .carousel-track img { flex: 0 0 90%; width: 90%; height: auto; object-fit: contain; border-radius: 10px; }
+            .carousel-track img { flex: 0 0 90%; width: 90%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; }
             .carousel-nav { display: none; }
             .video-wrapper { border-radius: 12px; }
             .play-btn { width: 56px; height: 56px; }
