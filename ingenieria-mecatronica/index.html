@@ -105,18 +105,21 @@
         .modalidades-title { font-family: montserrat, sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 2px; }
         .modalidades-title span { color: var(--cyan); }
         .modalidades-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; opacity: .8; margin-bottom: 3rem; max-width: 600px; }
-        .modalidades-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+        .modalidades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
         .modalidad-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; position: relative; transition: transform .3s, box-shadow .3s, border-color .3s; }
         .modalidad-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,212,255,.15); border-color: rgba(0,212,255,.4); }
         .modalidad-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; }
-        .modalidad-card:first-child .modalidad-icon { background: linear-gradient(135deg, rgba(0,212,255,.2), rgba(0,212,255,.05)); }
-        .modalidad-card:last-child .modalidad-icon { background: linear-gradient(135deg, rgba(255,149,0,.2), rgba(255,149,0,.05)); }
+        .modalidad-card:nth-child(1) .modalidad-icon { background: linear-gradient(135deg, rgba(0,212,255,.2), rgba(0,212,255,.05)); }
+        .modalidad-card:nth-child(2) .modalidad-icon { background: linear-gradient(135deg, rgba(100,220,100,.2), rgba(100,220,100,.05)); }
+        .modalidad-card:nth-child(3) .modalidad-icon { background: linear-gradient(135deg, rgba(255,149,0,.2), rgba(255,149,0,.05)); }
         .modalidad-card h3 { font-family: montserrat, sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .5rem; }
         .modalidad-card .modalidad-dia { font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 900; color: var(--cyan); margin-bottom: 1rem; font-family: montserrat, sans-serif; }
-        .modalidad-card:last-child .modalidad-dia { color: #ff9500; }
+        .modalidad-card:nth-child(2) .modalidad-dia { color: #64dc64; }
+        .modalidad-card:nth-child(3) .modalidad-dia { color: #ff9500; }
         .modalidad-card p { font-size: .92rem; line-height: 1.7; opacity: .8; margin: 0; }
         .modalidad-tag { display: inline-block; background: rgba(0,212,255,.15); color: var(--cyan); border-radius: 8px; padding: .3rem .8rem; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
-        .modalidad-card:last-child .modalidad-tag { background: rgba(255,149,0,.15); color: #ff9500; }
+        .modalidad-card:nth-child(2) .modalidad-tag { background: rgba(100,220,100,.15); color: #64dc64; }
+        .modalidad-card:nth-child(3) .modalidad-tag { background: rgba(255,149,0,.15); color: #ff9500; }
         .modalidades-cta { text-align: center; margin-top: 2.5rem; }
         .modalidades-cta p { font-size: 1.1rem; opacity: .7; margin-bottom: 1rem; }
         .modalidades-cta strong { color: var(--cyan); font-weight: 700; }
@@ -236,6 +239,7 @@
             .perfil-content, .contacto-grid, .experiencias-content { grid-template-columns: 1fr; }
             .diferencia-grid { grid-template-columns: 1fr; }
             .modalidades-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .modalidad-card:nth-child(2) .modalidad-icon { background: linear-gradient(135deg, rgba(0,212,255,.2), rgba(0,212,255,.05)); }
             .modalidad-card { padding: 2rem 1.5rem; }
             .modalidades-section { padding: 3.5rem 1.25rem; }
             .collage { grid-template-columns: 1fr; }
@@ -480,10 +484,17 @@
         <div class="modalidades-grid">
             <div class="modalidad-card">
                 <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                <span class="modalidad-tag">Escolarizado</span>
-                <h3>Entre semana</h3>
-                <div class="modalidad-dia">1 día hábil</div>
-                <p>Asiste un día entre lunes y viernes. Ideal si trabajas y quieres avanzar tu carrera profesional sin sacrificar tu empleo.</p>
+                <span class="modalidad-tag">Escolarizada</span>
+                <h3>Tiempo completo</h3>
+                <div class="modalidad-dia">Turno matutino</div>
+                <p>La experiencia universitaria completa. Vive el campus, convive con tus compañeros y aprovecha al máximo tu formación.</p>
+            </div>
+            <div class="modalidad-card">
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#64dc64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                <span class="modalidad-tag">Entre semana</span>
+                <h3>1 día a la semana</h3>
+                <div class="modalidad-dia">Tú eliges el día</div>
+                <p>Asiste solo un día entre semana y sigue con tu trabajo o actividades el resto de la semana. Flexibilidad total.</p>
             </div>
             <div class="modalidad-card">
                 <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
@@ -565,53 +576,7 @@
 </section>
 <div class="section-divider" style="background:var(--gris-claro);"></div>
 
-<section id="experiencias" class="bg-flecha bg-flecha-center" style="background: var(--gris-claro); padding-top:3rem;">
-    <div class="container">
-        <div class="section-title">
-            <h2>Lo que nos diferencia</h2>
-            <div class="accent-line"></div>
-        </div>
-        <div class="diferencia-grid">
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-                <p>Titúlate en solo 3 años con un modelo educativo intensivo y enfocado en competencias reales del mercado laboral.</p>
-            </div>
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-                <p>Laboratorios equipados con tecnología industrial: brazos robóticos, PLCs, impresoras 3D y estaciones de soldadura.</p>
-            </div>
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg></div>
-                <p>Docentes con experiencia activa en la industria manufacturera y tecnológica de la región fronteriza.</p>
-            </div>
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M5 20V8l7-4 7 4v12"/><path d="M9 20v-4h6v4"/></svg></div>
-                <p>Vinculación directa con empresas del sector industrial para prácticas profesionales y bolsa de trabajo.</p>
-            </div>
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-                <p>Plan de estudios actualizado y alineado a las necesidades de la Industria 4.0 y la manufactura inteligente.</p>
-            </div>
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                <p>5 planteles en Baja California con ubicaciones estratégicas cerca de los principales parques industriales.</p>
-            </div>
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-                <p>Esquemas de becas y financiamiento accesibles para que tu inversión educativa sea alcanzable.</p>
-            </div>
-            <div class="diferencia-item">
-                <div class="dif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/><circle cx="12" cy="8" r="7"/></svg></div>
-                <p>Más de 18 años de experiencia formando profesionales competitivos que transforman la industria.</p>
-            </div>
-        </div>
-        <div class="collage">
-            <img src="assets/asset_4.jpg" alt="Estudiantes de mecatrónica en laboratorio" loading="lazy">
-            <img src="assets/asset_5.jpg" alt="Proyecto de robótica CENYCA" loading="lazy">
-            <img src="assets/asset_6.jpg" alt="Instalaciones CENYCA Universidad" loading="lazy">
-        </div>
-    </div>
-</section>
+<!-- Imágenes asset_4.jpg, asset_5.jpg, asset_6.jpg disponibles para reubicar -->
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
 <section id="instalaciones" style="background:#fff;">
@@ -751,7 +716,7 @@
                         <label for="mensaje">¿Tienes alguna pregunta? (opcional)</label>
                         <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-cyan form-btn">Quiero mi lugar con descuento</button>
+                    <button type="submit" class="btn btn-cyan form-btn">Más información</button>
                 </form>
                 <div class="form-trust">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
