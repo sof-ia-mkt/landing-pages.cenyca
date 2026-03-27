@@ -445,6 +445,15 @@
         .text-reveal { background: linear-gradient(90deg, var(--gris-oscuro) 50%, rgba(102,102,102,.2) 50%); background-size: 200% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; transition: background-position 1.2s cubic-bezier(.22,1,.36,1); }
         .text-reveal.revealed { background-position: 0% 0; }
 
+        /* Circuit animation */
+        .circuit-draw { stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 0s; }
+        .circuit-node { opacity: 0; transition: opacity .4s ease; }
+        .circuit-node-text { opacity: 0; transition: opacity .4s ease .2s; }
+        .circuit-active .circuit-node { opacity: 1; }
+        .circuit-active .circuit-node-text { opacity: 1; }
+        @keyframes circuit-glow { 0%,100%{filter:drop-shadow(0 0 3px rgba(0,212,255,.3))} 50%{filter:drop-shadow(0 0 8px rgba(0,212,255,.6))} }
+        .circuit-active #circuitSVG { animation: circuit-glow 3s ease-in-out infinite; }
+
         .anim-delay-5 { transition-delay: .5s; }
         .anim-delay-6 { transition-delay: .6s; }
         .anim-delay-7 { transition-delay: .7s; }
@@ -488,10 +497,81 @@
         </div>
     </div>
 </section>
-<!-- Robotic Arm 3D Disassembly -->
-<section id="robot-section" style="position:relative; height:80vh; background:linear-gradient(180deg, var(--gris-claro) 0%, var(--navy) 50%, #0a0e1a 100%); overflow:hidden;">
-    <div id="robot-sticky" style="position:sticky; top:0; height:60vh; display:flex; align-items:center; justify-content:center;">
-        <canvas id="robotCanvas" style="max-height:55vh;"></canvas>
+<!-- Circuit Draw Animation -->
+<section id="circuit-section" style="position:relative; padding:4rem 1.5rem; background:linear-gradient(180deg, var(--gris-claro) 0%, var(--navy) 40%, var(--navy) 100%); overflow:hidden;">
+    <div style="max-width:900px; margin:0 auto; text-align:center;">
+        <p style="font-size:.85rem; text-transform:uppercase; letter-spacing:3px; color:var(--cyan); font-weight:600; margin-bottom:.5rem; opacity:0;" class="anim anim-up">Ingeniería que conecta</p>
+        <h2 style="color:var(--blanco); font-size:clamp(1.5rem,4vw,2.2rem); font-weight:800; margin-bottom:2.5rem; opacity:0;" class="anim anim-up anim-delay-1">Mecánica · Electrónica · Programación</h2>
+        <svg id="circuitSVG" viewBox="0 0 800 350" style="width:100%; max-width:800px; margin:0 auto; display:block;" fill="none">
+            <!-- Main horizontal bus -->
+            <path class="circuit-line" d="M50,175 H750" stroke="rgba(0,212,255,.12)" stroke-width="2"/>
+            <path class="circuit-draw" d="M50,175 H750" stroke="url(#cyanGrad)" stroke-width="2.5"/>
+
+            <!-- Branch 1: top-left -->
+            <path class="circuit-line" d="M150,175 V60 H300" stroke="rgba(0,212,255,.12)" stroke-width="2"/>
+            <path class="circuit-draw" d="M150,175 V60 H300" stroke="url(#cyanGrad)" stroke-width="2"/>
+            <!-- Branch 2: top-right -->
+            <path class="circuit-line" d="M500,175 V60 H650" stroke="rgba(0,212,255,.12)" stroke-width="2"/>
+            <path class="circuit-draw" d="M500,175 V60 H650" stroke="url(#cyanGrad)" stroke-width="2"/>
+            <!-- Branch 3: bottom-left -->
+            <path class="circuit-line" d="M250,175 V290 H400" stroke="rgba(0,212,255,.12)" stroke-width="2"/>
+            <path class="circuit-draw" d="M250,175 V290 H400" stroke="url(#cyanGrad)" stroke-width="2"/>
+            <!-- Branch 4: bottom-right -->
+            <path class="circuit-line" d="M600,175 V290 H450" stroke="rgba(0,212,255,.12)" stroke-width="2"/>
+            <path class="circuit-draw" d="M600,175 V290 H450" stroke="url(#cyanGrad)" stroke-width="2"/>
+            <!-- Branch 5: short top-center -->
+            <path class="circuit-line" d="M400,175 V100" stroke="rgba(0,212,255,.12)" stroke-width="2"/>
+            <path class="circuit-draw" d="M400,175 V100" stroke="url(#cyanGrad)" stroke-width="2"/>
+            <!-- Branch 6: diagonal left -->
+            <path class="circuit-line" d="M150,60 L100,30" stroke="rgba(0,212,255,.12)" stroke-width="1.5"/>
+            <path class="circuit-draw" d="M150,60 L100,30" stroke="url(#cyanGrad)" stroke-width="1.5"/>
+            <!-- Branch 7: diagonal right -->
+            <path class="circuit-line" d="M650,60 L700,30" stroke="rgba(0,212,255,.12)" stroke-width="1.5"/>
+            <path class="circuit-draw" d="M650,60 L700,30" stroke="url(#cyanGrad)" stroke-width="1.5"/>
+            <!-- Branch 8: bottom extension -->
+            <path class="circuit-line" d="M400,290 V330" stroke="rgba(0,212,255,.12)" stroke-width="1.5"/>
+            <path class="circuit-draw" d="M400,290 V330" stroke="url(#cyanGrad)" stroke-width="1.5"/>
+
+            <!-- Nodes / IC chips -->
+            <!-- Central IC -->
+            <rect class="circuit-node" x="370" y="145" width="60" height="60" rx="6" stroke="var(--cyan)" stroke-width="2" fill="rgba(0,212,255,.08)"/>
+            <text class="circuit-node-text" x="400" y="180" text-anchor="middle" fill="var(--cyan)" font-size="11" font-family="monospace" font-weight="700">CPU</text>
+            <!-- Top-left IC -->
+            <rect class="circuit-node" x="275" y="40" width="50" height="40" rx="5" stroke="var(--cyan)" stroke-width="1.5" fill="rgba(0,212,255,.06)"/>
+            <text class="circuit-node-text" x="300" y="65" text-anchor="middle" fill="var(--cyan)" font-size="9" font-family="monospace">PLC</text>
+            <!-- Top-right IC -->
+            <rect class="circuit-node" x="625" y="40" width="50" height="40" rx="5" stroke="var(--cyan)" stroke-width="1.5" fill="rgba(0,212,255,.06)"/>
+            <text class="circuit-node-text" x="650" y="65" text-anchor="middle" fill="var(--cyan)" font-size="9" font-family="monospace">IOT</text>
+            <!-- Bottom IC -->
+            <rect class="circuit-node" x="375" y="270" width="50" height="40" rx="5" stroke="var(--cyan)" stroke-width="1.5" fill="rgba(0,212,255,.06)"/>
+            <text class="circuit-node-text" x="400" y="295" text-anchor="middle" fill="var(--cyan)" font-size="9" font-family="monospace">CAD</text>
+            <!-- Top center node -->
+            <circle class="circuit-node" cx="400" cy="100" r="12" stroke="var(--cyan)" stroke-width="1.5" fill="rgba(0,212,255,.08)"/>
+            <text class="circuit-node-text" x="400" y="104" text-anchor="middle" fill="var(--cyan)" font-size="8" font-family="monospace">AI</text>
+
+            <!-- Junction dots -->
+            <circle class="circuit-node" cx="150" cy="175" r="5" fill="var(--cyan)"/>
+            <circle class="circuit-node" cx="250" cy="175" r="5" fill="var(--cyan)"/>
+            <circle class="circuit-node" cx="500" cy="175" r="5" fill="var(--cyan)"/>
+            <circle class="circuit-node" cx="600" cy="175" r="5" fill="var(--cyan)"/>
+            <circle class="circuit-node" cx="150" cy="60" r="4" fill="var(--cyan)"/>
+            <circle class="circuit-node" cx="500" cy="60" r="4" fill="var(--cyan)"/>
+            <circle class="circuit-node" cx="250" cy="290" r="4" fill="var(--cyan)"/>
+            <circle class="circuit-node" cx="600" cy="290" r="4" fill="var(--cyan)"/>
+
+            <!-- Left endpoint -->
+            <circle class="circuit-node" cx="50" cy="175" r="6" stroke="var(--cyan)" stroke-width="2" fill="rgba(0,212,255,.15)"/>
+            <!-- Right endpoint -->
+            <circle class="circuit-node" cx="750" cy="175" r="6" stroke="var(--cyan)" stroke-width="2" fill="rgba(0,212,255,.15)"/>
+
+            <defs>
+                <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00D4FF" stop-opacity=".6"/>
+                    <stop offset="50%" stop-color="#00D4FF" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="#00D4FF" stop-opacity=".6"/>
+                </linearGradient>
+            </defs>
+        </svg>
     </div>
 </section>
 
@@ -1061,189 +1141,44 @@
         });
     })();
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+// Circuit draw on scroll
 (function(){
-    const canvas = document.getElementById('robotCanvas');
-    const section = document.getElementById('robot-section');
-    if (!canvas || !section) return;
+    const section = document.getElementById('circuit-section');
+    const paths = document.querySelectorAll('.circuit-draw');
+    if (!section || !paths.length) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(3, 3, 6);
-    camera.lookAt(0, 1.8, 0);
+    // Calculate each path's length and set dasharray
+    paths.forEach(p => {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = len;
+        p.style.strokeDashoffset = len;
+    });
 
-    // Lighting
-    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-    const dir = new THREE.DirectionalLight(0xffffff, 0.9);
-    dir.position.set(5, 8, 6);
-    scene.add(dir);
-    const cyanLight = new THREE.PointLight(0x00d4ff, 1.5, 12);
-    cyanLight.position.set(-2, 4, 3);
-    scene.add(cyanLight);
-    const rimLight = new THREE.PointLight(0x00d4ff, 0.6, 10);
-    rimLight.position.set(3, 1, -2);
-    scene.add(rimLight);
-
-    // Materials
-    const matBody = new THREE.MeshStandardMaterial({ color: 0x1B2040, metalness: 0.85, roughness: 0.15 });
-    const matCyan = new THREE.MeshStandardMaterial({ color: 0x00D4FF, metalness: 0.5, roughness: 0.3, emissive: 0x00D4FF, emissiveIntensity: 0.4 });
-    const matDark = new THREE.MeshStandardMaterial({ color: 0x252B52, metalness: 0.75, roughness: 0.2 });
-    const matAccent = new THREE.MeshStandardMaterial({ color: 0x00D4FF, metalness: 0.3, roughness: 0.4, emissive: 0x00D4FF, emissiveIntensity: 0.15 });
-
-    const parts = [];
-    function addPart(geo, material, pos, rot) {
-        const clonedMat = material.clone();
-        clonedMat.transparent = true;
-        const mesh = new THREE.Mesh(geo, clonedMat);
-        mesh.position.set(pos[0], pos[1], pos[2]);
-        if (rot) mesh.rotation.set(rot[0], rot[1], rot[2]);
-        mesh.userData.origPos = mesh.position.clone();
-        mesh.userData.origRot = mesh.rotation.clone();
-        mesh.userData.explodeDir = new THREE.Vector3(
-            (Math.random()-.5)*5,
-            (Math.random()-.5)*4+1.5,
-            (Math.random()-.5)*5
-        );
-        mesh.userData.explodeRot = new THREE.Vector3(
-            (Math.random()-.5)*3,
-            (Math.random()-.5)*3,
-            (Math.random()-.5)*3
-        );
-        scene.add(mesh);
-        parts.push(mesh);
-        return mesh;
-    }
-
-    // === ROBOTIC ARM ===
-    // Base platform
-    addPart(new THREE.CylinderGeometry(1, 1.1, .25, 24), matDark, [0, .12, 0]);
-    addPart(new THREE.CylinderGeometry(.85, .85, .08, 24), matAccent, [0, .28, 0]);
-    // Base turret
-    addPart(new THREE.CylinderGeometry(.6, .7, .5, 16), matBody, [0, .57, 0]);
-    // Joint 1 ring
-    addPart(new THREE.TorusGeometry(.35, .08, 8, 24), matCyan, [0, .85, 0], [Math.PI/2, 0, 0]);
-    // Shoulder housing
-    addPart(new THREE.BoxGeometry(.7, .5, .6), matBody, [0, 1.15, 0]);
-    addPart(new THREE.SphereGeometry(.2, 12, 12), matCyan, [-.38, 1.15, 0]);
-    addPart(new THREE.SphereGeometry(.2, 12, 12), matCyan, [.38, 1.15, 0]);
-    // Upper arm
-    addPart(new THREE.CylinderGeometry(.18, .16, 1.2, 12), matBody, [0, 2, 0]);
-    // Hydraulic detail
-    addPart(new THREE.CylinderGeometry(.06, .06, 1, 8), matDark, [.22, 1.95, 0]);
-    addPart(new THREE.CylinderGeometry(.06, .06, 1, 8), matDark, [-.22, 1.95, 0]);
-    // Elbow joint
-    addPart(new THREE.SphereGeometry(.22, 12, 12), matCyan, [0, 2.65, 0]);
-    addPart(new THREE.TorusGeometry(.25, .05, 8, 20), matAccent, [0, 2.65, 0], [0, 0, Math.PI/2]);
-    // Forearm
-    addPart(new THREE.CylinderGeometry(.14, .12, 1, 12), matBody, [0, 3.2, 0], [0, 0, .15]);
-    // Forearm cable
-    addPart(new THREE.CylinderGeometry(.04, .04, .9, 8), matAccent, [.15, 3.18, 0], [0, 0, .15]);
-    // Wrist joint
-    addPart(new THREE.CylinderGeometry(.15, .15, .15, 16), matCyan, [.12, 3.72, 0]);
-    addPart(new THREE.TorusGeometry(.12, .04, 8, 16), matDark, [.12, 3.72, 0]);
-    // Gripper base
-    addPart(new THREE.BoxGeometry(.35, .2, .3), matBody, [.12, 3.9, 0]);
-    // Gripper fingers
-    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [-.02, 4.1, .12]);
-    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [.26, 4.1, .12]);
-    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [-.02, 4.1, -.12]);
-    addPart(new THREE.BoxGeometry(.08, .35, .1), matDark, [.26, 4.1, -.12]);
-    // Finger tips
-    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [-.02, 4.32, .12]);
-    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [.26, 4.32, .12]);
-    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [-.02, 4.32, -.12]);
-    addPart(new THREE.BoxGeometry(.06, .1, .08), matCyan, [.26, 4.32, -.12]);
-    // Status LEDs on base
-    addPart(new THREE.SphereGeometry(.05, 8, 8), matCyan, [.5, .35, .5]);
-    addPart(new THREE.SphereGeometry(.05, 8, 8), matCyan, [-.5, .35, .5]);
-    addPart(new THREE.SphereGeometry(.05, 8, 8), matCyan, [.5, .35, -.5]);
-
-    // === PARTICLES ===
-    const particleCount = 350;
-    const particleGeo = new THREE.BufferGeometry();
-    const pPos = new Float32Array(particleCount * 3);
-    const pVel = [];
-    for (let i = 0; i < particleCount; i++) {
-        pPos[i*3] = (Math.random()-.5)*2.5;
-        pPos[i*3+1] = Math.random()*4.5;
-        pPos[i*3+2] = (Math.random()-.5)*2.5;
-        pVel.push(new THREE.Vector3((Math.random()-.5)*.015, (Math.random()-.5)*.015, (Math.random()-.5)*.015));
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    const particleMat = new THREE.PointsMaterial({ color: 0x00D4FF, size: 0.035, transparent: true, opacity: 0 });
-    scene.add(new THREE.Points(particleGeo, particleMat));
-
-    // Resize
-    function resize() {
-        const w = window.innerWidth;
-        const h = window.innerHeight * 0.6;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Scroll
-    let scrollProgress = 0;
-    function updateScroll() {
-        const rect = section.getBoundingClientRect();
-        const sH = section.offsetHeight - window.innerHeight;
-        scrollProgress = Math.max(0, Math.min(1, -rect.top / Math.max(sH, 1)));
-    }
-
-    // Animate
-    let time = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.01;
-        updateScroll();
-
-        const t = scrollProgress;
-        const explode = Math.pow(Math.max(0, (t - 0.1) / 0.9), 1.8);
-        const rotY = Math.sin(time * 0.4) * 0.2 * (1 - explode);
-
-        parts.forEach(p => {
-            const o = p.userData.origPos;
-            const oR = p.userData.origRot;
-            const eD = p.userData.explodeDir;
-            const eR = p.userData.explodeRot;
-
-            p.position.x = o.x + eD.x * explode;
-            p.position.y = o.y + eD.y * explode;
-            p.position.z = o.z + eD.z * explode;
-
-            p.rotation.x = oR.x + eR.x * explode;
-            p.rotation.y = oR.y + eR.y * explode + rotY;
-            p.rotation.z = oR.z + eR.z * explode;
-
-            p.material.opacity = Math.max(0, 1 - explode * 1.6);
-            const s = Math.max(0.01, 1 - explode * 0.7);
-            p.scale.set(s, s, s);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                section.classList.add('circuit-active');
+                // Animate lines drawing
+                paths.forEach((p, i) => {
+                    const len = p.getTotalLength();
+                    const delay = i * 120;
+                    setTimeout(() => {
+                        p.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)';
+                        p.style.strokeDashoffset = '0';
+                    }, delay);
+                });
+            } else {
+                section.classList.remove('circuit-active');
+                paths.forEach(p => {
+                    const len = p.getTotalLength();
+                    p.style.transition = 'stroke-dashoffset .4s ease';
+                    p.style.strokeDashoffset = len;
+                });
+            }
         });
-
-        // Particles
-        particleMat.opacity = Math.min(.8, explode * 2);
-        const pos = particleGeo.attributes.position.array;
-        for (let i = 0; i < particleCount; i++) {
-            pos[i*3] += pVel[i].x + Math.sin(time + i) * 0.002;
-            pos[i*3+1] += pVel[i].y + Math.cos(time + i*.5) * 0.002;
-            pos[i*3+2] += pVel[i].z;
-            if (Math.abs(pos[i*3]) > 5) pVel[i].x *= -1;
-            if (pos[i*3+1] > 6 || pos[i*3+1] < -1) pVel[i].y *= -1;
-            if (Math.abs(pos[i*3+2]) > 5) pVel[i].z *= -1;
-        }
-        particleGeo.attributes.position.needsUpdate = true;
-
-        // Cyan light pulses
-        cyanLight.intensity = 1.5 + Math.sin(time * 2) * 0.3;
-
-        renderer.render(scene, camera);
-    }
-    animate();
+    }, { threshold: 0.25 });
+    observer.observe(section);
 })();
 </script>
 </body>
