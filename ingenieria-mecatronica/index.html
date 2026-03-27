@@ -48,7 +48,7 @@
         .btn-cyan:hover { background: var(--cyan-oscuro); transform: translateY(-2px); }
         section { padding: 5rem 1.5rem; position: relative; }
         .bg-flecha { position: relative; }
-        .bg-flecha::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/flecha2.png'); background-size: 600px; background-repeat: no-repeat; background-attachment: fixed; opacity: .15; pointer-events: none; z-index: 0; }
+        .bg-flecha::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/flecha2.png'); background-size: 600px; background-repeat: no-repeat; opacity: .15; pointer-events: none; z-index: 0; transform: translateY(var(--parallax-y, 0)); will-change: transform; transition: transform .1s linear; }
         .bg-flecha-right::before { background-position: right -80px center; }
         .bg-flecha-left::before { background-position: left -80px center; }
         .bg-flecha-center::before { background-position: center; background-size: 700px; }
@@ -434,6 +434,17 @@
         .ubicacion-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,.15); }
         .ubicacion-card:hover svg { animation: pin-bounce .5s ease; }
         @keyframes pin-bounce { 0%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} 60%{transform:translateY(-2px)} }
+        /* Apple-style Hero Reveal */
+        .hero-reveal { opacity: 0; filter: blur(12px); transform: translateY(30px); animation: heroReveal 1.2s cubic-bezier(.22,1,.36,1) forwards; }
+        .hero-reveal-delay-1 { animation-delay: .2s; }
+        .hero-reveal-delay-2 { animation-delay: .5s; }
+        .hero-reveal-delay-3 { animation-delay: .8s; }
+        @keyframes heroReveal { to { opacity: 1; filter: blur(0); transform: translateY(0); } }
+
+        /* Apple-style Text Reveal on scroll */
+        .text-reveal { background: linear-gradient(90deg, var(--gris-oscuro) 50%, rgba(102,102,102,.2) 50%); background-size: 200% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; transition: background-position 1.2s cubic-bezier(.22,1,.36,1); }
+        .text-reveal.revealed { background-position: 0% 0; }
+
         .anim-delay-5 { transition-delay: .5s; }
         .anim-delay-6 { transition-delay: .6s; }
         .anim-delay-7 { transition-delay: .7s; }
@@ -456,9 +467,9 @@
     <video class="hero-video-bg" autoplay muted loop playsinline><source src="assets/hero-video.mp4" type="video/mp4"></video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1>Ingeniería <span class="accent">Mecatrónica</span></h1>
-        <p>Diseña, construye y programa el futuro. Fórmate como ingeniero integral capaz de crear sistemas inteligentes que combinan mecánica, electrónica y programación.</p>
-        <a href="#contacto" class="nav-cta" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
+        <h1 class="hero-reveal">Ingeniería <span class="accent">Mecatrónica</span></h1>
+        <p class="hero-reveal hero-reveal-delay-1">Diseña, construye y programa el futuro. Fórmate como ingeniero integral capaz de crear sistemas inteligentes que combinan mecánica, electrónica y programación.</p>
+        <a href="#contacto" class="nav-cta hero-reveal hero-reveal-delay-2" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
     </div>
 </section>
 <div class="section-divider" style="background:var(--gris-claro);"></div>
@@ -466,7 +477,7 @@
 <section class="beneficios bg-flecha bg-flecha-right" id="beneficios" style="background:var(--gris-claro);">
     <div class="container">
         <div class="section-title">
-            <h2>¿Por qué estudiar Mecatrónica?</h2>
+            <h2 class="text-reveal">¿Por qué estudiar Mecatrónica?</h2>
             <div class="accent-line"></div>
         </div>
         <div class="beneficios-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
@@ -520,7 +531,7 @@
     <div class="container">
         <div class="accordion-trigger" onclick="toggleAccordion(this)">
             <div class="section-title">
-                <h2>Perfil del egresado</h2>
+                <h2 class="text-reveal">Perfil del egresado</h2>
                 <p class="accordion-hint">Toca para ver más</p>
                 <div class="accent-line"></div>
             </div>
@@ -553,7 +564,7 @@
     <div class="container">
         <div class="accordion-trigger" onclick="toggleAccordion(this)">
             <div class="section-title">
-                <h2>Campo laboral</h2>
+                <h2 class="text-reveal">Campo laboral</h2>
                 <p class="accordion-hint">Toca para ver más</p>
                 <div class="accent-line"></div>
             </div>
@@ -609,7 +620,7 @@
 <section id="inversion" class="inversion-section">
     <div class="container">
         <div class="section-title">
-            <h2>Inversión</h2>
+            <h2 class="text-reveal">Inversión</h2>
             <p>Conoce el costo de tu carrera y simula con beca.</p>
             <div class="accent-line"></div>
         </div>
@@ -733,7 +744,7 @@
 <section id="ubicacion" class="bg-flecha bg-flecha-left">
     <div class="container">
         <div class="section-title">
-            <h2>Ubicación</h2>
+            <h2 class="text-reveal">Ubicación</h2>
             <p>Visítanos y conoce nuestras instalaciones.</p>
             <div class="accent-line"></div>
         </div>
@@ -1011,6 +1022,38 @@
 
         document.querySelectorAll('.anim').forEach(el => observer.observe(el));
         document.querySelectorAll('.highlight-word').forEach(el => observer.observe(el));
+    })();
+
+    // Apple-style Text Reveal on scroll
+    (function() {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.text-reveal').forEach(el => revealObserver.observe(el));
+    })();
+
+    // Apple-style Parallax on bg-flecha decorative backgrounds
+    (function() {
+        const sections = document.querySelectorAll('.bg-flecha');
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    sections.forEach(sec => {
+                        const rect = sec.getBoundingClientRect();
+                        const speed = 0.15;
+                        const yPos = -(rect.top * speed);
+                        sec.style.setProperty('--parallax-y', yPos + 'px');
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
     })();
 </script>
 </body>
