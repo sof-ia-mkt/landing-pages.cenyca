@@ -371,12 +371,11 @@
         .pricing-detail { font-size: .78rem; color: rgba(255,255,255,.5); }
         .pricing-detail strong { display: block; color: rgba(255,255,255,.85); font-size: .85rem; font-weight: 600; }
         .pricing-nota { text-align: center; font-size: .7rem; color: rgba(255,255,255,.35); margin-top: .5rem; position: relative; z-index: 1; max-width: 420px; margin-left: auto; margin-right: auto; }
-        .promo-banner { background: linear-gradient(90deg, #ff6b35, #ff3366); padding: .6rem 1rem; display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap; }
-        .promo-banner span { font-size: .78rem; font-weight: 700; color: #fff; letter-spacing: .02em; }
-        .promo-timer { font-family: 'Courier New', monospace; font-size: .9rem; font-weight: 800; color: #fff; background: rgba(0,0,0,.3); padding: .15rem .5rem; border-radius: 6px; min-width: 52px; text-align: center; }
-        .price-original { font-size: .85rem; color: rgba(255,255,255,.4); text-decoration: line-through; font-weight: 400; }
-        .price-promo { color: #ff6b35; font-size: .85rem; font-weight: 700; }
-        .pricing-detail .promo-tag { display: inline-block; background: linear-gradient(90deg, #ff6b35, #ff3366); color: #fff; font-size: .6rem; font-weight: 700; padding: .1rem .4rem; border-radius: 4px; margin-left: .3rem; text-transform: uppercase; }
+        .flash-badge { position: absolute; top: -12px; right: -14px; z-index: 5; background: linear-gradient(135deg, #ff6b35, #ff3366); border-radius: 14px; padding: .5rem .8rem; display: flex; align-items: center; gap: .5rem; box-shadow: 0 4px 20px rgba(255,51,102,.4); animation: badge-pulse 2s ease-in-out infinite; cursor: default; }
+        .flash-badge-icon { font-size: 1.2rem; }
+        .flash-badge-text strong { display: block; font-size: .7rem; color: #fff; white-space: nowrap; }
+        .flash-badge-timer { font-family: 'Courier New', monospace; font-size: .8rem; font-weight: 800; color: #fff; background: rgba(0,0,0,.25); padding: .1rem .4rem; border-radius: 5px; text-align: center; margin-top: .15rem; }
+        @keyframes badge-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
 
         /* Acordeón collapsible */
         .accordion-trigger { cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 2rem 1.5rem; transition: .3s; }
@@ -619,22 +618,27 @@
             <p>Conoce el costo de tu carrera y simula con beca.</p>
             <div class="accent-line"></div>
         </div>
-        <div class="pricing-card anim anim-up">
-            <div class="promo-banner">
-                <span>30% OFF inscripción — Oferta termina en</span>
-                <div class="promo-timer" id="promo-timer">10:00</div>
+        <div style="position:relative; max-width:420px; margin:0 auto;">
+            <div class="flash-badge" id="flash-badge">
+                <div class="flash-badge-icon">🔥</div>
+                <div class="flash-badge-text">
+                    <strong>30% OFF inscripción</strong>
+                    <div class="flash-badge-timer" id="promo-timer">10:00</div>
+                </div>
             </div>
-            <div class="pricing-toggle">
-                <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
-                <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
-                <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
-            </div>
-            <div class="pricing-price">
-                <div class="price-amount" id="total-display">$4,000<span>/mes</span></div>
-            </div>
-            <div class="pricing-details">
-                <div class="pricing-detail"><span class="price-original">$2,000</span> <strong class="price-promo">$1,400</strong> Inscripción <span class="promo-tag">-30%</span></div>
-                <div class="pricing-detail"><strong>$950</strong>Paquete cuatrimestral</div>
+            <div class="pricing-card anim anim-up">
+                <div class="pricing-toggle">
+                    <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
+                    <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
+                    <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
+                </div>
+                <div class="pricing-price">
+                    <div class="price-amount" id="total-display">$4,000<span>/mes</span></div>
+                </div>
+                <div class="pricing-details">
+                    <div class="pricing-detail"><strong>$2,000</strong>Inscripción única</div>
+                    <div class="pricing-detail"><strong>$950</strong>Paquete cuatrimestral</div>
+                </div>
             </div>
         </div>
         <p class="pricing-nota">Los costos pueden variar. Consulta con un asesor educativo para confirmar becas y plan de pagos.</p>
