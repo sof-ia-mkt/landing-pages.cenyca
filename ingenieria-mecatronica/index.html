@@ -376,6 +376,9 @@
         .pricing-detail-left .detail-sub { font-size: .68rem; color: rgba(255,255,255,.4); margin-top: .1rem; }
         .pricing-detail-right { text-align: right; white-space: nowrap; }
         .pricing-detail-right strong { font-size: .95rem; color: var(--cyan); font-weight: 700; }
+        .pricing-total { display: flex; justify-content: space-between; align-items: center; padding: .6rem .75rem; margin-top: .5rem; background: rgba(0,212,255,.08); border-radius: 10px; border: 1px solid rgba(0,212,255,.15); }
+        .pricing-total span { font-size: .8rem; color: rgba(255,255,255,.6); }
+        .pricing-total strong { font-size: 1.1rem; color: var(--cyan); }
         .detail-badge { display: inline-block; font-size: .6rem; font-weight: 700; padding: .15rem .45rem; border-radius: 4px; margin-left: .4rem; text-transform: uppercase; }
         .badge-green { background: rgba(0,200,100,.15); color: #4ade80; border: 1px solid rgba(0,200,100,.3); }
         .badge-orange { background: linear-gradient(90deg, #ff6b35, #ff3366); color: #fff; }
@@ -656,6 +659,10 @@
                     </div>
                     <div class="pricing-detail-right"><strong>$950</strong></div>
                 </div>
+                <div class="pricing-total">
+                    <span>Tu primer pago total</span>
+                    <strong id="total-primer-pago">$6,350</strong>
+                </div>
             </div>
         </div>
         <p class="pricing-nota">⚠ Los costos pueden variar según la promoción activa.<br>Las becas están sujetas a disponibilidad y condiciones.<br>Regístrate y contacta a uno de nuestros asesores para información personalizada.</p>
@@ -894,8 +901,11 @@
     // Simulador de inversión
     function calcBeca(pct, btn) {
         const base = 4000;
-        const final_val = base - base * (pct / 100);
-        document.getElementById('total-display').innerHTML = '$' + final_val.toLocaleString('es-MX') + '<span>/mes</span>';
+        const mensualidad = base - base * (pct / 100);
+        const inscripcion = 1400;
+        const paquete = 950;
+        document.getElementById('total-display').innerHTML = '$' + mensualidad.toLocaleString('es-MX') + '<span>/mes</span>';
+        document.getElementById('total-primer-pago').textContent = '$' + (inscripcion + mensualidad + paquete).toLocaleString('es-MX');
         document.querySelectorAll('.beca-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     }
