@@ -345,7 +345,8 @@
             .accordion-body-inner { padding: 0 .85rem 2rem; }
             .accordion-hint { font-size: .65rem; }
             .pricing-card { max-width: 100%; }
-            .pricing-details { flex-direction: column; gap: .5rem; }
+            .pricing-detail { flex-direction: column; align-items: flex-start; gap: .3rem; }
+            .pricing-detail-right { text-align: left; }
             .pricing-price .price-amount { font-size: 2.2rem; }
             .footer-grid { grid-template-columns: 1fr; gap: 1.25rem; }
             .footer-col h4 { font-size: .9rem; margin-bottom: .6rem; }
@@ -367,9 +368,17 @@
         .pricing-price { padding: .5rem 1.5rem 1rem; }
         .pricing-price .price-amount { font-size: 2.8rem; font-weight: 800; color: var(--blanco); transition: .3s; }
         .pricing-price .price-amount span { font-size: 1rem; font-weight: 400; opacity: .6; }
-        .pricing-details { display: flex; justify-content: center; gap: 1.5rem; padding: .75rem 1.5rem 1.25rem; border-top: 1px solid rgba(255,255,255,.08); }
-        .pricing-detail { font-size: .78rem; color: rgba(255,255,255,.5); }
-        .pricing-detail strong { display: block; color: rgba(255,255,255,.85); font-size: .85rem; font-weight: 600; }
+        .pricing-details { display: flex; flex-direction: column; gap: 0; padding: .5rem 1.5rem 1rem; border-top: 1px solid rgba(255,255,255,.08); }
+        .pricing-detail { display: flex; align-items: center; justify-content: space-between; padding: .6rem 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+        .pricing-detail:last-child { border-bottom: none; }
+        .pricing-detail-left { text-align: left; }
+        .pricing-detail-left .detail-name { font-size: .85rem; color: rgba(255,255,255,.85); font-weight: 600; }
+        .pricing-detail-left .detail-sub { font-size: .68rem; color: rgba(255,255,255,.4); margin-top: .1rem; }
+        .pricing-detail-right { text-align: right; white-space: nowrap; }
+        .pricing-detail-right strong { font-size: .95rem; color: var(--cyan); font-weight: 700; }
+        .detail-badge { display: inline-block; font-size: .6rem; font-weight: 700; padding: .15rem .45rem; border-radius: 4px; margin-left: .4rem; text-transform: uppercase; }
+        .badge-green { background: rgba(0,200,100,.15); color: #4ade80; border: 1px solid rgba(0,200,100,.3); }
+        .badge-orange { background: linear-gradient(90deg, #ff6b35, #ff3366); color: #fff; }
         .pricing-nota { text-align: center; font-size: .7rem; color: rgba(255,255,255,.35); margin-top: .5rem; position: relative; z-index: 1; max-width: 420px; margin-left: auto; margin-right: auto; }
         .promo-banner { background: linear-gradient(90deg, #ff6b35, #ff3366); padding: .6rem 1rem; display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap; border-radius: 20px 20px 0 0; }
         .promo-banner span { font-size: .78rem; font-weight: 700; color: #fff; letter-spacing: .02em; }
@@ -633,8 +642,20 @@
                 <div class="price-amount" id="total-display">$4,000<span>/mes</span></div>
             </div>
             <div class="pricing-details">
-                <div class="pricing-detail"><span class="price-original">$2,000</span> <strong class="price-promo">$1,400</strong> Inscripción <span class="promo-tag">-30%</span></div>
-                <div class="pricing-detail"><strong>$950</strong>Paquete cuatrimestral</div>
+                <div class="pricing-detail">
+                    <div class="pricing-detail-left">
+                        <div class="detail-name">Inscripción única <span class="detail-badge badge-green">Sin reinscripción</span></div>
+                        <div class="detail-sub">Un solo pago al inicio — no vuelves a pagar inscripción</div>
+                    </div>
+                    <div class="pricing-detail-right"><span class="price-original">$2,000</span> <strong class="price-promo" style="color:#ff6b35;">$1,400</strong> <span class="detail-badge badge-orange">-30%</span></div>
+                </div>
+                <div class="pricing-detail">
+                    <div class="pricing-detail-left">
+                        <div class="detail-name">Paquete cuatrimestral</div>
+                        <div class="detail-sub">Credencial + seguro estudiantil · Pago cada cuatrimestre</div>
+                    </div>
+                    <div class="pricing-detail-right"><strong>$950</strong></div>
+                </div>
             </div>
         </div>
         <p class="pricing-nota">⚠ Los costos pueden variar según la promoción activa.<br>Las becas están sujetas a disponibilidad y condiciones.<br>Regístrate y contacta a uno de nuestros asesores para información personalizada.</p>
