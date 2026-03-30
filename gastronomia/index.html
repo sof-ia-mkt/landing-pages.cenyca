@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomía | CENYCA Universidad</title>
+    <link rel="stylesheet" href="https://use.typekit.net/ntg4rac.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan: #00D4FF; --cyan-oscuro: #00B8DB; --blanco: #FFFFFF;
+            --gris-claro: #F5F5F5; --gris: #666666; --gris-oscuro: #333333; --negro: #1A1A1A;
+            --navy: #1B2040; --navy-light: #252B52;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: montserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 400; color: var(--gris-oscuro); line-height: 1.6; overflow-x: hidden; }
+        h1, h2 { font-family: montserrat, sans-serif; font-weight: 700; }
+        h3, h4 { font-family: montserrat, sans-serif; font-weight: 600; }
+        p, li, span, label, select, input, textarea { font-weight: 400; }
+        .hero p, .beneficio-card p, .campo-item h3, footer p, .footer-col a { font-weight: 300; }
+        header { background: var(--navy); box-shadow: 0 2px 12px rgba(0,0,0,.15); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+        .logo-area { display: flex; align-items: center; gap: .75rem; }
+        .logo-img { height: 50px; width: auto; flex-shrink: 0; object-fit: contain; }
+        .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.4); flex-shrink: 0; }
+        .header-career { color: var(--blanco); font-family: montserrat, sans-serif; font-size: .95rem; font-weight: 600; letter-spacing: .3px; }
+        nav a { text-decoration: none; color: var(--blanco); font-size: .9rem; font-weight: 500; padding: .4rem .75rem; border-radius: 6px; transition: .2s; } .nav-cta { display: inline-block; padding: .6rem 1.5rem; background: var(--cyan); color: var(--navy); font-family: montserrat, sans-serif; font-weight: 700; font-size: .9rem; border-radius: 50px; text-decoration: none; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; animation: cta-pulse 2s infinite; } .nav-cta:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0,212,255,.4); } .nav-cta::after { content: ""; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); transform: skewX(-20deg); animation: cta-shine 3s infinite; } @keyframes cta-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,212,255,.4); } 50% { box-shadow: 0 0 15px 5px rgba(0,212,255,.2); } } @keyframes cta-shine { 0% { left: -60%; } 100% { left: 120%; } }
+        nav a:hover { color: var(--blanco); background: rgba(255,255,255,.15); }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { display: block; width: 26px; height: 3px; background: var(--blanco); border-radius: 2px; transition: .3s; }
+        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(27,32,64,.84), rgba(27,32,64,.92)); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; }
+        .hero { margin-top: 80px; position: relative; overflow: hidden; color: var(--blanco); padding: 5.5rem 1.5rem 4.5rem; text-align: center; background: var(--navy); }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .hero-badge { display: inline-block; background: rgba(0,212,255,.15); backdrop-filter: blur(8px); padding: .4rem 1.2rem; border-radius: 50px; font-size: .85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: .5px; }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 1px; }
+        .hero h1 .accent { color: var(--cyan); font-weight: 900; }
+        .hero-slogan { margin-top: 2rem; opacity: .8; }
+        .hero-slogan img { height: 70px; }
+        .hero p { font-size: 1.1rem; opacity: .92; max-width: 600px; margin: 0 auto 2.5rem; }
+        .hero-badges { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
+        .hero-badge-item { background: rgba(255,255,255,.12); backdrop-filter: blur(6px); padding: .5rem 1rem; border-radius: 10px; font-size: .82rem; font-weight: 500; display: flex; align-items: center; gap: .4rem; }
+        .btn { display: inline-block; padding: .95rem 2.5rem; border-radius: 50px; font-size: 1rem; font-family: montserrat, sans-serif; font-weight: 600; text-decoration: none; transition: .3s; cursor: pointer; border: none; }
+        .btn-white { background: var(--blanco); color: var(--navy); box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+        .btn-cyan { background: var(--cyan); color: var(--navy); }
+        .btn-cyan:hover { background: var(--cyan-oscuro); transform: translateY(-2px); }
+        section { padding: 5rem 1.5rem; position: relative; }
+        .bg-flecha { position: relative; }
+        .bg-flecha::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/flecha2.png'); background-size: 600px; background-repeat: no-repeat; background-attachment: fixed; opacity: .15; pointer-events: none; z-index: 0; }
+        .bg-flecha-right::before { background-position: right -80px center; }
+        .bg-flecha-left::before { background-position: left -80px center; }
+        .bg-flecha-center::before { background-position: center; background-size: 700px; }
+        .bg-flecha > * { position: relative; z-index: 1; }
+        .carousel-wrapper { position: relative; max-width: 1100px; margin: 0 auto; overflow: hidden; border-radius: 16px; }
+        .carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; gap: 1rem; padding-bottom: .5rem; scrollbar-width: none; }
+        .carousel-track::-webkit-scrollbar { display: none; }
+        .carousel-track img { flex: 0 0 calc(33.333% - .67rem); scroll-snap-align: start; width: calc(33.333% - .67rem); height: 280px; object-fit: cover; border-radius: 14px; }
+        .carousel-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1.25rem; }
+        .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,212,255,.25); border: none; cursor: pointer; transition: .3s; padding: 0; }
+        .carousel-dot.active { background: var(--cyan); transform: scale(1.2); }
+        .carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(27,32,64,.7); border: none; color: var(--cyan); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: .3s; backdrop-filter: blur(4px); }
+        .carousel-nav:hover { background: rgba(27,32,64,.9); }
+        .carousel-prev { left: 10px; }
+        .carousel-next { right: 10px; }
+        .section-divider { display: flex; align-items: center; justify-content: center; background: #fff; padding: 0; }
+        .section-divider::before { content: ''; display: block; width: 100%; max-width: 600px; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,.35), transparent); }
+        .section-divider .divider-icon { display: none; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--negro); margin-bottom: .6rem; text-transform: uppercase; letter-spacing: 1px; }
+        .highlight-word { position: relative; display: inline; }
+        .highlight-word::after { content: ''; position: absolute; left: 0; bottom: 2px; width: 0; height: 6px; background: rgba(0,212,255,.3); border-radius: 2px; z-index: -1; transition: width .8s ease; }
+        .highlight-word.visible::after { width: 100%; }
+        .section-title p { color: var(--gris); max-width: 600px; margin: 0 auto; }
+        .section-title .accent-line { width: 60px; height: 4px; background: var(--cyan); border-radius: 2px; margin: .8rem auto 0; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .beneficios { background: var(--gris-claro); }
+        .beneficios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+        .beneficio-card { background: var(--blanco); padding: 2rem 1.5rem; border-radius: 16px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,.05); transition: .3s; }
+        .beneficio-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+        .beneficio-icon { width: 64px; height: 64px; background: linear-gradient(135deg, var(--navy), var(--navy-light)); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; color: var(--cyan); }
+        .beneficio-card h3 { font-size: 1.05rem; margin-bottom: .5rem; color: var(--negro); }
+        .beneficio-card p { font-size: .9rem; color: var(--gris); }
+        .perfil-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .perfil-image { border-radius: 20px; height: 420px; position: relative; overflow: hidden; }
+        .perfil-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .perfil-lista { list-style: none; }
+        .perfil-lista li { padding: .75rem 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start; gap: .75rem; font-size: .92rem; }
+        .perfil-lista li:last-child { border-bottom: none; }
+        .check-icon { width: 24px; height: 24px; background: rgba(0,212,255,.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--cyan); font-weight: 700; font-size: .8rem; margin-top: 2px; }
+        .campo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+        .campo-item { background: var(--blanco); padding: 1.5rem; border-radius: 14px; text-align: center; border-left: 4px solid var(--cyan); box-shadow: 0 2px 8px rgba(0,0,0,.04); transition: .3s; }
+        .campo-item:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+        .campo-item .campo-icon { margin-bottom: .6rem; display: flex; justify-content: center; color: var(--cyan); }
+        .campo-item h3 { font-size: .95rem; color: var(--negro); }
+        .modalidades-section { background: linear-gradient(135deg, var(--navy) 0%, #0a0e2a 100%); color: var(--blanco); padding: 5rem 1.5rem; position: relative; overflow: hidden; }
+        .modalidades-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #00f0ff, var(--cyan)); }
+        .modalidades-section::after { content: ''; position: absolute; bottom: -30%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,.06) 0%, transparent 70%); pointer-events: none; }
+        .modalidades-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(0,212,255,.12); border: 1px solid rgba(0,212,255,.3); border-radius: 50px; padding: .4rem 1.2rem; font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); margin-bottom: 1.5rem; }
+        .modalidades-title { font-family: montserrat, sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 2px; }
+        .modalidades-title span { color: var(--cyan); }
+        .modalidades-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; opacity: .8; margin-bottom: 3rem; max-width: 600px; }
+        .modalidades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+        .modalidad-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; position: relative; transition: transform .3s, box-shadow .3s, border-color .3s; }
+        .modalidad-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,212,255,.15); border-color: rgba(0,212,255,.4); }
+        .modalidad-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; }
+        .modalidad-card:nth-child(1) .modalidad-icon { background: linear-gradient(135deg, rgba(0,212,255,.2), rgba(0,212,255,.05)); }
+        .modalidad-card:nth-child(2) .modalidad-icon { background: linear-gradient(135deg, rgba(100,220,100,.2), rgba(100,220,100,.05)); }
+        .modalidad-card:nth-child(3) .modalidad-icon { background: linear-gradient(135deg, rgba(255,149,0,.2), rgba(255,149,0,.05)); }
+        .modalidad-card h3 { font-family: montserrat, sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .5rem; }
+        .modalidad-card .modalidad-dia { font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 900; color: var(--cyan); margin-bottom: 1rem; font-family: montserrat, sans-serif; }
+        .modalidad-card:nth-child(2) .modalidad-dia { color: #64dc64; }
+        .modalidad-card:nth-child(3) .modalidad-dia { color: #ff9500; }
+        .modalidad-card p { font-size: .92rem; line-height: 1.7; opacity: .8; margin: 0; }
+        .modalidad-tag { display: inline-block; background: rgba(0,212,255,.15); color: var(--cyan); border-radius: 8px; padding: .3rem .8rem; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+        .modalidad-card:nth-child(2) .modalidad-tag { background: rgba(100,220,100,.15); color: #64dc64; }
+        .modalidad-card:nth-child(3) .modalidad-tag { background: rgba(255,149,0,.15); color: #ff9500; }
+        .modalidades-cta { text-align: center; margin-top: 2.5rem; }
+        .modalidades-cta p { font-size: 1.1rem; opacity: .7; margin-bottom: 1rem; }
+        .modalidades-cta strong { color: var(--cyan); font-weight: 700; }
+        .urgencia-banner { background: linear-gradient(135deg, var(--navy), #0d1025); color: var(--blanco); padding: 4rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
+        .urgencia-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #00f0ff, var(--cyan)); }
+        .urgencia-banner::after { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,212,255,.08) 0%, transparent 70%); pointer-events: none; }
+        .urgencia-lema { font-family: montserrat, sans-serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 3px; line-height: 1.15; }
+        .urgencia-lema span { color: var(--cyan); font-weight: 900; }
+        .urgencia-lema .accent-underline { position: relative; display: inline-block; }
+        .urgencia-lema .accent-underline::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 100%; height: 4px; background: var(--cyan); border-radius: 2px; }
+        .urgencia-item { background: rgba(255,255,255,.08); border-radius: 12px; padding: 1rem 1.5rem; min-width: 160px; }
+        .urgencia-item-label { font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; opacity: .6; margin-bottom: .3rem; }
+        .urgencia-item-value { font-size: 1.3rem; font-family: montserrat, sans-serif; font-weight: 700; }
+        .urgencia-item-value.cyan { color: var(--cyan); }
+        .countdown { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .countdown-unit { background: rgba(0,212,255,.15); border: 1px solid rgba(0,212,255,.3); color: var(--blanco); border-radius: 12px; padding: .75rem 1rem; min-width: 70px; }
+        .countdown-number { font-family: montserrat, sans-serif; font-size: 1.8rem; font-weight: 700; display: block; line-height: 1; color: var(--cyan); }
+        .countdown-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 1px; opacity: .7; }
+        .urgencia-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .urgencia-left { text-align: left; }
+        .urgencia-left .urgencia-lema { text-align: left; }
+        .urgencia-left .countdown { justify-content: flex-start; }
+        .urgencia-form .form-card { background: linear-gradient(160deg, #1e2348, #161a35); color: var(--blanco); border: 1px solid rgba(0,212,255,.15); box-shadow: 0 8px 40px rgba(0,0,0,.3), 0 0 80px rgba(0,212,255,.05); }
+        .urgencia-form .form-card h3 { color: var(--blanco); font-size: 1.25rem; text-align: center; }
+        .urgencia-form .form-card .form-subtitle { text-align: center; font-size: .88rem; color: rgba(255,255,255,.6); margin-top: -.75rem; margin-bottom: 1.5rem; }
+        .urgencia-form .form-group label { color: rgba(255,255,255,.85); font-size: .82rem; }
+        .urgencia-form .form-group .input-wrapper { position: relative; }
+        .urgencia-form .form-group .input-icon { position: absolute; left: .85rem; top: 50%; transform: translateY(-50%); color: var(--cyan); pointer-events: none; opacity: .7; }
+        .urgencia-form .form-group .input-icon svg { width: 18px; height: 18px; }
+        .urgencia-form .form-group input, .urgencia-form .form-group select { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); color: var(--blanco); padding-left: 2.75rem; border-radius: 12px; }
+        .urgencia-form .form-group input::placeholder { color: rgba(255,255,255,.35); }
+        .urgencia-form .form-group input:focus, .urgencia-form .form-group select:focus { border-color: var(--cyan); background: rgba(0,212,255,.06); box-shadow: 0 0 0 3px rgba(0,212,255,.1); }
+        .urgencia-form .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300D4FF' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+        .urgencia-form .form-group select option { background: var(--navy); color: var(--blanco); }
+        .urgencia-form .form-group textarea { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); color: var(--blanco); border-radius: 12px; min-height: 70px; }
+        .urgencia-form .form-group textarea::placeholder { color: rgba(255,255,255,.35); }
+        .urgencia-form .form-group textarea:focus { border-color: var(--cyan); background: rgba(0,212,255,.06); box-shadow: 0 0 0 3px rgba(0,212,255,.1); }
+        .urgencia-form .form-btn { background: var(--cyan); color: var(--navy); font-weight: 700; font-size: 1.05rem; padding: .95rem; border-radius: 12px; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+        .urgencia-form .form-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,212,255,.4); }
+        .urgencia-form .form-btn::after { content: ''; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); transform: skewX(-20deg); animation: cta-shine 3s infinite; }
+        .form-trust { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1rem; font-size: .78rem; color: rgba(255,255,255,.5); }
+        .form-trust svg { width: 14px; height: 14px; color: var(--cyan); flex-shrink: 0; }
+        .form-lugares { background: rgba(255,255,255,.06); border: 1px solid rgba(0,212,255,.2); border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+        .form-lugares-header { display: flex; align-items: center; gap: .5rem; margin-bottom: .6rem; }
+        .form-lugares-icon { font-size: 1.2rem; }
+        .form-lugares-text { font-size: .9rem; color: rgba(255,255,255,.9); }
+        .form-lugares-text strong { color: var(--cyan); font-weight: 700; font-size: 1.1em; }
+        .form-lugares-barra { width: 100%; height: 10px; background: rgba(255,255,255,.1); border-radius: 6px; overflow: hidden; margin-bottom: .7rem; }
+        .form-lugares-barra-inner { height: 100%; border-radius: 6px; transition: width 1.5s ease; background: linear-gradient(90deg, var(--cyan), #00f0ff, #ff9500); background-size: 200% 100%; animation: barra-pulse 2s ease infinite; }
+        @keyframes barra-pulse { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .form-lugares-promo { font-size: .82rem; color: rgba(255,255,255,.75); line-height: 1.4; margin: 0; text-align: center; }
+        .form-lugares-promo strong { color: var(--cyan); font-weight: 700; }
+        .form-card { background: var(--blanco); padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+        .form-card h3 { font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--negro); }
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .35rem; color: var(--gris-oscuro); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: .75rem 1rem; border: 2px solid #e8e8e8; border-radius: 10px; font-size: .95rem; font-family: inherit; transition: .2s; outline: none; background: var(--blanco); }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,212,255,.1); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-btn { width: 100%; padding: .85rem; font-size: 1rem; }
+        footer { background: var(--negro); color: rgba(255,255,255,.7); padding: 3rem 1.5rem 1.5rem; }
+        .footer-bottom { max-width: 1100px; margin: 1.5rem auto 0; text-align: center; font-size: .82rem; color: rgba(255,255,255,.4); }
+        /* Inversión */
+        .inversion-section { background: linear-gradient(160deg, var(--navy), var(--navy-light), #1a1f3d); position: relative; overflow: hidden; }
+        .inversion-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,212,255,.08) 0%, transparent 70%); pointer-events: none; }
+        .inversion-section::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,212,255,.05) 0%, transparent 70%); pointer-events: none; }
+        .inversion-section .section-title h2 { color: var(--blanco); }
+        .inversion-section .section-title p { color: rgba(255,255,255,.6); }
+        .inversion-card { max-width: 540px; margin: 0 auto; background: rgba(255,255,255,.07); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; overflow: hidden; position: relative; z-index: 1; }
+        .inversion-header { background: rgba(0,212,255,.12); color: var(--blanco); padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,.08); }
+        .inversion-header h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
+        .inversion-body { padding: 1.5rem; }
+        .inversion-row { display: flex; justify-content: space-between; align-items: center; padding: .65rem 0; border-bottom: 1px solid rgba(255,255,255,.08); gap: 1rem; }
+        .inversion-row:last-child { border-bottom: none; }
+        .inversion-label { font-size: .9rem; color: rgba(255,255,255,.85); font-weight: 400; flex: 1; }
+        .inversion-label small { display: block; font-size: .75rem; color: rgba(255,255,255,.5); font-weight: 300; }
+        .inversion-value { font-size: 1.05rem; font-weight: 700; color: var(--cyan); text-align: right; white-space: nowrap; }
+        .inversion-beca { display: flex; align-items: center; gap: .75rem; justify-content: center; margin: 1.25rem 0 .5rem; }
+        .beca-btn { padding: .5rem 1.25rem; border-radius: 50px; border: 2px solid rgba(0,212,255,.4); background: transparent; color: var(--blanco); font-family: montserrat, sans-serif; font-weight: 600; font-size: .85rem; cursor: pointer; transition: .3s; }
+        .beca-btn.active { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+        .beca-btn:hover { border-color: var(--cyan); background: rgba(0,212,255,.15); }
+        .inversion-total { background: rgba(0,212,255,.1); color: var(--blanco); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.08); }
+        .inversion-total .total-label { font-size: .85rem; font-weight: 400; opacity: .8; }
+        .inversion-total .total-label span { display: block; font-size: .7rem; opacity: .6; }
+        .inversion-total .total-value { font-size: 1.4rem; font-weight: 700; color: var(--cyan); }
+        .inversion-nota { text-align: center; font-size: .75rem; color: rgba(255,255,255,.4); margin-top: .75rem; position: relative; z-index: 1; }
+        /* Acordeón */
+        .accordion-trigger { cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 2rem 1.5rem; transition: .3s; }
+        .accordion-trigger:hover { opacity: .85; }
+        .accordion-trigger .section-title { margin-bottom: 0; }
+        .accordion-chevron { width: 44px; height: 44px; min-width: 44px; border-radius: 50%; background: var(--cyan); display: flex; align-items: center; justify-content: center; transition: transform .4s ease; flex-shrink: 0; }
+        .accordion-chevron svg { transition: transform .4s ease; color: var(--navy); }
+        .accordion-trigger.open .accordion-chevron svg { transform: rotate(180deg); }
+        .accordion-hint { font-size: .75rem; color: var(--gris); font-weight: 400; text-transform: uppercase; letter-spacing: 1px; margin-top: .3rem; }
+        .accordion-trigger.open .accordion-hint { display: none; }
+        .accordion-body { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
+        .accordion-body.open { max-height: 2000px; }
+        .accordion-body-inner { padding: 0 1.5rem 3rem; }
+        /* Snackbars */
+        .snackbar { position: fixed; bottom: -150px; left: 0; right: 0; z-index: 999; background: var(--navy); color: var(--blanco); box-shadow: 0 -4px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 1rem; padding: 1rem 2.5rem 1rem 1.5rem; transition: bottom .5s ease; }
+        .snackbar.show { bottom: 0; }
+        .snackbar-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .snackbar-text { flex: 1; min-width: 0; }
+        .snackbar-text strong { display: block; font-size: .95rem; font-weight: 700; margin-bottom: .15rem; }
+        .snackbar-text span { font-size: .8rem; font-weight: 300; opacity: .8; display: block; }
+        .snackbar-btn { display: inline-block; padding: .55rem 1.25rem; border-radius: 50px; border: none; font-family: montserrat, sans-serif; font-weight: 700; font-size: .8rem; cursor: pointer; transition: .3s; text-decoration: none; white-space: nowrap; flex-shrink: 0; text-align: center; }
+        .snackbar-btn.cyan { background: var(--cyan); color: var(--navy); }
+        .snackbar-btn.green { background: #25D366; color: var(--blanco); }
+        .snackbar-close { position: absolute; top: .5rem; right: .5rem; background: none; border: none; color: rgba(255,255,255,.5); cursor: pointer; font-size: 1.4rem; line-height: 1; padding: .35rem; transition: .2s; z-index: 1; }
+        .snackbar-close:hover { color: var(--blanco); }
+        .snackbar-urgencia { background: linear-gradient(135deg, #1A1A1A, #2a2a2a); border-top: 3px solid var(--cyan); }
+        @media (max-width: 768px) {
+            .logo-area img[alt="Donde tu potencial se vuelve éxito"] { display: none; }
+            .divider-slogan { display: none; }
+            .bg-flecha::before { background-attachment: scroll; background-size: 400px; opacity: .1; }
+            nav { display: none; } .hamburger { display: flex; }
+            .hero { padding: 4.5rem 1.25rem 3.5rem; } .hero h1 { font-size: 1.8rem; }
+            .perfil-content, .contacto-grid { grid-template-columns: 1fr; }
+            .modalidades-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .modalidad-card { padding: 2rem 1.5rem; } .modalidades-section { padding: 3.5rem 1.25rem; }
+            .carousel-track img { flex: 0 0 calc(50% - .5rem); width: calc(50% - .5rem); height: 220px; }
+            #ubicacion .container > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+            .perfil-image { height: 280px; }
+            .beneficios-grid { grid-template-columns: repeat(2, 1fr); }
+            .campo-grid { grid-template-columns: repeat(2, 1fr); }
+            section { padding: 3.5rem 1.25rem; }
+            .urgencia-layout { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+            .urgencia-left { text-align: center; display: flex; flex-direction: column; align-items: center; }
+            .urgencia-left .urgencia-lema { text-align: center; }
+            .urgencia-left p { text-align: center !important; }
+            .urgencia-left .countdown { justify-content: center; }
+            .urgencia-left .form-lugares { width: 100%; }
+            .urgencia-form .form-card { padding: 1.5rem; }
+            .snackbar { flex-wrap: wrap; padding: .85rem 1rem 1rem; gap: .5rem; padding-right: 2rem; }
+            .snackbar-btn { width: 100%; padding: .6rem; font-size: .8rem; margin-top: .25rem; }
+            .accordion-trigger { padding: 1.5rem 1rem; }
+            .inversion-card { border-radius: 16px; max-width: 100%; }
+        }
+        @media (max-width: 480px) {
+            .header-inner { padding: .6rem .75rem; } .logo-img { height: 34px; }
+            .header-divider { height: 22px; }
+            .header-career { font-size: .7rem; max-width: 120px; line-height: 1.2; }
+            .hero { margin-top: 62px; padding: 2.5rem 1rem 2rem; } .hero h1 { font-size: 1.4rem; }
+            .hero p { font-size: .88rem; } .btn { padding: .7rem 1.6rem; font-size: .88rem; }
+            section { padding: 2.5rem .85rem; }
+            .beneficios-grid { grid-template-columns: 1fr; }
+            .campo-grid { grid-template-columns: 1fr; }
+            .campo-item { display: flex; align-items: center; gap: .75rem; text-align: left; border-left: 3px solid var(--cyan); padding: 1rem; }
+            .campo-item .campo-icon { margin-bottom: 0; }
+            .carousel-track img { flex: 0 0 90%; width: 90%; height: auto; object-fit: contain; }
+            .carousel-nav { display: none; }
+            .perfil-image { height: 200px; }
+            .inversion-row { flex-direction: column; align-items: center; text-align: center; gap: .25rem; }
+            .inversion-total { flex-direction: column; text-align: center; gap: .5rem; padding: 1rem; }
+            .inversion-beca { flex-direction: column; }
+            .footer-bottom { font-size: .75rem; }
+        }
+        /* Animations */
+        .anim { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
+        .anim-up { transform: translateY(40px); }
+        .anim-left { transform: translateX(-40px); }
+        .anim-right { transform: translateX(40px); }
+        .anim-scale { transform: scale(.85); }
+        .anim.visible { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+        .anim-delay-1 { transition-delay: .1s; } .anim-delay-2 { transition-delay: .2s; } .anim-delay-3 { transition-delay: .3s; } .anim-delay-4 { transition-delay: .4s; } .anim-delay-5 { transition-delay: .5s; } .anim-delay-6 { transition-delay: .6s; } .anim-delay-7 { transition-delay: .7s; } .anim-delay-8 { transition-delay: .8s; }
+        .ubicacion-card { transition: transform .3s ease, box-shadow .3s ease; }
+        .ubicacion-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,.15); }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <div class="logo-area">
+            <img src="assets/logo.avif" alt="CENYCA Universidad" class="logo-img">
+            <span class="header-divider"></span>
+            <img src="assets/slogan.avif" alt="Donde tu potencial se vuelve éxito" style="height:45px; opacity:.9;">
+            <span class="header-divider divider-slogan"></span>
+            <span class="header-career">Licenciatura en Gastronomía</span>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <video class="hero-video-bg" autoplay muted loop playsinline><source src="assets/hero-video.mov" type="video/mp4"></video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Licenciatura en <span class="accent">Gastronomía</span></h1>
+        <p>Domina el arte culinario con formación profesional. Aprende técnicas clásicas y de vanguardia, desarrolla tu creatividad gastronómica y prepárate para liderar la industria de alimentos y bebidas.</p>
+        <a href="#contacto" class="nav-cta" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--gris-claro);"></div>
+
+<!-- BENEFICIOS -->
+<section class="beneficios bg-flecha bg-flecha-right" id="beneficios" style="background:var(--gris-claro);">
+    <div class="container">
+        <div class="section-title">
+            <h2>¿Por qué estudiar Gastronomía?</h2>
+            <div class="accent-line"></div>
+        </div>
+        <div class="beneficios-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <div class="beneficio-card"><div class="beneficio-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><h3>Prácticas en restaurante real</h3><p>Desde tu formación cocinas en un entorno profesional. Aprende haciendo, no solo estudiando, con experiencia real en cocina.</p></div>
+            <div class="beneficio-card"><div class="beneficio-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Titulación en 3 años</h3><p>Modelo cuatrimestral intensivo con RVOE. Obtén tu título universitario y cédula profesional en menos tiempo.</p></div>
+            <div class="beneficio-card"><div class="beneficio-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3>Formación integral</h3><p>Combina técnica culinaria con administración, nutrición y emprendimiento. No solo cocinas: aprendes a dirigir negocios gastronómicos.</p></div>
+            <div class="beneficio-card"><div class="beneficio-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Región gastronómica líder</h3><p>Fórmate en Baja California, epicentro de la escena culinaria mexicana con la ruta del vino, cocina fronteriza y eventos como Cocinarte.</p></div>
+        </div>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--gris-claro);"></div>
+
+<!-- MODALIDADES -->
+<section class="modalidades-section">
+    <div class="container" style="text-align:center;">
+        <div class="modalidades-badge">Modalidades de estudio</div>
+        <div class="modalidades-title">Tu carrera,<br><span>a tu ritmo</span></div>
+        <p class="modalidades-subtitle" style="margin-left:auto; margin-right:auto;">Estudia sin pausar tus actividades cotidianas.</p>
+        <div class="modalidades-grid">
+            <div class="modalidad-card">
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                <span class="modalidad-tag">Escolarizada</span>
+                <h3>Tiempo completo</h3>
+                <div class="modalidad-dia">Turno matutino</div>
+                <p>La experiencia universitaria completa. Vive el campus, convive con tus compañeros y aprovecha al máximo tu formación.</p>
+            </div>
+            <div class="modalidad-card">
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#64dc64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                <span class="modalidad-tag">Entre semana</span>
+                <h3>1 día a la semana</h3>
+                <div class="modalidad-dia">Solo 1 día</div>
+                <p>Asiste un día entre semana y sigue con tu trabajo o actividades el resto de la semana. Flexibilidad real.</p>
+            </div>
+            <div class="modalidad-card">
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <span class="modalidad-tag">Ejecutivo</span>
+                <h3>Fin de semana</h3>
+                <div class="modalidad-dia">Sábado o Domingo</div>
+                <p>Dedica tu sábado o domingo a formarte. Perfecto para quienes tienen compromisos de lunes a viernes.</p>
+            </div>
+        </div>
+        <div class="modalidades-cta">
+            <p>Sin importar la modalidad, obtienes el <strong>mismo título con validez oficial</strong></p>
+            <a href="#contacto" class="btn btn-cyan">Quiero más información</a>
+        </div>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--gris-claro);"></div>
+
+<!-- PERFIL DEL EGRESADO -->
+<section id="perfil" class="bg-flecha bg-flecha-left" style="padding:0; background:var(--gris-claro);">
+    <div class="container">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="section-title">
+                <h2>Perfil del egresado</h2>
+                <p class="accordion-hint">Toca para ver más</p>
+                <div class="accent-line"></div>
+            </div>
+            <div class="accordion-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="accordion-body">
+            <div class="accordion-body-inner">
+                <div class="perfil-content">
+                    <div class="perfil-image">
+                        <img src="assets/perfil-egresado.webp" alt="Perfil del egresado de Gastronomía">
+                    </div>
+                    <div>
+                        <ul class="perfil-lista">
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Dominar técnicas gastronómicas clásicas y de vanguardia para crear platillos de alto nivel.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Administrar y dirigir empresas de alimentos y bebidas con visión estratégica.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Crear e iniciar negocios gastronómicos propios con espíritu emprendedor.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Aplicar estándares de calidad, nutrición y conservación de alimentos en cualquier entorno profesional.</span></li>
+                            <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Innovar en la cocina con creatividad, conocimiento del patrimonio gastronómico mexicano y visión global.</span></li>
+                            <li style="border-bottom:none; padding-top:1rem;"><span></span><span style="font-style:italic; opacity:.85;">Tu formación te preparará para ser un profesional competitivo en la industria gastronómica nacional e internacional.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--gris-claro);"></div>
+
+<!-- CAMPO LABORAL -->
+<section id="campo" class="bg-flecha bg-flecha-right" style="background:var(--gris-claro); padding:0;">
+    <div class="container">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+            <div class="section-title">
+                <h2>Campo laboral</h2>
+                <p class="accordion-hint">Toca para ver más</p>
+                <div class="accent-line"></div>
+            </div>
+            <div class="accordion-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="accordion-body">
+            <div class="accordion-body-inner">
+                <div class="campo-grid">
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 2-1 3-2 4l-1 1v2h-4v-2l-1-1c-1-1-2-2-2-4a5 5 0 0 1 5-5z"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span><h3>Chef ejecutivo</h3></div>
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><h3>Director de restaurantes</h3></div>
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><h3>Supervisor de producción de alimentos</h3></div>
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><h3>Emprendimiento gastronómico</h3></div>
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></span><h3>Panadería y repostería profesional</h3></div>
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><h3>Consultoría en alimentos y bebidas</h3></div>
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><h3>Gastronomía hotelera y turística</h3></div>
+                    <div class="campo-item"><span class="campo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span><h3>Desarrollo de productos alimenticios</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--gris-claro);"></div>
+<div class="section-divider"><div class="divider-icon"></div></div>
+
+<!-- INSTALACIONES -->
+<section id="instalaciones" style="background:#fff;">
+    <div class="container">
+        <div class="section-title" style="margin-bottom: 1rem;">
+            <h2 style="font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">Conoce nuestro <span class="highlight-word">campus</span></h2>
+            <div class="accent-line"></div>
+        </div>
+        <p style="text-align:center; font-size: clamp(.75rem, 1.5vw, .9rem); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; color: var(--gris-oscuro); margin-bottom: 2.5rem; opacity: .6;">Instalaciones de primer nivel en Baja California</p>
+        <div class="carousel-wrapper">
+            <button class="carousel-nav carousel-prev" onclick="moveCarousel(-1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div class="carousel-track" id="carouselTrack">
+                <img src="assets/instalaciones-1.avif" alt="Aula CENYCA Universidad" loading="lazy">
+                <img src="assets/instalaciones-2.avif" alt="Instalaciones CENYCA" loading="lazy">
+                <img src="assets/instalaciones-3.webp" alt="Instalaciones CENYCA" loading="lazy">
+                <img src="assets/instalaciones-4.avif" alt="Instalaciones CENYCA" loading="lazy">
+                <img src="assets/instalaciones-5.avif" alt="Instalaciones CENYCA" loading="lazy">
+                <img src="assets/instalaciones-6.avif" alt="Instalaciones CENYCA" loading="lazy">
+                <img src="assets/ubicacion1.avif" alt="Campus CENYCA Universidad" loading="lazy">
+                <img src="assets/ubicacion2.avif" alt="Campus CENYCA Universidad" loading="lazy">
+            </div>
+            <button class="carousel-nav carousel-next" onclick="moveCarousel(1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- INVERSIÓN -->
+<section id="inversion" class="inversion-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Inversión</h2>
+            <p>Conoce el costo de tu carrera y simula con beca.</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="inversion-card">
+            <div class="inversion-header"><h3>Simulador de costos</h3></div>
+            <div class="inversion-body">
+                <div class="inversion-row">
+                    <span class="inversion-label">Inscripción <small>Pago único, sin reinscripción</small></span>
+                    <span class="inversion-value">$2,000</span>
+                </div>
+                <div class="inversion-row">
+                    <span class="inversion-label">Mensualidad</span>
+                    <span class="inversion-value" id="mensualidad-display">$4,000</span>
+                </div>
+                <div class="inversion-row">
+                    <span class="inversion-label">Paquete cuatrimestral <small>Seguro + credencial estudiantil</small></span>
+                    <span class="inversion-value">$950</span>
+                </div>
+                <div style="text-align:center; padding-top:.75rem;">
+                    <span style="font-size:.85rem; font-weight:600; color:var(--blanco);">Selecciona tu beca:</span>
+                    <div class="inversion-beca">
+                        <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
+                        <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
+                        <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
+                    </div>
+                </div>
+            </div>
+            <div class="inversion-total">
+                <div class="total-label">Mensualidad con beca<span>+ inscripción de $2,000 + paquete cuatrimestral $950</span></div>
+                <div class="total-value" id="total-display">$4,000/mes</div>
+            </div>
+        </div>
+        <p class="inversion-nota">Los costos pueden variar. Esta simulación no es oficial hasta haber sido atendido por un asesor educativo.</p>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--navy);"></div>
+
+<!-- CONTACTO -->
+<section class="urgencia-banner" id="contacto">
+    <div class="urgencia-layout">
+        <div class="urgencia-left">
+            <div class="urgencia-lema">Donde tu potencial <br>se vuelve <span class="accent-underline">éxito</span></div>
+            <p style="font-size:clamp(1rem, 2vw, 1.25rem); font-weight:300; opacity:.9; margin-bottom:1rem; line-height:1.7;">La industria gastronómica necesita <strong style="font-weight:700;">profesionales creativos preparados para innovar y liderar.</strong></p>
+            <p style="font-size:clamp(.95rem, 1.8vw, 1.1rem); font-weight:300; opacity:.8; margin-bottom:1.5rem; line-height:1.7;">En <strong style="font-weight:700;">CENYCA Universidad</strong> te formamos para ser ese profesional.</p>
+            <div class="urgencia-item" style="display:inline-block; margin-bottom:1.5rem;">
+                <div class="urgencia-item-label">Próximo inicio de clases</div>
+                <div class="urgencia-item-value cyan">Mayo 2026</div>
+            </div>
+            <p style="font-size:.95rem; margin-bottom:.75rem; opacity:.85;">Las inscripciones cierran en:</p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-unit"><span class="countdown-number" id="cd-dias">00</span><span class="countdown-label">Días</span></div>
+                <div class="countdown-unit"><span class="countdown-number" id="cd-horas">00</span><span class="countdown-label">Horas</span></div>
+                <div class="countdown-unit"><span class="countdown-number" id="cd-min">00</span><span class="countdown-label">Min</span></div>
+                <div class="countdown-unit"><span class="countdown-number" id="cd-seg">00</span><span class="countdown-label">Seg</span></div>
+            </div>
+            <div class="form-lugares" style="margin-top:1.5rem;">
+                <div class="form-lugares-header">
+                    <span class="form-lugares-icon">🔥</span>
+                    <span class="form-lugares-text">Solo quedan <strong id="lugares-form-count">10</strong> de <strong>30</strong> lugares</span>
+                </div>
+                <div class="form-lugares-barra">
+                    <div class="form-lugares-barra-inner" id="barra-form-lugares"></div>
+                </div>
+                <p class="form-lugares-promo">Sé de los <strong>primeros 10 registros</strong> y obtén un <strong>descuento del 30%</strong> en tu inscripción</p>
+            </div>
+        </div>
+        <div class="urgencia-form">
+            <div class="form-card">
+                <h3>Regístrate ahora</h3>
+                <p class="form-subtitle">Completa tus datos y un asesor te contactará</p>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+                            <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                            <input type="tel" id="telefono" name="telefono" placeholder="(664) 000-0000" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="plantel">Plantel de interés</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                            <select id="plantel" name="plantel" required>
+                                <option value="" disabled selected>Selecciona un plantel</option>
+                                <option value="casablanca">CENYCA Casablanca</option>
+                                <option value="otay">CENYCA Otay</option>
+                                <option value="rosarito">CENYCA Rosarito</option>
+                                <option value="ensenada">CENYCA Ensenada</option>
+                                <option value="mexicali">CENYCA Mexicali</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">¿Tienes alguna pregunta? (opcional)</label>
+                        <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-cyan form-btn">Más información</button>
+                </form>
+                <div class="form-trust">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Tus datos están protegidos. Respuesta en menos de 24 hrs.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--navy);"></div>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion" class="bg-flecha bg-flecha-left">
+    <div class="container">
+        <div class="section-title">
+            <h2>Ubicación</h2>
+            <p>Visítanos y conoce nuestras instalaciones.</p>
+            <div class="accent-line"></div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:900px; margin:0 auto;">
+            <a href="https://maps.app.goo.gl/X4jXGNjSZyvkf13EA" target="_blank" rel="noopener" class="ubicacion-card anim anim-up anim-delay-1" style="display:flex; align-items:flex-start; gap:1rem; background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,.08); text-decoration:none; color:inherit;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#E53935" stroke="none" style="flex-shrink:0; margin-top:2px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <div>
+                    <strong style="font-size:1.05rem; color:var(--navy); display:block; margin-bottom:.35rem;">CENYCA Palmas</strong>
+                    <span style="font-size:.9rem; color:#555; line-height:1.5;">Blvd. Gustavo Díaz Ordaz 4141, San Carlos, 22106 Tijuana, B.C.</span>
+                </div>
+            </a>
+            <a href="https://maps.app.goo.gl/J3kH813nD5xzNakF7" target="_blank" rel="noopener" class="ubicacion-card anim anim-up anim-delay-2" style="display:flex; align-items:flex-start; gap:1rem; background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,.08); text-decoration:none; color:inherit;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#E53935" stroke="none" style="flex-shrink:0; margin-top:2px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <div>
+                    <strong style="font-size:1.05rem; color:var(--navy); display:block; margin-bottom:.35rem;">CENYCA Campus Casa Blanca</strong>
+                    <span style="font-size:.9rem; color:#555; line-height:1.5;">Blvd. Casa Blanca 5530, Col. Matamoros, 22206 Tijuana, B.C.</span>
+                </div>
+            </a>
+            <a href="https://maps.app.goo.gl/WQeZDZUEUCzS6EWY7" target="_blank" rel="noopener" class="ubicacion-card anim anim-up anim-delay-3" style="display:flex; align-items:flex-start; gap:1rem; background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,.08); text-decoration:none; color:inherit;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#E53935" stroke="none" style="flex-shrink:0; margin-top:2px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <div>
+                    <strong style="font-size:1.05rem; color:var(--navy); display:block; margin-bottom:.35rem;">CENYCA Universidad Plaza Americana Otay</strong>
+                    <span style="font-size:.9rem; color:#555; line-height:1.5;">Calz. del Tecnológico 2016, Local 16, Otay Constituyentes, 22457 Tijuana, B.C.</span>
+                </div>
+            </a>
+            <a href="https://maps.app.goo.gl/LzJtQyn7pSoBWvM27" target="_blank" rel="noopener" class="ubicacion-card anim anim-up anim-delay-4" style="display:flex; align-items:flex-start; gap:1rem; background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,.08); text-decoration:none; color:inherit;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#E53935" stroke="none" style="flex-shrink:0; margin-top:2px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <div>
+                    <strong style="font-size:1.05rem; color:var(--navy); display:block; margin-bottom:.35rem;">CENYCA Universidad Tecate</strong>
+                    <span style="font-size:.9rem; color:#555; line-height:1.5;">Calle F No. 908, Col. Moderna, 21450 Tecate, B.C.</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Snackbars -->
+<div class="snackbar" id="snackbar-inversion">
+    <button class="snackbar-close" onclick="closeSnackbar('snackbar-inversion')">&times;</button>
+    <div class="snackbar-icon">💰</div>
+    <div class="snackbar-text">
+        <strong>Mensualidad desde $3,200/mes</strong>
+        <span>Inscripción única de $2,000 · Becas hasta 20%</span>
+    </div>
+    <a href="#inversion" class="snackbar-btn cyan" onclick="setTimeout(function(){closeSnackbar('snackbar-inversion')},300)">Ver costos</a>
+</div>
+<div class="snackbar snackbar-urgencia" id="snackbar-urgencia">
+    <button class="snackbar-close" onclick="closeSnackbar('snackbar-urgencia')">&times;</button>
+    <div class="snackbar-icon">🔥</div>
+    <div class="snackbar-text">
+        <strong>¡Solo 10 lugares con 30% OFF en inscripción!</strong>
+        <span>Registra tus datos y asegura tu descuento antes de que se agoten</span>
+    </div>
+    <a href="#contacto" class="snackbar-btn green" onclick="setTimeout(function(){closeSnackbar('snackbar-urgencia')},300)">¡Lo quiero!</a>
+</div>
+
+<footer style="padding:2rem 1.5rem; text-align:center;">
+    <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:2rem; flex-wrap:wrap; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,.1);">
+        <img src="assets/logo.avif" alt="CENYCA Universidad" style="height:45px; opacity:.8;">
+        <img src="assets/slogan.avif" alt="Donde tu potencial se vuelve éxito" style="height:35px; opacity:.6;">
+    </div>
+    <div class="footer-bottom">&copy; 2026 CENYCA Universidad. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+    // Snackbar popups
+    (function() {
+        let currentSnackbar = null, snackbar1Closed = false, snackbar2Closed = false, scrollTriggered = false;
+        window.closeSnackbar = function(id) {
+            document.getElementById(id).classList.remove('show');
+            currentSnackbar = null;
+            if (id === 'snackbar-inversion') { snackbar1Closed = true; if (!snackbar2Closed) setTimeout(() => { if (!currentSnackbar) { document.getElementById('snackbar-urgencia').classList.add('show'); currentSnackbar = 'snackbar-urgencia'; } }, 4000); }
+            else { snackbar2Closed = true; if (!snackbar1Closed) setTimeout(() => { if (!currentSnackbar) { document.getElementById('snackbar-inversion').classList.add('show'); currentSnackbar = 'snackbar-inversion'; } }, 4000); }
+        };
+        setTimeout(() => { if (!currentSnackbar) { document.getElementById('snackbar-inversion').classList.add('show'); currentSnackbar = 'snackbar-inversion'; } }, 5000);
+        window.addEventListener('scroll', function() {
+            if (scrollTriggered) return;
+            const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            if (scrollPct > 0.35 && snackbar1Closed && !snackbar2Closed && !currentSnackbar) { scrollTriggered = true; document.getElementById('snackbar-urgencia').classList.add('show'); currentSnackbar = 'snackbar-urgencia'; }
+        });
+    })();
+
+    function toggleAccordion(trigger) { trigger.classList.toggle('open'); trigger.nextElementSibling.classList.toggle('open'); }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.textContent = '¡Enviado correctamente!'; btn.style.background = '#25D366'; btn.style.color = '#fff';
+        e.target.reset();
+        setTimeout(() => { btn.textContent = 'Enviar solicitud'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+    }
+
+    function calcBeca(pct, btn) {
+        const base = 4000, final = base - base * (pct / 100);
+        document.getElementById('mensualidad-display').textContent = pct > 0 ? '$' + final.toLocaleString('es-MX') + ' (-' + pct + '%)' : '$4,000';
+        document.getElementById('total-display').textContent = '$' + final.toLocaleString('es-MX') + '/mes';
+        document.querySelectorAll('.beca-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    // Countdown - Mayo 2026
+    (function() {
+        const target = new Date('2026-05-04T09:00:00-07:00').getTime();
+        function update() {
+            let diff = Math.max(0, target - Date.now());
+            document.getElementById('cd-dias').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
+            document.getElementById('cd-horas').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+            document.getElementById('cd-min').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            document.getElementById('cd-seg').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        }
+        update(); setInterval(update, 1000);
+    })();
+
+    // Lugares disponibles
+    (function() {
+        const total = 30, remaining = 8 + Math.floor(Math.random() * 5);
+        const el = document.getElementById('lugares-form-count');
+        if (el) el.textContent = remaining;
+        const barra = document.getElementById('barra-form-lugares');
+        if (barra) barra.style.width = ((total - remaining) / total * 100) + '%';
+    })();
+</script>
+<script>
+    // Carousel
+    (function() {
+        const track = document.getElementById('carouselTrack'), dotsContainer = document.getElementById('carouselDots');
+        const images = track.querySelectorAll('img');
+        let currentIndex = 0;
+        images.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => images[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' }));
+            dotsContainer.appendChild(dot);
+        });
+        track.addEventListener('scroll', () => {
+            const newIndex = Math.round(track.scrollLeft / (images[0].offsetWidth + 16));
+            if (newIndex !== currentIndex) { currentIndex = newIndex; dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === currentIndex)); }
+        });
+        window.moveCarousel = function(dir) { track.scrollBy({ left: dir * (images[0].offsetWidth + 16), behavior: 'smooth' }); };
+    })();
+
+    // Scroll animations
+    (function() {
+        document.querySelectorAll('.section-title').forEach(el => el.classList.add('anim', 'anim-up'));
+        document.querySelectorAll('.beneficio-card').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + (i + 1)));
+        document.querySelectorAll('.campo-item').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + Math.min(i + 1, 8)));
+        document.querySelectorAll('.perfil-content > *').forEach((el, i) => el.classList.add('anim', i === 0 ? 'anim-left' : 'anim-right'));
+        document.querySelectorAll('.perfil-lista li').forEach((el, i) => el.classList.add('anim', 'anim-up', 'anim-delay-' + (i + 1)));
+        document.querySelectorAll('.urgencia-left').forEach(el => el.classList.add('anim', 'anim-left'));
+        document.querySelectorAll('.urgencia-form').forEach(el => el.classList.add('anim', 'anim-right'));
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); else entry.target.classList.remove('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+        document.querySelectorAll('.highlight-word').forEach(el => observer.observe(el));
+    })();
+</script>
+</body>
+</html>
