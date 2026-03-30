@@ -1,0 +1,17 @@
+node_modules/
+.claude/
+logos_sofia/
+logos_sofia2/
+screenshots/
+package.json
+package-lock.json
+generate_cotizacion.py
+generate_pdf.py
+take_screenshots.js
+Cotizacion-SOF-IA-CENYCA.pdf
+Presentacion-Landing-CENYCA.pdf
+landing-pages.cenyca/
+deploy/
+*.mov
+.DS_Store
+Thumbs.db

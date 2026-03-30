@@ -8,7 +8,7 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --cyan: #922B21; --cyan-oscuro: #7B241C; --blanco: #FFFFFF;
+            --cyan: #C0392B; --cyan-oscuro: #A93226; --blanco: #FFFFFF;
             --gris-claro: #F5F5F5; --gris: #666666; --gris-oscuro: #333333; --negro: #1A1A1A;
             --navy: #1B2040; --navy-light: #252B52;
         }
@@ -461,36 +461,27 @@
         .anim-delay-7 { transition-delay: .7s; }
         .anim-delay-8 { transition-delay: .8s; }
     
-        /* Hero Pill & Staggered Reveal */
-        .hero-subtitle-pill {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 2px solid var(--cyan);
-            border-radius: 30px;
-            padding: 0.8rem 1.6rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: heroPillReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
-            max-width: 90%;
+        .typewriter-cursor-red {
+            color: var(--cyan);
+            font-weight: 900;
+            font-size: 1.1em;
+            animation: blink-red 0.6s step-end infinite;
         }
-        @keyframes heroPillReveal {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes blink-red {
+            0%, 60% { opacity: 1; }
+            61%, 100% { opacity: 0; }
+        }
+        /* Hero subtitle */
+        .hero-subtitle-pill {
+            margin: 0 auto 2rem;
+            max-width: 640px;
         }
         .hero-subtitle-pill p {
             margin: 0 !important;
-            font-size: clamp(0.95rem, 1.8vw, 1.15rem) !important;
-            line-height: 1.5;
-            color: rgba(255, 255, 255, 0.95) !important;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            column-gap: 0.35rem;
-            row-gap: 0.1rem;
+            font-size: clamp(1rem, 1.8vw, 1.2rem) !important;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.92) !important;
+            text-align: center;
         }
         .hero-word {
             opacity: 0;
@@ -517,15 +508,12 @@
     </div>
 </header>
 <section class="hero">
-    <!-- Video pendiente -->
+    <video class="hero-video-bg" autoplay muted loop playsinline><source src="assets/hero-criminologia.mp4" type="video/mp4"></video>
     <div class="hero-overlay"></div>
     <canvas id="heroParticles" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></canvas>
     <div class="hero-content">
-        <h1 class="hero-reveal">Licenciatura en <span class="accent">Criminología y Criminalística</span></h1>
-        <div class="hero-subtitle-pill">
-            <p class="staggered-text">Investiga, deduce y prevén. Sé el profesional forense e investigador analítico que el sistema de justicia exige.</p>
-        </div>
-        <a href="#contacto" class="nav-cta hero-reveal hero-reveal-delay-2" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
+        <h1 class="hero-reveal">Licenciatura en <span class="accent" id="hero-typewriter"></span><span class="typewriter-cursor-red">|</span></h1>
+<a href="#contacto" class="nav-cta hero-reveal hero-reveal-delay-2" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
     </div>
 </section>
 <div class="section-divider" style="background:var(--gris-claro);"></div>
@@ -1218,22 +1206,29 @@
 })();
 </script>
 
-    // Animacion palabra por palabra Staggered
-    document.addEventListener("DOMContentLoaded", () => {
-        const staggeredTexts = document.querySelectorAll('.staggered-text');
-        staggeredTexts.forEach((el) => {
-            const text = el.textContent.trim();
-            el.innerHTML = '';
-            const words = text.split(' ');
-            words.forEach((word, index) => {
-                const span = document.createElement('span');
-                span.classList.add('hero-word');
-                span.textContent = word;
-                span.style.animationDelay = `${0.6 + (index * 0.04)}s`;
-                el.appendChild(span);
-            });
-        });
-    });
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const el = document.getElementById('hero-typewriter');
+    const cursor = document.querySelector('.typewriter-cursor-red');
+    if (!el) return;
+    const text = 'Criminología y Criminalística';
+    let i = 0;
+    // Esperar que termine la animación del h1 (hero-reveal ~1.2s)
+    setTimeout(() => {
+        function type() {
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, 100);
+            } else {
+                // Ocultar cursor después de terminar
+                setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 1500);
+            }
+        }
+        type();
+    }, 1000);
+});
+</script>
 
 </body>
 </html>
