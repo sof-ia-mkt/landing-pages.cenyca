@@ -48,7 +48,7 @@
         .btn-cyan:hover { background: var(--cyan-oscuro); transform: translateY(-2px); }
         section { padding: 5rem 1.5rem; position: relative; }
         .bg-flecha { position: relative; }
-        .bg-flecha::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/flecha2.png'); background-size: 600px; background-repeat: no-repeat; background-attachment: fixed; opacity: .15; pointer-events: none; z-index: 0; }
+        .bg-flecha::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('assets/flecha2.webp'); background-size: 600px; background-repeat: no-repeat; background-attachment: fixed; opacity: .15; pointer-events: none; z-index: 0; }
         .bg-flecha-right::before { background-position: right -80px center; }
         .bg-flecha-left::before { background-position: left -80px center; }
         .bg-flecha-center::before { background-position: center; background-size: 700px; }
@@ -178,30 +178,61 @@
         .form-btn { width: 100%; padding: .85rem; font-size: 1rem; }
         footer { background: var(--negro); color: rgba(255,255,255,.7); padding: 3rem 1.5rem 1.5rem; }
         .footer-bottom { max-width: 1100px; margin: 1.5rem auto 0; text-align: center; font-size: .82rem; color: rgba(255,255,255,.4); }
-        /* Inversión */
-        .inversion-section { background: linear-gradient(160deg, var(--navy), var(--navy-light), #1a1f3d); position: relative; overflow: hidden; }
+        /* Así se vive */
+        .vida-section { background: #0d0f1a; padding: 5rem 1.5rem; }
+        .vida-section .section-title { margin-bottom: 2.5rem; }
+        .vida-section .accent-line { background: linear-gradient(90deg, var(--cyan), #00f0ff); }
+        .vida-video-wrap { position: relative; border-radius: 16px; overflow: hidden; margin-bottom: 1.5rem; max-height: 480px; cursor: pointer; }
+        .vida-video { width: 100%; display: block; object-fit: cover; max-height: 480px; }
+        .vida-play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.35); border: none; cursor: pointer; transition: opacity .3s; }
+        .vida-play-btn:hover { background: rgba(0,0,0,.5); }
+        .vida-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+        .vida-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .vida-grid img, .vida-grid-bottom img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; transition: transform .3s; }
+        .vida-grid img:hover, .vida-grid-bottom img:hover { transform: scale(1.03); }
+        .vida-item { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
+        .vida-item.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 600px) {
+            .vida-grid { grid-template-columns: 1fr 1fr; }
+            .vida-grid img:last-child { grid-column: 1 / -1; }
+        }
+        /* Inversión simulador */
+        .inversion-section { background: linear-gradient(160deg, var(--navy), var(--navy-light), #1a1f3d); position: relative; overflow: hidden; padding: 3rem 0; }
         .inversion-section::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,212,255,.08) 0%, transparent 70%); pointer-events: none; }
-        .inversion-section::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,212,255,.05) 0%, transparent 70%); pointer-events: none; }
         .inversion-section .section-title h2 { color: var(--blanco); }
         .inversion-section .section-title p { color: rgba(255,255,255,.6); }
-        .inversion-card { max-width: 540px; margin: 0 auto; background: rgba(255,255,255,.07); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; overflow: hidden; position: relative; z-index: 1; }
-        .inversion-header { background: rgba(0,212,255,.12); color: var(--blanco); padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,.08); }
-        .inversion-header h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
-        .inversion-body { padding: 1.5rem; }
-        .inversion-row { display: flex; justify-content: space-between; align-items: center; padding: .65rem 0; border-bottom: 1px solid rgba(255,255,255,.08); gap: 1rem; }
-        .inversion-row:last-child { border-bottom: none; }
-        .inversion-label { font-size: .9rem; color: rgba(255,255,255,.85); font-weight: 400; flex: 1; }
-        .inversion-label small { display: block; font-size: .75rem; color: rgba(255,255,255,.5); font-weight: 300; }
-        .inversion-value { font-size: 1.05rem; font-weight: 700; color: var(--cyan); text-align: right; white-space: nowrap; }
-        .inversion-beca { display: flex; align-items: center; gap: .75rem; justify-content: center; margin: 1.25rem 0 .5rem; }
+        .pricing-card { max-width: 420px; margin: 0 auto; background: rgba(255,255,255,.06); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; overflow: hidden; position: relative; z-index: 1; text-align: center; }
+        .pricing-toggle { display: flex; gap: .25rem; justify-content: center; padding: 1.25rem 1.5rem .75rem; }
+        .pricing-toggle .beca-btn { padding: .4rem 1.1rem; border-radius: 50px; border: 2px solid rgba(0,212,255,.3); background: transparent; color: rgba(255,255,255,.7); font-family: montserrat, sans-serif; font-weight: 600; font-size: .8rem; cursor: pointer; transition: .3s; }
+        .pricing-toggle .beca-btn.active { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+        .pricing-toggle .beca-btn:hover { border-color: var(--cyan); background: rgba(0,212,255,.15); }
+        .pricing-price { padding: .5rem 1.5rem 1rem; }
+        .pricing-price .price-amount { font-size: 2.8rem; font-weight: 800; color: var(--blanco); transition: .3s; }
+        .pricing-price .price-amount span { font-size: 1rem; font-weight: 400; opacity: .6; }
+        .pricing-details { display: flex; flex-direction: column; gap: 0; padding: .5rem 1.5rem 1rem; border-top: 1px solid rgba(255,255,255,.08); }
+        .pricing-detail { display: flex; align-items: center; justify-content: space-between; padding: .6rem 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+        .pricing-detail:last-child { border-bottom: none; }
+        .pricing-detail-left { text-align: left; }
+        .pricing-detail-left .detail-name { font-size: .85rem; color: rgba(255,255,255,.85); font-weight: 600; }
+        .pricing-detail-left .detail-sub { font-size: .68rem; color: rgba(255,255,255,.4); margin-top: .1rem; }
+        .pricing-detail-right { text-align: right; white-space: nowrap; }
+        .pricing-detail-right strong { font-size: .95rem; color: var(--cyan); font-weight: 700; }
+        .pricing-total { display: flex; justify-content: space-between; align-items: center; padding: .6rem .75rem; margin-top: .5rem; background: rgba(0,212,255,.08); border-radius: 10px; border: 1px solid rgba(0,212,255,.15); }
+        .pricing-total span { font-size: .8rem; color: rgba(255,255,255,.6); }
+        .pricing-total strong { font-size: 1.1rem; color: var(--cyan); }
+        .detail-badge { display: inline-block; font-size: .6rem; font-weight: 700; padding: .15rem .45rem; border-radius: 4px; margin-left: .4rem; text-transform: uppercase; }
+        .badge-green { background: rgba(0,200,100,.15); color: #4ade80; border: 1px solid rgba(0,200,100,.3); }
+        .badge-orange { background: linear-gradient(90deg, #ff6b35, #ff3366); color: #fff; }
+        .pricing-nota { text-align: center; font-size: .7rem; color: rgba(255,255,255,.35); margin-top: .5rem; position: relative; z-index: 1; max-width: 420px; margin-left: auto; margin-right: auto; }
+        .promo-banner { background: linear-gradient(90deg, #ff6b35, #ff3366); padding: .6rem 1rem; display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap; border-radius: 20px 20px 0 0; }
+        .promo-banner span { font-size: .78rem; font-weight: 700; color: #fff; letter-spacing: .02em; }
+        .promo-timer { font-family: 'Courier New', monospace; font-size: .9rem; font-weight: 800; color: #fff; background: rgba(0,0,0,.3); padding: .15rem .5rem; border-radius: 6px; min-width: 52px; text-align: center; }
+        .price-original { font-size: .85rem; color: rgba(255,255,255,.4); text-decoration: line-through; font-weight: 400; }
+        .price-promo { color: #ff6b35; font-size: .85rem; font-weight: 700; }
+        .pricing-detail .promo-tag { display: inline-block; background: linear-gradient(90deg, #ff6b35, #ff3366); color: #fff; font-size: .6rem; font-weight: 700; padding: .1rem .4rem; border-radius: 4px; margin-left: .3rem; text-transform: uppercase; }
         .beca-btn { padding: .5rem 1.25rem; border-radius: 50px; border: 2px solid rgba(0,212,255,.4); background: transparent; color: var(--blanco); font-family: montserrat, sans-serif; font-weight: 600; font-size: .85rem; cursor: pointer; transition: .3s; }
         .beca-btn.active { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
         .beca-btn:hover { border-color: var(--cyan); background: rgba(0,212,255,.15); }
-        .inversion-total { background: rgba(0,212,255,.1); color: var(--blanco); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.08); }
-        .inversion-total .total-label { font-size: .85rem; font-weight: 400; opacity: .8; }
-        .inversion-total .total-label span { display: block; font-size: .7rem; opacity: .6; }
-        .inversion-total .total-value { font-size: 1.4rem; font-weight: 700; color: var(--cyan); }
-        .inversion-nota { text-align: center; font-size: .75rem; color: rgba(255,255,255,.4); margin-top: .75rem; position: relative; z-index: 1; }
         /* Acordeón */
         .accordion-trigger { cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 2rem 1.5rem; transition: .3s; }
         .accordion-trigger:hover { opacity: .85; }
@@ -252,7 +283,8 @@
             .snackbar { flex-wrap: wrap; padding: .85rem 1rem 1rem; gap: .5rem; padding-right: 2rem; }
             .snackbar-btn { width: 100%; padding: .6rem; font-size: .8rem; margin-top: .25rem; }
             .accordion-trigger { padding: 1.5rem 1rem; }
-            .inversion-card { border-radius: 16px; max-width: 100%; }
+            .pricing-card { border-radius: 16px; max-width: 100%; }
+            .pricing-toggle .beca-btn { padding: .35rem .8rem; font-size: .75rem; }
         }
         @media (max-width: 480px) {
             .header-inner { padding: .6rem .75rem; } .logo-img { height: 34px; }
@@ -268,9 +300,9 @@
             .carousel-track img { flex: 0 0 90%; width: 90%; height: auto; object-fit: contain; }
             .carousel-nav { display: none; }
             .perfil-image { height: 200px; }
-            .inversion-row { flex-direction: column; align-items: center; text-align: center; gap: .25rem; }
-            .inversion-total { flex-direction: column; text-align: center; gap: .5rem; padding: 1rem; }
-            .inversion-beca { flex-direction: column; }
+            .pricing-detail { flex-direction: column; align-items: flex-start; gap: .3rem; }
+            .pricing-detail-right { text-align: left; }
+            .pricing-price .price-amount { font-size: 2.2rem; }
             .footer-bottom { font-size: .75rem; }
         }
         /* Animations */
@@ -303,7 +335,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <h1>Licenciatura en <span class="accent">Gastronomía</span></h1>
-        <p>Domina el arte culinario con formación profesional. Aprende técnicas clásicas y de vanguardia, desarrolla tu creatividad gastronómica y prepárate para liderar la industria de alimentos y bebidas.</p>
+        <p>Técnicas clásicas y de vanguardia para dominar el arte culinario y liderar la industria de alimentos y bebidas.</p>
         <a href="#contacto" class="nav-cta" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
     </div>
 </section>
@@ -438,14 +470,12 @@
         <div class="carousel-wrapper">
             <button class="carousel-nav carousel-prev" onclick="moveCarousel(-1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
             <div class="carousel-track" id="carouselTrack">
-                <img src="assets/instalaciones-1.avif" alt="Aula CENYCA Universidad" loading="lazy">
                 <img src="assets/instalaciones-2.avif" alt="Instalaciones CENYCA" loading="lazy">
-                <img src="assets/instalaciones-3.webp" alt="Instalaciones CENYCA" loading="lazy">
-                <img src="assets/instalaciones-4.avif" alt="Instalaciones CENYCA" loading="lazy">
+                <img src="assets/instalaciones-1.avif" alt="Instalaciones CENYCA" loading="lazy">
                 <img src="assets/instalaciones-5.avif" alt="Instalaciones CENYCA" loading="lazy">
-                <img src="assets/instalaciones-6.avif" alt="Instalaciones CENYCA" loading="lazy">
-                <img src="assets/ubicacion1.avif" alt="Campus CENYCA Universidad" loading="lazy">
-                <img src="assets/ubicacion2.avif" alt="Campus CENYCA Universidad" loading="lazy">
+                <img src="assets/carrusel-2.jpg" alt="Gastronomía CENYCA" loading="lazy">
+                <img src="assets/ubicacion1.avif" alt="Campus CENYCA" loading="lazy">
+                <img src="assets/ubicacion2.avif" alt="Campus CENYCA" loading="lazy">
             </div>
             <button class="carousel-nav carousel-next" onclick="moveCarousel(1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
@@ -453,6 +483,32 @@
     </div>
 </section>
 <div class="section-divider"></div>
+
+<!-- ASÍ SE VIVE -->
+<section class="vida-section">
+    <div class="container">
+        <div class="section-title">
+            <h2 style="color:#fff; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight:900; letter-spacing:2px; text-transform:uppercase;">Así se vive la <span class="highlight-word">Gastronomía</span> en CENYCA</h2>
+            <div class="accent-line"></div>
+        </div>
+        <div class="vida-video-wrap">
+            <video class="vida-video" src="assets/video-vida.mp4" loop muted playsinline preload="metadata" id="vidaVideo"></video>
+            <button class="vida-play-btn" id="vidaPlayBtn" onclick="(function(){var v=document.getElementById('vidaVideo');var b=document.getElementById('vidaPlayBtn');if(v.paused){v.play();b.style.opacity='0';}else{v.pause();b.style.opacity='1';}})()">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </button>
+        </div>
+        <div class="vida-grid">
+            <img src="assets/vida-1.webp" alt="Vida Gastronomía CENYCA" loading="lazy" class="vida-item">
+            <img src="assets/vida-2.webp" alt="Vida Gastronomía CENYCA" loading="lazy" class="vida-item">
+            <img src="assets/vida-3.webp" alt="Vida Gastronomía CENYCA" loading="lazy" class="vida-item">
+        </div>
+        <div class="vida-grid-bottom">
+            <img src="assets/vida-4.webp" alt="Vida Gastronomía CENYCA" loading="lazy" class="vida-item">
+            <img src="assets/vida-5.webp" alt="Vida Gastronomía CENYCA" loading="lazy" class="vida-item">
+        </div>
+    </div>
+</section>
+<div class="section-divider" style="background:var(--navy);"></div>
 
 <!-- INVERSIÓN -->
 <section id="inversion" class="inversion-section">
@@ -462,36 +518,42 @@
             <p>Conoce el costo de tu carrera y simula con beca.</p>
             <div class="accent-line"></div>
         </div>
-        <div class="inversion-card">
-            <div class="inversion-header"><h3>Simulador de costos</h3></div>
-            <div class="inversion-body">
-                <div class="inversion-row">
-                    <span class="inversion-label">Inscripción <small>Pago único, sin reinscripción</small></span>
-                    <span class="inversion-value">$2,000</span>
-                </div>
-                <div class="inversion-row">
-                    <span class="inversion-label">Mensualidad</span>
-                    <span class="inversion-value" id="mensualidad-display">$4,000</span>
-                </div>
-                <div class="inversion-row">
-                    <span class="inversion-label">Paquete cuatrimestral <small>Seguro + credencial estudiantil</small></span>
-                    <span class="inversion-value">$950</span>
-                </div>
-                <div style="text-align:center; padding-top:.75rem;">
-                    <span style="font-size:.85rem; font-weight:600; color:var(--blanco);">Selecciona tu beca:</span>
-                    <div class="inversion-beca">
-                        <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
-                        <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
-                        <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
-                    </div>
-                </div>
+        <div class="pricing-card anim anim-up">
+            <div class="promo-banner">
+                <span>30% OFF inscripción — Oferta termina en</span>
+                <div class="promo-timer" id="promo-timer">10:00</div>
             </div>
-            <div class="inversion-total">
-                <div class="total-label">Mensualidad con beca<span>+ inscripción de $2,000 + paquete cuatrimestral $950</span></div>
-                <div class="total-value" id="total-display">$4,000/mes</div>
+            <div class="pricing-toggle">
+                <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
+                <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
+                <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
+            </div>
+            <div class="pricing-price">
+                <div class="price-amount" id="total-display">$4,000<span>/mes</span></div>
+            </div>
+            <div class="pricing-details">
+                <div class="pricing-detail">
+                    <div class="pricing-detail-left">
+                        <div class="detail-name">Inscripción única <span class="detail-badge badge-green">Sin reinscripción</span></div>
+                        <div class="detail-sub">Un solo pago al inicio — no vuelves a pagar inscripción</div>
+                    </div>
+                    <div class="pricing-detail-right"><span class="price-original">$2,000</span> <strong class="price-promo" style="color:#ff6b35;">$1,400</strong> <span class="detail-badge badge-orange">-30%</span></div>
+                </div>
+                <div class="pricing-detail">
+                    <div class="pricing-detail-left">
+                        <div class="detail-name">Paquete cuatrimestral</div>
+                        <div class="detail-sub">Credencial + seguro estudiantil · Pago cada cuatrimestre</div>
+                    </div>
+                    <div class="pricing-detail-right"><strong>$950</strong></div>
+                </div>
+                <div class="pricing-total">
+                    <span>Tu primer pago total</span>
+                    <strong id="total-primer-pago">$6,350</strong>
+                </div>
+                <div style="text-align:center; margin-top:.6rem; padding:.65rem 1rem; background:rgba(0,212,255,.06); border:1px dashed rgba(0,212,255,.25); border-radius:8px; font-size:.78rem; color:rgba(255,255,255,.75); line-height:1.6;"><strong style="color:var(--cyan);">Aparta tu lugar</strong> pagando inscripción y paquete cuatrimestral. No te preocupes por los espacios.</div>
             </div>
         </div>
-        <p class="inversion-nota">Los costos pueden variar. Esta simulación no es oficial hasta haber sido atendido por un asesor educativo.</p>
+        <p class="pricing-nota">⚠ Los costos pueden variar. Becas sujetas a disponibilidad. Contacta a un asesor para más información.</p>
     </div>
 </section>
 <div class="section-divider" style="background:var(--navy);"></div>
@@ -679,12 +741,65 @@
     }
 
     function calcBeca(pct, btn) {
-        const base = 4000, final = base - base * (pct / 100);
-        document.getElementById('mensualidad-display').textContent = pct > 0 ? '$' + final.toLocaleString('es-MX') + ' (-' + pct + '%)' : '$4,000';
-        document.getElementById('total-display').textContent = '$' + final.toLocaleString('es-MX') + '/mes';
+        const base = 4000;
+        const mensualidad = base - base * (pct / 100);
+        const inscripcion = 1400;
+        const paquete = 950;
+        document.getElementById('total-display').innerHTML = '$' + mensualidad.toLocaleString('es-MX') + '<span>/mes</span>';
+        document.getElementById('total-primer-pago').textContent = '$' + (inscripcion + mensualidad + paquete).toLocaleString('es-MX');
         document.querySelectorAll('.beca-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     }
+
+    // Fade + slide stagger — fotos "Así se vive"
+    (function() {
+        const items = document.querySelectorAll('.vida-item');
+        if (!items.length) return;
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const idx = Array.from(items).indexOf(el);
+                    setTimeout(function() { el.classList.add('visible'); }, idx * 100);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.15 });
+        items.forEach(function(item) { observer.observe(item); });
+    })();
+
+    // Autoplay video "Así se vive" al hacer scroll
+    (function() {
+        const video = document.getElementById('vidaVideo');
+        const btn = document.getElementById('vidaPlayBtn');
+        if (!video) return;
+        video.muted = true;
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    video.play().then(function() { if (btn) btn.style.opacity = '0'; }).catch(function(){});
+                } else {
+                    video.pause();
+                    if (btn) btn.style.opacity = '1';
+                }
+            });
+        }, { threshold: 0.4 });
+        observer.observe(video);
+    })();
+
+    // Promo timer - 10 min countdown, reinicia silenciosamente
+    (function() {
+        let secs = 600;
+        const el = document.getElementById('promo-timer');
+        if (!el) return;
+        setInterval(function() {
+            secs--;
+            if (secs <= 0) secs = 600;
+            const m = Math.floor(secs / 60);
+            const s = secs % 60;
+            el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        }, 1000);
+    })();
 
     // Countdown - Mayo 2026
     (function() {
