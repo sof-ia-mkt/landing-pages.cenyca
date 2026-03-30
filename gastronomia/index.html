@@ -8,7 +8,7 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --cyan: #00D4FF; --cyan-oscuro: #00B8DB; --blanco: #FFFFFF;
+            --cyan: #27AE60; --cyan-oscuro: #1E8449; --blanco: #FFFFFF;
             --gris-claro: #F5F5F5; --gris: #666666; --gris-oscuro: #333333; --negro: #1A1A1A;
             --navy: #1B2040; --navy-light: #252B52;
         }
@@ -36,6 +36,20 @@
         .hero-badge { display: inline-block; background: rgba(0,212,255,.15); backdrop-filter: blur(8px); padding: .4rem 1.2rem; border-radius: 50px; font-size: .85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: .5px; }
         .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 1px; }
         .hero h1 .accent { color: var(--cyan); font-weight: 900; }
+        .chef-flicker { opacity: 0; animation: chef-flicker 1.8s ease-out 0.6s forwards; }
+        @keyframes chef-flicker {
+            0%   { opacity: 0; }
+            8%   { opacity: 1; text-shadow: 0 0 30px var(--cyan), 0 0 60px var(--cyan); }
+            12%  { opacity: 0; text-shadow: none; }
+            16%  { opacity: 1; text-shadow: 0 0 20px var(--cyan); }
+            19%  { opacity: 0; }
+            24%  { opacity: 1; text-shadow: 0 0 40px var(--cyan), 0 0 80px rgba(39,174,96,.4); }
+            27%  { opacity: 0.2; }
+            32%  { opacity: 1; text-shadow: 0 0 20px var(--cyan); }
+            36%  { opacity: 0.5; }
+            42%  { opacity: 1; text-shadow: none; }
+            100% { opacity: 1; text-shadow: none; }
+        }
         .hero-slogan { margin-top: 2rem; opacity: .8; }
         .hero-slogan img { height: 70px; }
         .hero p { font-size: 1.1rem; opacity: .92; max-width: 600px; margin: 0 auto 2.5rem; }
@@ -378,8 +392,7 @@
     <video class="hero-video-bg" autoplay muted loop playsinline><source src="assets/hero-video.mp4" type="video/mp4"></video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1>Licenciatura en <span class="accent">Gastronomía</span></h1>
-        <p>Técnicas clásicas y de vanguardia para dominar el arte culinario y liderar la industria de alimentos y bebidas.</p>
+        <h1>Licenciatura en <span class="accent chef-flicker">Gastronomía</span></h1>
         <a href="#contacto" class="nav-cta" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
     </div>
 </section>
