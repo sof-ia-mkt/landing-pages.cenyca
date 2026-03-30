@@ -315,6 +315,48 @@
         .anim-delay-1 { transition-delay: .1s; } .anim-delay-2 { transition-delay: .2s; } .anim-delay-3 { transition-delay: .3s; } .anim-delay-4 { transition-delay: .4s; } .anim-delay-5 { transition-delay: .5s; } .anim-delay-6 { transition-delay: .6s; } .anim-delay-7 { transition-delay: .7s; } .anim-delay-8 { transition-delay: .8s; }
         .ubicacion-card { transition: transform .3s ease, box-shadow .3s ease; }
         .ubicacion-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,.15); }
+    
+        /* Hero Pill & Staggered Reveal */
+        .hero-subtitle-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid var(--cyan);
+            border-radius: 30px;
+            padding: 0.8rem 1.6rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroPillReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+            max-width: 90%;
+        }
+        @keyframes heroPillReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-subtitle-pill p {
+            margin: 0 !important;
+            font-size: clamp(0.95rem, 1.8vw, 1.15rem) !important;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.95) !important;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            column-gap: 0.35rem;
+            row-gap: 0.1rem;
+        }
+        .hero-word {
+            opacity: 0;
+            transform: translateY(15px);
+            display: inline-block;
+            animation: wordReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes wordReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
     </style>
 </head>
 <body>
@@ -860,5 +902,23 @@
         document.querySelectorAll('.highlight-word').forEach(el => observer.observe(el));
     })();
 </script>
+
+    // Animacion palabra por palabra Staggered
+    document.addEventListener("DOMContentLoaded", () => {
+        const staggeredTexts = document.querySelectorAll('.staggered-text');
+        staggeredTexts.forEach((el) => {
+            const text = el.textContent.trim();
+            el.innerHTML = '';
+            const words = text.split(' ');
+            words.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.classList.add('hero-word');
+                span.textContent = word;
+                span.style.animationDelay = `${0.6 + (index * 0.04)}s`;
+                el.appendChild(span);
+            });
+        });
+    });
+
 </body>
 </html>

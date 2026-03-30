@@ -460,6 +460,48 @@
         .anim-delay-6 { transition-delay: .6s; }
         .anim-delay-7 { transition-delay: .7s; }
         .anim-delay-8 { transition-delay: .8s; }
+    
+        /* Hero Pill & Staggered Reveal */
+        .hero-subtitle-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid var(--cyan);
+            border-radius: 30px;
+            padding: 0.8rem 1.6rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroPillReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+            max-width: 90%;
+        }
+        @keyframes heroPillReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-subtitle-pill p {
+            margin: 0 !important;
+            font-size: clamp(0.95rem, 1.8vw, 1.15rem) !important;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.95) !important;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            column-gap: 0.35rem;
+            row-gap: 0.1rem;
+        }
+        .hero-word {
+            opacity: 0;
+            transform: translateY(15px);
+            display: inline-block;
+            animation: wordReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes wordReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
     </style>
 </head>
 <body>
@@ -480,7 +522,9 @@
     <canvas id="heroParticles" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></canvas>
     <div class="hero-content">
         <h1 class="hero-reveal">Ingeniería <span class="accent">Electromecánica</span></h1>
-        <p class="hero-reveal hero-reveal-delay-1">Energiza, diseña y controla el futuro. Fórmate como el ingeniero que la industria necesita.</p>
+        <div class="hero-subtitle-pill">
+            <p class="staggered-text">Energiza, diseña y controla el futuro. Fórmate como el ingeniero que la industria necesita.</p>
+        </div>
         <a href="#contacto" class="nav-cta hero-reveal hero-reveal-delay-2" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
     </div>
 </section>
@@ -1173,5 +1217,23 @@
     draw();
 })();
 </script>
+
+    // Animacion palabra por palabra Staggered
+    document.addEventListener("DOMContentLoaded", () => {
+        const staggeredTexts = document.querySelectorAll('.staggered-text');
+        staggeredTexts.forEach((el) => {
+            const text = el.textContent.trim();
+            el.innerHTML = '';
+            const words = text.split(' ');
+            words.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.classList.add('hero-word');
+                span.textContent = word;
+                span.style.animationDelay = `${0.6 + (index * 0.04)}s`;
+                el.appendChild(span);
+            });
+        });
+    });
+
 </body>
 </html>
