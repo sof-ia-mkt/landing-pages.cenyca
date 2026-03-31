@@ -750,12 +750,68 @@
 
     function toggleAccordion(trigger) { trigger.classList.toggle('open'); trigger.nextElementSibling.classList.toggle('open'); }
 
-    function handleSubmit(e) {
+    const API_URL = 'https://emma-sistema.up.railway.app/api/landing/prospect';
+    const API_KEY = 'TU_API_KEY_AQUI'; // Reemplazar con la clave proporcionada por Novai
+
+    async function handleSubmit(e) {
         e.preventDefault();
         const btn = e.target.querySelector('button[type="submit"]');
-        btn.textContent = '¡Enviado correctamente!'; btn.style.background = '#25D366'; btn.style.color = '#fff';
-        e.target.reset();
-        setTimeout(() => { btn.textContent = 'Enviar solicitud'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+        const originalText = btn.textContent;
+        btn.textContent = 'Enviando...';
+        btn.disabled = true;
+
+        const plantelMap = { palmas: 'Palmas', casablanca: 'Casa Blanca', otay: 'Otay', tecate: 'Tecate' };
+        const telefonoRaw = e.target.telefono.value.replace(/\D/g, '');
+        const telefono = telefonoRaw.length > 10 ? telefonoRaw.slice(-10) : telefonoRaw;
+
+        const body = {
+            telefono: telefono,
+            nombre: e.target.nombre.value.trim(),
+            email: e.target.email.value.trim(),
+            carrera: 'Gastronomia',
+            plantel: plantelMap[e.target.plantel.value] || e.target.plantel.value,
+            source: 'landing-gastronomia'
+        };
+
+        try {
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-API-Key': API_KEY },
+                body: JSON.stringify(body)
+            });
+
+            if (res.ok) {
+                btn.textContent = '¡Registro exitoso!';
+                btn.style.background = '#25D366';
+                btn.style.color = '#fff';
+                e.target.reset();
+            } else if (res.status === 401) {
+                btn.textContent = 'Error de configuración';
+                btn.style.background = '#e74c3c';
+                btn.style.color = '#fff';
+                console.error('API Key inválida o ausente');
+            } else if (res.status === 422) {
+                btn.textContent = 'Verifica tu teléfono';
+                btn.style.background = '#e74c3c';
+                btn.style.color = '#fff';
+            } else if (res.status === 429) {
+                btn.textContent = 'Intenta en un momento';
+                btn.style.background = '#f39c12';
+                btn.style.color = '#fff';
+            } else {
+                btn.textContent = 'Error, intenta de nuevo';
+                btn.style.background = '#e74c3c';
+                btn.style.color = '#fff';
+            }
+        } catch (err) {
+            console.error('Error de red:', err);
+            btn.textContent = 'Sin conexión, intenta de nuevo';
+            btn.style.background = '#e74c3c';
+            btn.style.color = '#fff';
+        }
+
+        btn.disabled = false;
+        setTimeout(() => { btn.textContent = originalText; btn.style.background = ''; btn.style.color = ''; }, 4000);
     }
 
     function calcBeca(pct, btn) {
