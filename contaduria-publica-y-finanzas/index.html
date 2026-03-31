@@ -8,7 +8,7 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --cyan: #27AE60; --cyan-oscuro: #1E8449; --blanco: #FFFFFF;
+            --cyan: #2980B9; --cyan-oscuro: #1F618D; --blanco: #FFFFFF;
             --gris-claro: #F5F5F5; --gris: #666666; --gris-oscuro: #333333; --negro: #1A1A1A;
             --navy: #1B2040; --navy-light: #252B52;
         }
@@ -99,7 +99,7 @@
         .campo-item h3 { font-size: .95rem; color: var(--negro); }
         /* Modalidades - sección destacada */
         .modalidades-section { background: linear-gradient(135deg, var(--navy) 0%, #0a0e2a 100%); color: var(--blanco); padding: 5rem 1.5rem; position: relative; overflow: hidden; }
-        .modalidades-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #27AE60, var(--cyan)); }
+        .modalidades-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #2980B9, var(--cyan)); }
         .modalidades-section::after { content: ''; position: absolute; bottom: -30%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(39,174,96,.06) 0%, transparent 70%); pointer-events: none; }
         .modalidades-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(39,174,96,.12); border: 1px solid rgba(39,174,96,.3); border-radius: 50px; padding: .4rem 1.2rem; font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); margin-bottom: 1.5rem; }
         .modalidades-title { font-family: montserrat, sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 2px; background: linear-gradient(90deg, #fff, var(--cyan), #fff, var(--cyan), #fff); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer-text 4s ease-in-out infinite; }
@@ -135,7 +135,7 @@
         .collage { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
         .collage img { width: 100%; height: 280px; object-fit: cover; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,.1); }
         .urgencia-banner { background: linear-gradient(135deg, var(--navy), #0d1025); color: var(--blanco); padding: 4rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
-        .urgencia-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #27AE60, var(--cyan)); }
+        .urgencia-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cyan), #2980B9, var(--cyan)); }
         .urgencia-banner::after { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(39,174,96,.08) 0%, transparent 70%); pointer-events: none; }
         .urgencia-lema { font-family: montserrat, sans-serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 3px; line-height: 1.15; text-wrap: balance; }
         .urgencia-lema span { color: var(--cyan); font-weight: 900; }
@@ -156,7 +156,7 @@
         .urgencia-lugares { font-size: .95rem; margin-bottom: 1rem; opacity: .85; }
         .urgencia-lugares strong { color: var(--cyan); font-size: 1.3em; }
         .urgencia-barra { width: 100%; max-width: 400px; height: 8px; background: rgba(255,255,255,.15); border-radius: 4px; margin: 0 auto 1.5rem; overflow: hidden; }
-        .urgencia-barra-inner { height: 100%; background: linear-gradient(90deg, var(--cyan), #27AE60); border-radius: 4px; transition: width 1s ease; }
+        .urgencia-barra-inner { height: 100%; background: linear-gradient(90deg, var(--cyan), #2980B9); border-radius: 4px; transition: width 1s ease; }
         .urgencia-nota { font-size: .8rem; opacity: .5; margin-top: 1rem; }
         .urgencia-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
         .urgencia-left { text-align: left; }
@@ -194,7 +194,7 @@
         .form-lugares-text { font-size: .9rem; color: rgba(255,255,255,.9); }
         .form-lugares-text strong { color: var(--cyan); font-weight: 700; font-size: 1.1em; }
         .form-lugares-barra { width: 100%; height: 10px; background: rgba(255,255,255,.1); border-radius: 6px; overflow: hidden; margin-bottom: .7rem; }
-        .form-lugares-barra-inner { height: 100%; border-radius: 6px; transition: width 1.5s ease; background: linear-gradient(90deg, var(--cyan), #27AE60, #ff9500); background-size: 200% 100%; animation: barra-pulse 2s ease infinite; }
+        .form-lugares-barra-inner { height: 100%; border-radius: 6px; transition: width 1.5s ease; background: linear-gradient(90deg, var(--cyan), #2980B9, #ff9500); background-size: 200% 100%; animation: barra-pulse 2s ease infinite; }
         @keyframes barra-pulse { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         .form-lugares-promo { font-size: .82rem; color: rgba(255,255,255,.75); line-height: 1.4; margin: 0; text-align: center; }
         .form-lugares-promo strong { color: var(--cyan); font-weight: 700; }
@@ -517,7 +517,7 @@
     </div>
 </header>
 <section class="hero">
-    <!-- Video pendiente -->
+    <video class="hero-video-bg" autoplay muted loop playsinline><source src="assets/hero-video.mp4" type="video/mp4"></video>
     <div class="hero-overlay"></div>
     <canvas id="heroParticles" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></canvas>
     <div class="hero-content">
@@ -550,7 +550,7 @@
         <p class="modalidades-subtitle" style="margin-left:auto; margin-right:auto;">Estudia sin pausar tus actividades cotidianas.</p>
         <div class="modalidades-grid">
             <div class="modalidad-card">
-                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2980B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
                 <span class="modalidad-tag">Escolarizada</span>
                 <h3>Tiempo completo</h3>
                 <div class="modalidad-dia">Turno matutino</div>
