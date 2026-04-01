@@ -816,6 +816,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="turno">Horario de preferencia</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                            <select id="turno" name="turno">
+                                <option value="" selected>Sin preferencia</option>
+                                <option value="Turno Matutino">Turno matutino (Lunes a Viernes)</option>
+                                <option value="Entre Semana">Entre semana (1 día a la semana)</option>
+                                <option value="Sabado Matutino">Ejecutivo (Sábado o Domingo)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="mensaje">¿Tienes alguna pregunta? (opcional)</label>
                         <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="3"></textarea>
                     </div>
@@ -986,6 +998,7 @@
             email: e.target.email.value.trim(),
             carrera: 'Ingenieria Mecatronica',
             plantel: plantelMap[e.target.plantel.value] || e.target.plantel.value,
+            turno: e.target.turno.value || undefined,
             source: 'landing-mecatronica'
         };
 
