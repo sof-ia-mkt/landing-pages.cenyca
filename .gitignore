@@ -15,3 +15,5 @@ deploy/
 *.mov
 .DS_Store
 Thumbs.db
+
+.vercel
