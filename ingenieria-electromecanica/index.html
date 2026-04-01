@@ -543,9 +543,10 @@
         }
 
         /* Back to Top */
-        .back-to-top { position: fixed; bottom: 5.5rem; right: 1.5rem; width: 46px; height: 46px; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(16px); transition: opacity .3s, transform .3s; z-index: 998; box-shadow: 0 4px 15px rgba(0,0,0,.35); }
+        .back-to-top { position: fixed; bottom: 5.5rem; right: 1.5rem; width: 46px; height: 46px; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(16px); transition: opacity .3s, transform .3s; z-index: 1001; box-shadow: 0 4px 15px rgba(0,0,0,.35); }
         .back-to-top.visible { opacity: 1; transform: translateY(0); }
         .back-to-top:hover { transform: translateY(-3px) !important; box-shadow: 0 6px 22px rgba(0,0,0,.45); }
+        @media (max-width: 768px) { .back-to-top { bottom: 11rem; right: 1rem; width: 40px; height: 40px; } }
     </style>
 </head>
 <body>
