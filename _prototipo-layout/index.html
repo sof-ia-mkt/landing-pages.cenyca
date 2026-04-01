@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROTOTIPO — Nuevo Layout | Mecatrónica CENYCA</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d0f2d;
+    --cyan: #00d4ff;
+    --blanco: #fff;
+    --gris-claro: #f4f6fb;
+    --gris: #6b7280;
+    --orange: #ff6b00;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Montserrat', sans-serif; background: var(--blanco); }
+
+  /* BADGE DE PROTOTIPO */
+  .proto-badge {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    background: #f59e0b; color: #000; text-align: center;
+    padding: .4rem 1rem; font-size: .8rem; font-weight: 700; letter-spacing: 1px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy); position: sticky; top: 32px;
+    z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto; padding: .9rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .logo-area { display: flex; align-items: center; gap: .75rem; }
+  .logo-box {
+    width: 40px; height: 40px; background: var(--cyan); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: .85rem; color: var(--navy);
+  }
+  .logo-text { color: var(--blanco); font-size: .85rem; font-weight: 700; }
+  .logo-sub { color: rgba(255,255,255,.5); font-size: .7rem; }
+  .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.3); }
+  .career-name { color: var(--blanco); font-size: .9rem; font-weight: 600; }
+  nav { display: flex; gap: .5rem; align-items: center; }
+  nav a { color: var(--blanco); text-decoration: none; font-size: .75rem; padding: .35rem .65rem; border-radius: 6px; transition: .2s; }
+  nav a:hover { background: rgba(255,255,255,.1); }
+  .nav-cta {
+    background: var(--cyan); color: var(--navy) !important; font-weight: 700;
+    border-radius: 50px !important; padding: .45rem 1rem !important;
+  }
+
+  /* SECCIÓN LABEL (solo para el prototipo) */
+  .proto-label {
+    position: absolute; top: 12px; left: 12px;
+    background: rgba(0,0,0,.65); color: #fff; font-size: .7rem;
+    font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: .3rem .75rem; border-radius: 50px; pointer-events: none;
+    backdrop-filter: blur(4px);
+  }
+  .proto-order {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--cyan); color: var(--navy); font-size: .8rem;
+    font-weight: 900; padding: .3rem .7rem; border-radius: 50px;
+    pointer-events: none;
+  }
+
+  /* ─── 1. HERO ─── */
+  .hero {
+    position: relative; min-height: 92vh;
+    background: linear-gradient(135deg, #0d0f2d 0%, #0a1628 50%, #0d1f3c 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg-glow {
+    position: absolute; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,.12) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+  .hero-label {
+    display: inline-block; background: rgba(0,212,255,.15);
+    border: 1px solid rgba(0,212,255,.3); border-radius: 50px;
+    color: var(--cyan); font-size: .75rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: .4rem 1.2rem; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 900;
+    color: var(--blanco); line-height: 1.1; margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--cyan); }
+  .hero p { color: rgba(255,255,255,.7); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2rem; }
+  .hero-scroll-hint {
+    margin-top: 3rem; color: rgba(255,255,255,.4); font-size: .8rem;
+    display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  }
+  .scroll-arrow {
+    width: 24px; height: 24px; border-right: 2px solid rgba(255,255,255,.3);
+    border-bottom: 2px solid rgba(255,255,255,.3); transform: rotate(45deg);
+    animation: bounce 1.5s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(6px)} }
+  .hero-video-placeholder {
+    position: absolute; inset: 0; z-index: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-video-placeholder img {
+    width: 100%; height: 100%; object-fit: cover; opacity: .35;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to bottom, rgba(13,15,45,.6) 0%, rgba(13,15,45,.4) 50%, rgba(13,15,45,.75) 100%);
+  }
+
+  /* ─── 2. FORMULARIO (NUEVO — después del hero) ─── */
+  .contacto-section {
+    background: linear-gradient(135deg, #0d0f2d 0%, #0a1f45 100%);
+    padding: 5rem 1.5rem; position: relative;
+  }
+  .contacto-section::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--cyan), #00f0ff, var(--cyan));
+  }
+  .contacto-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+  }
+  .contacto-left { color: var(--blanco); }
+  .contacto-left .badge {
+    display: inline-block; background: rgba(0,212,255,.12);
+    border: 1px solid rgba(0,212,255,.3); border-radius: 50px;
+    color: var(--cyan); font-size: .75rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: .4rem 1.2rem; margin-bottom: 1.5rem;
+  }
+  .contacto-left h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900;
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+  .contacto-left h2 span { color: var(--cyan); }
+  .contacto-left p { font-size: 1rem; opacity: .8; line-height: 1.7; margin-bottom: 1.5rem; }
+  .urgencia-item { margin-bottom: 1.5rem; }
+  .urgencia-item-label { font-size: .8rem; opacity: .6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: .25rem; }
+  .urgencia-item-value { font-size: 1.5rem; font-weight: 900; color: var(--cyan); }
+  .countdown {
+    display: flex; gap: .75rem; margin-top: .75rem;
+  }
+  .cd-unit { text-align: center; }
+  .cd-num {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 8px; padding: .6rem .9rem;
+    font-size: 1.4rem; font-weight: 900; color: var(--blanco); display: block;
+  }
+  .cd-label { font-size: .65rem; opacity: .5; margin-top: .25rem; text-transform: uppercase; letter-spacing: 1px; }
+  .form-card {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px);
+  }
+  .form-card h3 { color: var(--blanco); font-size: 1.4rem; font-weight: 700; margin-bottom: .5rem; }
+  .form-card .subtitle { color: rgba(255,255,255,.55); font-size: .9rem; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; color: rgba(255,255,255,.7); font-size: .8rem; font-weight: 600; margin-bottom: .4rem; }
+  .input-mock {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px; padding: .75rem 1rem; color: rgba(255,255,255,.4);
+    font-size: .9rem; width: 100%;
+  }
+  .btn-submit {
+    width: 100%; padding: 1rem; background: var(--cyan); color: var(--navy);
+    border: none; border-radius: 50px; font-weight: 700; font-size: 1rem;
+    cursor: pointer; margin-top: .5rem;
+  }
+  .form-trust { display: flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.4); font-size: .75rem; margin-top: 1rem; }
+  .lugares-bar {
+    background: rgba(255,255,255,.1); border-radius: 50px; height: 8px; margin-top: .75rem; overflow: hidden;
+  }
+  .lugares-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), #00f0ff); width: 67%; border-radius: 50px; }
+
+  /* ─── 3. BENEFICIOS ─── */
+  .beneficios-section { background: var(--gris-claro); padding: 5rem 1.5rem; position: relative; }
+  .section-label { text-align: center; margin-bottom: 3rem; }
+  .section-badge {
+    display: inline-block; background: rgba(0,212,255,.1); border: 1px solid rgba(0,212,255,.25);
+    border-radius: 50px; color: #0090b3; font-size: .75rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; padding: .4rem 1.2rem; margin-bottom: 1rem;
+  }
+  .section-label h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--navy); }
+  .section-label p { color: var(--gris); margin-top: .5rem; }
+  .cards-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .card {
+    background: var(--blanco); border-radius: 16px; padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06); border: 1px solid rgba(0,0,0,.06);
+  }
+  .card-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0,212,255,.15), rgba(0,212,255,.05));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1rem;
+  }
+  .card h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+  .card p { font-size: .85rem; color: var(--gris); line-height: 1.6; }
+
+  /* ─── 4. MODALIDADES ─── */
+  .modalidades-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #0a0e2a 100%);
+    padding: 5rem 1.5rem; position: relative;
+  }
+  .modalidades-section::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--cyan), #00f0ff, var(--cyan));
+  }
+  .modal-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem;
+  }
+  .modal-card {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px; padding: 2rem; text-align: center;
+  }
+  .modal-icon {
+    width: 60px; height: 60px; border-radius: 16px; margin: 0 auto 1rem;
+    background: linear-gradient(135deg, rgba(0,212,255,.2), rgba(0,212,255,.05));
+    display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+  }
+  .modal-card h4 { color: var(--blanco); font-size: 1.05rem; font-weight: 700; margin-bottom: .5rem; }
+  .modal-card p { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.6; }
+  .modal-tag {
+    display: inline-block; margin-top: .75rem; background: rgba(0,212,255,.12);
+    border: 1px solid rgba(0,212,255,.3); border-radius: 50px;
+    color: var(--cyan); font-size: .7rem; font-weight: 700; padding: .25rem .75rem;
+  }
+
+  /* ─── 5. INSTALACIONES ─── */
+  .instalaciones-section { background: var(--blanco); padding: 5rem 1.5rem; }
+  .fotos-grid {
+    max-width: 1100px; margin: 2.5rem auto 0;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 1rem;
+  }
+  .foto-block { border-radius: 16px; overflow: hidden; position: relative; }
+  .foto-block.tall { grid-row: span 2; }
+  .foto-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #c8d6e5, #a8b8c8);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: .5rem; color: #5a6a7a;
+    font-size: .8rem; font-weight: 600;
+  }
+  .foto-inner span { font-size: 2rem; }
+  .foto-inner.dark { background: linear-gradient(135deg, #1a2a3a, #0d1a2a); color: rgba(255,255,255,.4); }
+
+  /* ─── 6. VIDA ESTUDIANTIL ─── */
+  .vida-section { background: #0d0f1a; padding: 5rem 1.5rem; }
+  .vida-layout {
+    max-width: 1100px; margin: 2.5rem auto 0;
+    display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; align-items: start;
+  }
+  .vida-video-mock {
+    aspect-ratio: 9/16; background: linear-gradient(135deg, #1a2a4a, #0d1a3a);
+    border-radius: 20px; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: .75rem; color: rgba(255,255,255,.3);
+  }
+  .vida-video-mock span { font-size: 3rem; }
+  .vida-fotos-mock {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem;
+  }
+  .vida-foto {
+    aspect-ratio: 4/3; border-radius: 12px;
+    background: linear-gradient(135deg, #1a2a4a, #2a3a5a);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.2); font-size: 1.5rem;
+  }
+  .vida-foto:nth-child(5) { grid-column: span 2; }
+
+  /* ─── 7. INVERSIÓN ─── */
+  .inversion-section { background: var(--gris-claro); padding: 5rem 1.5rem; }
+  .inv-grid {
+    max-width: 1100px; margin: 2.5rem auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .inv-card {
+    background: var(--blanco); border-radius: 20px; padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07); text-align: center; position: relative;
+  }
+  .inv-card.featured {
+    background: var(--navy); color: var(--blanco);
+    box-shadow: 0 8px 40px rgba(0,212,255,.2);
+    border: 2px solid rgba(0,212,255,.3);
+  }
+  .inv-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--cyan); color: var(--navy); font-size: .7rem; font-weight: 700;
+    padding: .3rem .9rem; border-radius: 50px; white-space: nowrap;
+  }
+  .inv-price { font-size: 2.5rem; font-weight: 900; color: var(--cyan); margin: 1rem 0 .25rem; }
+  .inv-per { font-size: .8rem; opacity: .5; margin-bottom: 1rem; }
+  .inv-features { list-style: none; font-size: .85rem; }
+  .inv-features li { padding: .4rem 0; border-bottom: 1px solid rgba(0,0,0,.06); opacity: .7; }
+  .inv-card.featured .inv-features li { border-color: rgba(255,255,255,.08); }
+
+  /* ─── 8. UBICACIÓN ─── */
+  .ubicacion-section { background: var(--blanco); padding: 5rem 1.5rem; }
+  .map-mock {
+    max-width: 1100px; margin: 2.5rem auto 0; height: 300px; border-radius: 20px;
+    background: linear-gradient(135deg, #e8f0e8, #d0e0d0);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem; color: #5a7a5a;
+    font-weight: 600; font-size: 1rem;
+  }
+  .map-mock span { font-size: 3rem; }
+
+  /* DIVIDERS */
+  .divider { height: 40px; }
+  .divider-dark { background: var(--navy); }
+  .divider-light { background: var(--gris-claro); }
+  .divider-white { background: var(--blanco); }
+
+  /* FOOTER */
+  footer { background: #080a20; padding: 3rem 1.5rem; text-align: center; }
+  footer p { color: rgba(255,255,255,.3); font-size: .8rem; }
+
+  /* ORDEN VISUAL INDICATORS */
+  section { position: relative; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .contacto-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .modal-grid { grid-template-columns: 1fr; }
+    .fotos-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .foto-block.tall { grid-row: span 1; }
+    .vida-layout { grid-template-columns: 1fr; }
+    .vida-video-mock { max-width: 200px; margin: 0 auto; aspect-ratio: 9/16; }
+    .inv-grid { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BADGE DE PROTOTIPO -->
+<div class="proto-badge">⚠️ PROTOTIPO — Solo para revisión de layout. No es la página final.</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-box">C</div>
+      <div>
+        <div class="logo-text">CENYCA</div>
+        <div class="logo-sub">Universidad</div>
+      </div>
+      <div class="header-divider"></div>
+      <div class="career-name">Ingeniería Mecatrónica</div>
+    </div>
+    <nav>
+      <a href="#beneficios">¿Por qué CENYCA?</a>
+      <a href="#modalidades">Modalidades</a>
+      <a href="#instalaciones">Conoce tu Campus</a>
+      <a href="#vida">Vida Estudiantil</a>
+      <a href="#contacto" class="nav-cta">Contactar un Asesor</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 1 — HERO
+════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="proto-label">SECCIÓN 1 · Hero</div>
+  <div class="proto-order">#1</div>
+  <div class="hero-video-placeholder">
+    <img src="../ingenieria-mecatronica/assets/asset_1.jpg" alt="Hero" onerror="this.style.display='none'">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-bg-glow"></div>
+  <div class="hero-content">
+    <div class="hero-label">Licenciatura · Ingeniería</div>
+    <h1>Ingeniería<br><span>Mecatrónica</span></h1>
+    <p>Forma parte de la revolución tecnológica. Diseña, automatiza y lidera la industria del futuro.</p>
+    <!-- NOTA: El botón "Inscríbete" ya no es necesario porque el formulario
+         queda visiblen en el primer scroll debajo del hero -->
+    <div class="hero-scroll-hint">
+      <span style="font-size:.75rem; opacity:.5">Tu formulario está justo abajo</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </div>
+</section>
+<div class="divider divider-dark"></div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 2 — FORMULARIO (NUEVO LUGAR)
+     💡 Antes estaba en posición #9
+════════════════════════════════════════ -->
+<section class="contacto-section" id="contacto">
+  <div class="proto-label">SECCIÓN 2 · Formulario ← MOVIDO AQUÍ</div>
+  <div class="proto-order" style="background:#22c55e; color:#fff;">#2 ✨</div>
+  <div class="contacto-grid">
+    <div class="contacto-left">
+      <div class="badge">Cupo limitado</div>
+      <h2>Donde tu potencial<br>se vuelve <span>éxito</span></h2>
+      <p>La industria necesita profesionales en Ingeniería Mecatrónica listos para liderar la automatización y transformación tecnológica.</p>
+      <div class="urgencia-item">
+        <div class="urgencia-item-label">Próximo inicio de clases</div>
+        <div class="urgencia-item-value">Mayo 2026</div>
+      </div>
+      <p style="font-size:.85rem; opacity:.6; margin-bottom:.5rem;">Las inscripciones cierran en:</p>
+      <div class="countdown">
+        <div class="cd-unit"><span class="cd-num">29</span><span class="cd-label">Días</span></div>
+        <div class="cd-unit"><span class="cd-num">14</span><span class="cd-label">Horas</span></div>
+        <div class="cd-unit"><span class="cd-num">38</span><span class="cd-label">Min</span></div>
+        <div class="cd-unit"><span class="cd-num">52</span><span class="cd-label">Seg</span></div>
+      </div>
+      <div style="margin-top:1.5rem;">
+        <div style="font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:.5rem;">🔥 Solo quedan <strong style="color:#fff;">10</strong> de <strong style="color:#fff;">30</strong> lugares</div>
+        <div class="lugares-bar"><div class="lugares-fill"></div></div>
+        <p style="font-size:.75rem; color:rgba(255,255,255,.4); margin-top:.5rem;">Sé de los primeros 10 registros y obtén 30% en tu inscripción</p>
+      </div>
+    </div>
+    <div>
+      <div class="form-card">
+        <h3>Regístrate ahora</h3>
+        <p class="subtitle">Completa tus datos y un asesor te contactará</p>
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <div class="input-mock">Tu nombre completo</div>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <div class="input-mock">tu@correo.com</div>
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <div class="input-mock">(664) 000-0000</div>
+        </div>
+        <div class="form-group">
+          <label>Plantel de interés</label>
+          <div class="input-mock">Selecciona un plantel</div>
+        </div>
+        <div class="form-group">
+          <label>Horario de preferencia</label>
+          <div class="input-mock">Sin preferencia</div>
+        </div>
+        <button class="btn-submit">Más información</button>
+        <div class="form-trust">🔒 Tus datos están protegidos · Respuesta en menos de 24 hrs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider divider-light"></div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 3 — BENEFICIOS
+════════════════════════════════════════ -->
+<section class="beneficios-section" id="beneficios">
+  <div class="proto-label">SECCIÓN 3 · ¿Por qué CENYCA?</div>
+  <div class="proto-order">#3</div>
+  <div class="section-label">
+    <div class="section-badge">Tus ventajas</div>
+    <h2>¿Por qué estudiar Mecatrónica en CENYCA?</h2>
+    <p>Todo lo que necesitas para impulsar tu carrera profesional.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h4>Laboratorios de automatización</h4>
+      <p>Practica con equipos de última generación: robots, CNC, PLCs y sistemas embebidos.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📅</div>
+      <h4>Horarios flexibles</h4>
+      <p>Estudia entre semana o fines de semana sin pausar tu trabajo o actividades.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎓</div>
+      <h4>Validez oficial SEP</h4>
+      <p>Título y cédula con reconocimiento oficial a nivel nacional.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💼</div>
+      <h4>Bolsa de trabajo</h4>
+      <p>Conectamos a nuestros egresados con empresas líderes de la industria en Tijuana y Mexicali.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💸</div>
+      <h4>Becas hasta 20%</h4>
+      <p>Accede a becas por puntualidad, desempeño académico o convenios empresariales.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📍</div>
+      <h4>4 planteles en BC</h4>
+      <p>Casa Blanca, Palmas, Otay y Tecate. Elige el más cercano a ti.</p>
+    </div>
+  </div>
+</section>
+<div class="divider divider-dark"></div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 4 — MODALIDADES
+════════════════════════════════════════ -->
+<section class="modalidades-section" id="modalidades">
+  <div class="proto-label">SECCIÓN 4 · Modalidades</div>
+  <div class="proto-order">#4</div>
+  <div class="section-label">
+    <div class="section-badge" style="background:rgba(0,212,255,.12); border-color:rgba(0,212,255,.3); color:var(--cyan);">Modalidades de estudio</div>
+    <h2 style="color:var(--blanco);">Tu carrera, a tu ritmo</h2>
+    <p style="color:rgba(255,255,255,.55);">Estudia sin pausar tus actividades cotidianas.</p>
+  </div>
+  <div class="modal-grid">
+    <div class="modal-card">
+      <div class="modal-icon">☀️</div>
+      <h4>Turno Matutino</h4>
+      <p>Lunes a Viernes. Intensidad completa para avanzar rápido.</p>
+      <span class="modal-tag">Lun–Vie</span>
+    </div>
+    <div class="modal-card" style="border-color:rgba(0,212,255,.3); box-shadow:0 0 30px rgba(0,212,255,.1);">
+      <div class="modal-icon">🗓️</div>
+      <h4>Entre Semana</h4>
+      <p>Un día a la semana. Ideal si trabajas o tienes otras actividades.</p>
+      <span class="modal-tag">1 día / semana</span>
+    </div>
+    <div class="modal-card">
+      <div class="modal-icon">🏢</div>
+      <h4>Ejecutivo</h4>
+      <p>Sábado o Domingo. Para profesionales que no pueden parar.</p>
+      <span class="modal-tag">Sáb o Dom</span>
+    </div>
+  </div>
+</section>
+<div class="divider divider-white"></div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 5 — CAMPUS / INSTALACIONES
+════════════════════════════════════════ -->
+<section class="instalaciones-section" id="instalaciones">
+  <div class="proto-label">SECCIÓN 5 · Conoce tu Campus</div>
+  <div class="proto-order">#5</div>
+  <div class="section-label">
+    <div class="section-badge">Nuestras instalaciones</div>
+    <h2>Conoce tu Campus</h2>
+    <p>Espacios diseñados para que aprendas haciendo.</p>
+  </div>
+  <div class="fotos-grid">
+    <div class="foto-block tall">
+      <div class="foto-inner dark">
+        <span>🏫</span>Laboratorio principal
+      </div>
+    </div>
+    <div class="foto-block">
+      <div class="foto-inner">
+        <span>⚙️</span>Área CNC
+      </div>
+    </div>
+    <div class="foto-block">
+      <div class="foto-inner">
+        <span>🤖</span>Robótica
+      </div>
+    </div>
+    <div class="foto-block">
+      <div class="foto-inner">
+        <span>💻</span>Cómputo
+      </div>
+    </div>
+    <div class="foto-block">
+      <div class="foto-inner dark">
+        <span>📐</span>Diseño CAD
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider divider-dark"></div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 6 — VIDA ESTUDIANTIL
+════════════════════════════════════════ -->
+<section class="vida-section" id="vida">
+  <div class="proto-label">SECCIÓN 6 · Vida Estudiantil</div>
+  <div class="proto-order">#6</div>
+  <div class="section-label">
+    <div class="section-badge" style="background:rgba(0,212,255,.12); border-color:rgba(0,212,255,.3); color:var(--cyan);">Comunidad</div>
+    <h2 style="color:var(--blanco);">Así se vive CENYCA</h2>
+    <p style="color:rgba(255,255,255,.55);">Mucho más que un salón de clases.</p>
+  </div>
+  <div class="vida-layout">
+    <div class="vida-video-mock">
+      <span>▶️</span>
+      <p style="font-size:.75rem; text-align:center; padding:0 1rem;">Video de vida estudiantil</p>
+    </div>
+    <div class="vida-fotos-mock">
+      <div class="vida-foto">🎉</div>
+      <div class="vida-foto">🏆</div>
+      <div class="vida-foto">📚</div>
+      <div class="vida-foto">🤝</div>
+      <div class="vida-foto" style="grid-column:span 2;">🎓 Graduación</div>
+    </div>
+  </div>
+</section>
+<div class="divider divider-light"></div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 7 — INVERSIÓN / COSTOS
+════════════════════════════════════════ -->
+<section class="inversion-section" id="inversion">
+  <div class="proto-label">SECCIÓN 7 · Inversión</div>
+  <div class="proto-order">#7</div>
+  <div class="section-label">
+    <div class="section-badge">Costos y becas</div>
+    <h2>Una inversión en tu futuro</h2>
+    <p>Planes de pago accesibles y becas disponibles.</p>
+  </div>
+  <div class="inv-grid">
+    <div class="inv-card">
+      <h4 style="color:var(--navy); font-size:1rem;">Sin beca</h4>
+      <div class="inv-price" style="color:var(--navy);">$4,000</div>
+      <div class="inv-per">/mes</div>
+      <ul class="inv-features">
+        <li>Inscripción $2,000</li>
+        <li>Material incluido</li>
+        <li>Acceso a plataforma</li>
+      </ul>
+    </div>
+    <div class="inv-card featured">
+      <div class="inv-badge">MÁS POPULAR</div>
+      <h4 style="font-size:1rem;">Con beca 20%</h4>
+      <div class="inv-price">$3,200</div>
+      <div class="inv-per" style="color:rgba(255,255,255,.4)">/mes</div>
+      <ul class="inv-features">
+        <li>Inscripción $2,000</li>
+        <li>Material incluido</li>
+        <li>Acceso a plataforma</li>
+        <li>Asesor dedicado</li>
+      </ul>
+    </div>
+    <div class="inv-card">
+      <h4 style="color:var(--navy); font-size:1rem;">Pago anual</h4>
+      <div class="inv-price" style="color:#059669;">$2,880</div>
+      <div class="inv-per">/mes · 2 meses gratis</div>
+      <ul class="inv-features">
+        <li>Inscripción $2,000</li>
+        <li>Material incluido</li>
+        <li>Acceso a plataforma</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div class="divider divider-white"></div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 8 — UBICACIÓN
+════════════════════════════════════════ -->
+<section class="ubicacion-section" id="ubicacion">
+  <div class="proto-label">SECCIÓN 8 · Ubicación</div>
+  <div class="proto-order">#8</div>
+  <div class="section-label">
+    <div class="section-badge">Dónde encontrarnos</div>
+    <h2>Ubicación</h2>
+    <p>Visítanos y conoce nuestras instalaciones.</p>
+  </div>
+  <div class="map-mock">
+    <span>🗺️</span>
+    <p>Mapa de Google — 4 planteles en Baja California</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 CENYCA Universidad · Este es un prototipo de layout, no la página final.</p>
+</footer>
+
+</body>
+</html>
