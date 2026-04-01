@@ -790,6 +790,7 @@
         btn.disabled = true;
 
         const plantelMap = { palmas: 'Palmas', casablanca: 'Casa Blanca', otay: 'Otay', tecate: 'Tecate' };
+        const ciudadMap = { palmas: 'Tijuana', casablanca: 'Tijuana', otay: 'Tijuana', tecate: 'Tecate' };
         const telefonoRaw = e.target.telefono.value.replace(/\D/g, '');
         const telefono = telefonoRaw.length > 10 ? telefonoRaw.slice(-10) : telefonoRaw;
 
@@ -799,6 +800,7 @@
             email: e.target.email.value.trim(),
             carrera: 'Gastronomia',
             plantel: plantelMap[e.target.plantel.value] || e.target.plantel.value,
+            ciudad: ciudadMap[e.target.plantel.value] || 'Tijuana',
             turno: e.target.turno.value || undefined,
             source: 'landing-gastronomia'
         };
