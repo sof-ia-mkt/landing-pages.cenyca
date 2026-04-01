@@ -19,7 +19,10 @@
         p, li, span, label, select, input, textarea { font-weight: 400; }
         .hero p, .beneficio-card p, .campo-item h3, footer p, .footer-col a { font-weight: 300; }
         header { background: var(--navy); box-shadow: 0 2px 12px rgba(0,0,0,.15); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: .5rem; }
+        .header-inner nav { display: flex; align-items: center; gap: .1rem; flex-shrink: 0; }
+        .header-inner nav a { font-size: .75rem; padding: .35rem .55rem; white-space: nowrap; }
+        .header-inner nav .nav-cta { font-size: .75rem; padding: .45rem .9rem; white-space: nowrap; }
         .logo-area { display: flex; align-items: center; gap: .75rem; }
         .logo-img { height: 50px; width: auto; flex-shrink: 0; object-fit: contain; }
         .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.4); flex-shrink: 0; }
@@ -551,6 +554,16 @@
             <span class="header-divider divider-slogan"></span>
             <span class="header-career">Ingeniería Industrial</span>
         </div>
+        <nav id="main-nav">
+            <a href="#beneficios" onclick="document.getElementById('main-nav').classList.remove('active')">¿Por qué CENYCA?</a>
+            <a href="#modalidades" onclick="document.getElementById('main-nav').classList.remove('active')">Modalidades</a>
+            <a href="#instalaciones" onclick="document.getElementById('main-nav').classList.remove('active')">Conoce tu Campus</a>
+            <a href="#vida" onclick="document.getElementById('main-nav').classList.remove('active')">Vida Estudiantil</a>
+            <a href="#contacto" class="nav-cta" onclick="document.getElementById('main-nav').classList.remove('active')">Contactar un Asesor</a>
+        </nav>
+        <button class="hamburger" aria-label="Menú" onclick="document.getElementById('main-nav').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </header>
 <section class="hero">
