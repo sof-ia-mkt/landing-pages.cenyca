@@ -243,10 +243,10 @@
             .divider-slogan { display: none; }
             .bg-flecha::before { background-attachment: scroll; background-size: 400px; opacity: .1; }
             .section-divider { padding: 0 1rem; }
-            nav { display: none; }
+            .header-inner nav { display: none; }
             .hamburger { display: flex; }
-            nav.active { display: flex; flex-direction: column; width: 100%; padding: .5rem 0; gap: .25rem; background: var(--navy); }
-            nav.active a { padding: .75rem 1rem; border-radius: 8px; font-size: .95rem; }
+            .header-inner nav.active { display: flex; flex-direction: column; width: 100%; padding: .5rem 0; gap: .25rem; background: var(--navy); }
+            .header-inner nav.active a { padding: .75rem 1rem; border-radius: 8px; font-size: .95rem; }
             .hero { padding: 4.5rem 1.25rem 3.5rem; }
             .hero h1 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
@@ -892,10 +892,10 @@
     <button class="snackbar-close" onclick="closeSnackbar('snackbar-inversion')">&times;</button>
     <div class="snackbar-icon">💰</div>
     <div class="snackbar-text">
-        <strong>Mensualidad desde $3,200/mes</strong>
-        <span>Inscripción única de $2,000 · Becas hasta 20%</span>
+        <strong>Con beca pagas desde $3,200/mes en lugar de $4,000</strong>
+        <span>Becas del 10% al 20% · Inscripción única de $2,000</span>
     </div>
-    <a href="#inversion" class="snackbar-btn cyan" onclick="setTimeout(function(){closeSnackbar('snackbar-inversion')},300)">Ver costos</a>
+    <a href="#contacto" class="snackbar-btn cyan" onclick="setTimeout(function(){closeSnackbar('snackbar-inversion')},300)">¡Quiero mi beca!</a>
 </div>
 
 <!-- Snackbar Urgencia -->
