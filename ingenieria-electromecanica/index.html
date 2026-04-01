@@ -8,7 +8,7 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --orange: #FF6B00; --orange-oscuro: #E65100; --blanco: #FFFFFF;
+            --orange: #F39C12; --orange-oscuro: #D68910; --blanco: #FFFFFF;
             --gris-claro: #F5F5F5; --gris: #666666; --gris-oscuro: #333333; --negro: #1A1A1A;
             --navy: #1B2040; --navy-light: #252B52;
         }
@@ -36,6 +36,17 @@
         .hero-badge { display: inline-block; background: rgba(255,107,0,.15); backdrop-filter: blur(8px); padding: .4rem 1.2rem; border-radius: 50px; font-size: .85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: .5px; }
         .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 1px; text-wrap: balance; }
         .hero h1 .accent { color: var(--orange); font-weight: 900; }
+        .electric-pulse { opacity: 0; animation: electric-on 1.6s ease 0.8s forwards; }
+        @keyframes electric-on {
+            0%   { opacity: 0; text-shadow: none; }
+            12%  { opacity: 1; text-shadow: -30px 0 12px var(--orange), -30px 0 30px var(--orange), -30px 0 60px rgba(243,156,18,.5); }
+            30%  { text-shadow: 0 0 12px var(--orange), 0 0 30px var(--orange), 0 0 70px rgba(243,156,18,.6), 0 0 4px #fff; }
+            48%  { text-shadow: 30px 0 12px var(--orange), 30px 0 30px var(--orange), 30px 0 60px rgba(243,156,18,.5); }
+            60%  { text-shadow: 0 0 6px var(--orange), 0 0 20px rgba(243,156,18,.4); }
+            75%  { text-shadow: 0 0 18px var(--orange), 0 0 40px rgba(243,156,18,.5), 0 0 2px #fff; }
+            88%  { text-shadow: 0 0 6px var(--orange); }
+            100% { opacity: 1; text-shadow: none; }
+        }
         .hero-slogan { margin-top: 2rem; opacity: .8; }
         .hero-slogan img { height: 70px; }
         .hero p { font-size: 1.1rem; opacity: .92; max-width: 520px; margin: 0 auto 2.5rem; text-wrap: balance; }
@@ -521,7 +532,7 @@
     <div class="hero-overlay"></div>
     <canvas id="heroParticles" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></canvas>
     <div class="hero-content">
-        <h1 class="hero-reveal">Ingeniería <span class="accent">Electromecánica</span></h1>
+        <h1 class="hero-reveal">Ingeniería <span class="accent electric-pulse">Electromecánica</span></h1>
 
         <a href="#contacto" class="nav-cta hero-reveal hero-reveal-delay-2" style="font-size:1.1rem; padding:.85rem 2.5rem;">Inscríbete ahora</a>
     </div>
@@ -550,7 +561,7 @@
         <p class="modalidades-subtitle" style="margin-left:auto; margin-right:auto;">Estudia sin pausar tus actividades cotidianas.</p>
         <div class="modalidades-grid">
             <div class="modalidad-card">
-                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F39C12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
                 <span class="modalidad-tag">Escolarizada</span>
                 <h3>Tiempo completo</h3>
                 <div class="modalidad-dia">Turno matutino</div>
