@@ -492,6 +492,10 @@
             0%, 60% { opacity: 1; }
             61%, 100% { opacity: 0; }
         }
+        /* Back to Top */
+        .back-to-top { position: fixed; bottom: 5.5rem; right: 1.5rem; width: 46px; height: 46px; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(16px); transition: opacity .3s, transform .3s; z-index: 998; box-shadow: 0 4px 15px rgba(0,0,0,.35); }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); }
+        .back-to-top:hover { transform: translateY(-3px) !important; box-shadow: 0 6px 22px rgba(0,0,0,.45); }
     </style>
 </head>
 <body>
@@ -1353,6 +1357,12 @@ document.addEventListener("DOMContentLoaded", () => {
         type();
     }, 1000);
 });
+</script>
+<button class="back-to-top" id="backToTop" aria-label="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="background:var(--cyan); color:var(--navy);">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+<script>
+(function(){ const b=document.getElementById('backToTop'); window.addEventListener('scroll',function(){ b.classList.toggle('visible',window.scrollY>400); }); })();
 </script>
 
 </body>
