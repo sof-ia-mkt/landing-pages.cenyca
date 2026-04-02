@@ -431,28 +431,17 @@
         .accordion-body.open { max-height: 2000px; }
         .accordion-body-inner { padding: 0 1.5rem 3rem; }
 
-        /* Popups snackbar */
-        .snackbar { position: fixed; bottom: -150px; left: 0; right: 0; z-index: 999; background: var(--navy); color: var(--blanco); box-shadow: 0 -4px 30px rgba(0,0,0,.25); display: flex; align-items: center; gap: 1rem; padding: 1rem 2.5rem 1rem 1.5rem; transition: bottom .5s ease; }
-        .snackbar.show { bottom: 0; }
-        .snackbar-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .snackbar-text { flex: 1; min-width: 0; }
-        .snackbar-text strong { display: block; font-size: .95rem; font-weight: 700; margin-bottom: .15rem; }
-        .snackbar-text span { font-size: .8rem; font-weight: 300; opacity: .8; display: block; }
-        .snackbar-btn { display: inline-block; padding: .55rem 1.25rem; border-radius: 50px; border: none; font-family: montserrat, sans-serif; font-weight: 700; font-size: .8rem; cursor: pointer; transition: .3s; text-decoration: none; white-space: nowrap; flex-shrink: 0; text-align: center; }
-        .snackbar-btn.cyan { background: var(--cyan); color: var(--navy); }
-        .snackbar-btn.cyan:hover { background: var(--cyan-oscuro); }
-        .snackbar-btn.green { background: #25D366; color: var(--blanco); }
-        .snackbar-btn.green:hover { background: #1da851; }
-        .snackbar-close { position: absolute; top: .5rem; right: .5rem; background: none; border: none; color: rgba(255,255,255,.5); cursor: pointer; font-size: 1.4rem; line-height: 1; padding: .35rem; transition: .2s; z-index: 1; }
-        .snackbar-close:hover { color: var(--blanco); }
-        .snackbar-urgencia { background: linear-gradient(135deg, #1A1A1A, #2a2a2a); border-top: 3px solid var(--cyan); }
-        @media (max-width: 768px) {
-            .snackbar { flex-wrap: wrap; padding: .85rem 1rem 1rem; gap: .5rem; padding-right: 2rem; }
-            .snackbar-icon { font-size: 1.2rem; }
-            .snackbar-text strong { font-size: .82rem; }
-            .snackbar-text span { font-size: .7rem; }
-            .snackbar-btn { width: 100%; padding: .6rem; font-size: .8rem; margin-top: .25rem; }
-        }
+        /* Ticker bar */
+        .ticker-bar { position: fixed; bottom: -50px; left: 0; right: 0; z-index: 999; background: var(--navy); border-top: 2px solid var(--cyan); box-shadow: 0 -2px 20px rgba(0,0,0,.3); display: flex; align-items: center; height: 42px; transition: bottom .5s ease; }
+        .ticker-bar.show { bottom: 0; }
+        .ticker-track { flex: 1; overflow: hidden; position: relative; height: 100%; display: flex; align-items: center; }
+        .ticker-content { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 30s linear infinite; gap: 3rem; padding-left: 100%; }
+        .ticker-item { font-size: .78rem; color: rgba(255,255,255,.85); font-weight: 500; display: flex; align-items: center; gap: .4rem; }
+        .ticker-item::before { content: '▸'; color: var(--cyan); font-weight: 700; }
+        .ticker-cta { flex-shrink: 0; padding: .35rem 1rem; background: var(--cyan); color: var(--navy); font-family: montserrat,sans-serif; font-size: .72rem; font-weight: 700; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; margin: 0 .75rem; white-space: nowrap; transition: .2s; }
+        .ticker-cta:hover { background: var(--cyan-oscuro); }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @media (max-width: 480px) { .ticker-cta { font-size: .65rem; padding: .3rem .75rem; } }
 
         /* Scroll animations */
         .anim { opacity: 0; transition: opacity .8s ease, transform .8s ease; }
@@ -1007,26 +996,24 @@
     </div>
 </section>
 
-<!-- Snackbar Inversión -->
-<div class="snackbar" id="snackbar-inversion">
-    <button class="snackbar-close" onclick="closeSnackbar('snackbar-inversion')">&times;</button>
-    <div class="snackbar-icon">💰</div>
-    <div class="snackbar-text">
-        <strong>Con beca pagas desde $3,200/mes en lugar de $4,000</strong>
-        <span>Becas del 10% al 20% · Inscripción única de $2,000</span>
+<div class="ticker-bar" id="ticker-bar">
+    <div class="ticker-track">
+        <div class="ticker-content">
+            <span class="ticker-item">30% OFF en tu inscripción — Aparta tu lugar con inscripción + paquete cuatrimestral</span>
+            <span class="ticker-item">Regístrate y un asesor te contactará en minutos</span>
+            <span class="ticker-item">Ciclo Mayo 2026 — Cupos limitados</span>
+            <span class="ticker-item">Becas del 10% al 20% disponibles — ¡Pregunta por la tuya!</span>
+            <span class="ticker-item">¿Dudas? Déjanos tus datos y te llamamos</span>
+            <span class="ticker-item">Inscripciones abiertas — No te quedes fuera</span>
+            <span class="ticker-item">30% OFF en tu inscripción — Aparta tu lugar con inscripción + paquete cuatrimestral</span>
+            <span class="ticker-item">Regístrate y un asesor te contactará en minutos</span>
+            <span class="ticker-item">Ciclo Mayo 2026 — Cupos limitados</span>
+            <span class="ticker-item">Becas del 10% al 20% disponibles — ¡Pregunta por la tuya!</span>
+            <span class="ticker-item">¿Dudas? Déjanos tus datos y te llamamos</span>
+            <span class="ticker-item">Inscripciones abiertas — No te quedes fuera</span>
+        </div>
     </div>
-    <a href="#contacto" class="snackbar-btn cyan" onclick="setTimeout(function(){closeSnackbar('snackbar-inversion')},300)">¡Quiero mi beca!</a>
-</div>
-
-<!-- Snackbar Urgencia -->
-<div class="snackbar snackbar-urgencia" id="snackbar-urgencia">
-    <button class="snackbar-close" onclick="closeSnackbar('snackbar-urgencia')">&times;</button>
-    <div class="snackbar-icon">🔥</div>
-    <div class="snackbar-text">
-        <strong>¡Solo 10 lugares con 30% OFF en inscripción!</strong>
-        <span>Registra tus datos y asegura tu descuento antes de que se agoten</span>
-    </div>
-    <a href="#contacto" class="snackbar-btn green" onclick="setTimeout(function(){closeSnackbar('snackbar-urgencia')},300)">¡Lo quiero!</a>
+    <a href="#contacto" class="ticker-cta">Contactar</a>
 </div>
 
 <footer style="padding:2rem 1.5rem; text-align:center;">
@@ -1037,59 +1024,10 @@
     <div class="footer-bottom">&copy; 2026 CENYCA Universidad. Todos los derechos reservados.</div>
 </footer>
 <script>
-    // Snackbar popups
-    (function() {
-        let currentSnackbar = null;
-        let snackbar1Closed = false;
-        let snackbar2Closed = false;
-        let scrollTriggered = false;
-
-        window.closeSnackbar = function(id) {
-            const el = document.getElementById(id);
-            el.classList.remove('show');
-            currentSnackbar = null;
-            if (id === 'snackbar-inversion') {
-                snackbar1Closed = true;
-                if (!snackbar2Closed) {
-                    setTimeout(() => {
-                        if (!currentSnackbar) {
-                            document.getElementById('snackbar-urgencia').classList.add('show');
-                            currentSnackbar = 'snackbar-urgencia';
-                        }
-                    }, 4000);
-                }
-            } else {
-                snackbar2Closed = true;
-                if (!snackbar1Closed) {
-                    setTimeout(() => {
-                        if (!currentSnackbar) {
-                            document.getElementById('snackbar-inversion').classList.add('show');
-                            currentSnackbar = 'snackbar-inversion';
-                        }
-                    }, 4000);
-                }
-            }
-        };
-
-        // Popup 1: aparece a los 5 segundos
-        setTimeout(() => {
-            if (!currentSnackbar) {
-                document.getElementById('snackbar-inversion').classList.add('show');
-                currentSnackbar = 'snackbar-inversion';
-            }
-        }, 5000);
-
-        // Popup 2: aparece al scrollear 35% de la página (si el 1 ya se cerró)
-        window.addEventListener('scroll', function() {
-            if (scrollTriggered) return;
-            const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            if (scrollPct > 0.35 && snackbar1Closed && !snackbar2Closed && !currentSnackbar) {
-                scrollTriggered = true;
-                document.getElementById('snackbar-urgencia').classList.add('show');
-                currentSnackbar = 'snackbar-urgencia';
-            }
-        });
-    })();
+        // Ticker: aparece a los 3 segundos
+        setTimeout(function() {
+            document.getElementById('ticker-bar').classList.add('show');
+        }, 3000);
 
     // Acordeón toggle
     function toggleAccordion(trigger) {
