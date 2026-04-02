@@ -109,7 +109,7 @@
         @keyframes shimmer-text { 0%{background-position:100% 0} 50%{background-position:0% 0} 100%{background-position:100% 0} }
         .modalidades-title span { -webkit-text-fill-color: transparent; }
         .modalidades-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; opacity: .8; margin-bottom: 3rem; max-width: 600px; }
-        .modalidades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+        .modalidades-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto; }
         .modalidad-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; position: relative; transition: transform .3s, box-shadow .3s, border-color .3s; }
         .modalidad-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(146,43,33,.15); border-color: rgba(146,43,33,.4); }
         .modalidad-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; }
@@ -595,7 +595,6 @@
                                 <option value="" disabled selected>Selecciona un plantel</option>
                                 <option value="casablanca">CENYCA Casa Blanca</option>
                                 <option value="palmas">CENYCA Palmas</option>
-                                <option value="otay">CENYCA Otay</option>
                                 <option value="tecate">CENYCA Tecate</option>
                             </select>
                         </div>
@@ -606,9 +605,8 @@
                             <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
                             <select id="turno" name="turno">
                                 <option value="" selected>Sin preferencia</option>
-                                <option value="Turno Matutino">Turno matutino (Lunes a Viernes)</option>
-                                <option value="Entre Semana">Entre semana (1 día a la semana)</option>
-                                <option value="Sabado Matutino">Ejecutivo (Sábado o Domingo)</option>
+                                <option value="Entre Semana">Entre semana (Martes)</option>
+                                <option value="Sabado Matutino">Fin de semana (Sábado o Domingo)</option>
                             </select>
                         </div>
                     </div>
@@ -633,13 +631,6 @@
         <div class="modalidades-title">Tu carrera,<br><span>a tu ritmo</span></div>
         <p class="modalidades-subtitle" style="margin-left:auto; margin-right:auto;">Estudia sin pausar tus actividades cotidianas.</p>
         <div class="modalidades-grid">
-            <div class="modalidad-card">
-                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#922B21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                <span class="modalidad-tag">Escolarizada</span>
-                <h3>Tiempo completo</h3>
-                <div class="modalidad-dia">Turno matutino</div>
-                <p>La experiencia universitaria completa. Vive el campus, convive con tus compañeros y aprovecha al máximo tu formación.</p>
-            </div>
             <div class="modalidad-card">
                 <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#64dc64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
                 <span class="modalidad-tag">Entre semana</span>
@@ -723,47 +714,137 @@
     </div>
 </section>
 
+<style>
+.inv-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;max-width:480px;margin:0 auto;}
+@media(min-width:680px){.inv-grid{grid-template-columns:1fr 1fr;max-width:820px;}}
+.inv-campus-wrap{text-align:center;margin-bottom:1rem;}
+.inv-campus-label{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);margin-bottom:.4rem;}
+.inv-campus-toggle{display:inline-flex;background:rgba(255,255,255,.07);border-radius:20px;padding:3px;}
+.inv-camp-btn{padding:.3rem 1rem;border-radius:18px;border:none;cursor:pointer;font-size:.75rem;font-weight:600;transition:.2s;}
+.inv-camp-btn.active{background:var(--amarillo);color:#1a1a2e;}
+.inv-camp-btn:not(.active){background:transparent;color:rgba(255,255,255,.55);}
+.inv-promo{background:linear-gradient(90deg,#c0392b,#922B21,#c0392b);border-radius:14px;padding:.85rem 1.1rem;margin-bottom:1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;box-shadow:0 4px 20px rgba(146,43,33,.4);max-width:820px;margin-left:auto;margin-right:auto;margin-bottom:1.1rem;}
+.inv-promo-text strong{font-size:.82rem;font-weight:800;color:white;display:block;}
+.inv-promo-text span{font-size:.7rem;color:rgba(255,255,255,.8);}
+.inv-timer-wrap{text-align:center;flex-shrink:0;}
+.inv-timer-label{font-size:.58rem;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:1px;margin-bottom:.1rem;}
+.inv-timer{font-family:'Courier New',monospace;font-size:1.25rem;font-weight:900;color:white;background:rgba(0,0,0,.28);padding:.15rem .55rem;border-radius:8px;min-width:54px;text-align:center;}
+.inv-card{border-radius:20px;padding:1.4rem;display:flex;flex-direction:column;gap:.65rem;}
+.inv-estelar{background:linear-gradient(145deg,rgba(146,43,33,.25) 0%,rgba(14,14,40,.95) 60%);border:2px solid #922B21;box-shadow:0 0 28px rgba(146,43,33,.3),0 0 60px rgba(146,43,33,.12);position:relative;}
+.inv-secondary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);}
+.inv-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#922B21,#c0392b);color:#fff;font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;padding:.22rem .9rem;border-radius:20px;white-space:nowrap;box-shadow:0 2px 10px rgba(146,43,33,.5);}
+.inv-modality{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;}
+.inv-estelar .inv-modality{color:#ff6b6b;}
+.inv-secondary .inv-modality{color:rgba(255,255,255,.5);}
+.inv-day{font-size:1.35rem;font-weight:900;color:white;}
+.inv-hour{font-size:.76rem;color:rgba(255,255,255,.5);margin-top:-.2rem;}
+.inv-price-wrap{border-top:1px solid rgba(255,255,255,.09);padding-top:.65rem;}
+.inv-estelar .inv-price-wrap{border-color:rgba(146,43,33,.35);}
+.inv-price-label{font-size:.68rem;color:rgba(255,255,255,.45);margin-bottom:.2rem;}
+.inv-price{display:flex;align-items:baseline;gap:.35rem;}
+.inv-price strong{font-size:2rem;font-weight:900;color:white;}
+.inv-price span{font-size:.78rem;color:rgba(255,255,255,.45);}
+.inv-boletos-note{font-size:.67rem;color:rgba(255,150,150,.75);margin-top:.1rem;}
+.inv-toggle{display:flex;border-radius:20px;padding:2px;}
+.inv-estelar .inv-toggle{background:rgba(0,0,0,.25);border:1px solid rgba(146,43,33,.3);}
+.inv-secondary .inv-toggle{background:rgba(255,255,255,.06);}
+.inv-tog-btn{flex:1;padding:.26rem .4rem;border-radius:18px;border:none;cursor:pointer;font-size:.68rem;font-weight:600;transition:.2s;}
+.inv-estelar .inv-tog-btn.active{background:#922B21;color:#fff;}
+.inv-estelar .inv-tog-btn:not(.active){background:transparent;color:rgba(255,255,255,.5);}
+.inv-secondary .inv-tog-btn.active{background:rgba(255,255,255,.15);color:white;}
+.inv-secondary .inv-tog-btn:not(.active){background:transparent;color:rgba(255,255,255,.5);}
+.inv-rows{display:flex;flex-direction:column;gap:.35rem;font-size:.77rem;}
+.inv-row{display:flex;justify-content:space-between;padding:.28rem 0;}
+.inv-estelar .inv-row{border-bottom:1px solid rgba(146,43,33,.18);}
+.inv-secondary .inv-row{border-bottom:1px solid rgba(255,255,255,.05);}
+.inv-row:last-child{border-bottom:none;}
+.inv-row span:first-child{color:rgba(255,255,255,.7);}
+.inv-row span:last-child{color:white;font-weight:500;}
+.inv-row.reinsc span:first-child{color:rgba(255,180,100,.85);}
+.inv-row.reinsc span:last-child{color:rgba(255,180,100,.85);}
+.inv-row.sinreinsc span:first-child{color:#4ade80;}
+.inv-row.sinreinsc span:last-child{color:#4ade80;}
+.inv-total{display:flex;justify-content:space-between;font-weight:800;color:white;padding:.4rem 0;font-size:.9rem;border-top:1px solid rgba(255,255,255,.1);margin-top:.1rem;}
+.inv-estelar .inv-total{border-color:rgba(146,43,33,.3);}
+.inv-cta-estelar{text-align:center;font-size:.82rem;padding:.6rem 1rem;border-radius:50px;background:linear-gradient(90deg,#922B21,#e74c3c);color:white;text-decoration:none;font-weight:700;box-shadow:0 4px 14px rgba(146,43,33,.4);display:block;margin-top:.1rem;}
+.inv-cta-sec{text-align:center;font-size:.82rem;padding:.55rem 1rem;border-radius:50px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);text-decoration:none;font-weight:600;display:block;margin-top:.1rem;}
+</style>
 <section id="inversion" class="inversion-section">
     <div class="container">
         <div class="section-title">
             <h2 class="text-reveal" style="background-image:linear-gradient(90deg, var(--blanco) 50%, rgba(255,255,255,.2) 50%);">Inversión</h2>
-            <p>Conoce el costo de tu carrera y simula con beca.</p>
+            <p>Elige tu modalidad y conoce tu inversión.</p>
             <div class="accent-line"></div>
         </div>
-        <div class="pricing-card anim anim-up">
-            <div class="promo-banner">
-                <span>30% OFF inscripción — Oferta termina en</span>
-                <div class="promo-timer" id="promo-timer">10:00</div>
+
+        <!-- Selector de plantel -->
+        <div class="inv-campus-wrap anim anim-up">
+            <div class="inv-campus-label">¿En qué plantel estudiarías?</div>
+            <div class="inv-campus-toggle">
+                <button id="inv-camp-tj" class="inv-camp-btn active" onclick="invSetCampus('tj')">Casa Blanca / Palmas</button>
+                <button id="inv-camp-tc" class="inv-camp-btn" onclick="invSetCampus('tc')">Tecate</button>
             </div>
-            <div class="pricing-toggle">
-                <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
-                <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
-                <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
+        </div>
+
+        <!-- Banner promo -->
+        <div class="inv-promo anim anim-up">
+            <div class="inv-promo-text"><span style="font-size:1.2rem;margin-right:.4rem;">🔥</span><strong>30% OFF en tu inscripción</strong><span>Regístrate ahora y ahorra $600 en tu inscripción</span></div>
+            <div class="inv-timer-wrap">
+                <div class="inv-timer-label">Termina en</div>
+                <div class="inv-timer" id="inv-timer">5:00</div>
             </div>
-            <div class="pricing-price">
-                <div class="price-amount" id="total-display">$4,000<span>/mes</span></div>
-            </div>
-            <div class="pricing-details">
-                <div class="pricing-detail">
-                    <div class="pricing-detail-left">
-                        <div class="detail-name">Inscripción única <span class="detail-badge badge-green">Sin reinscripción</span></div>
-                        <div class="detail-sub">Un solo pago al inicio — no vuelves a pagar inscripción</div>
-                    </div>
-                    <div class="pricing-detail-right"><span class="price-original">$2,000</span> <strong class="price-promo" style="color:#ff6b35;">$1,400</strong> <span class="detail-badge badge-orange">-30%</span></div>
+        </div>
+
+        <!-- Tarjetas -->
+        <div class="inv-grid anim anim-up">
+
+            <!-- Martes — Horario estelar -->
+            <div class="inv-card inv-estelar">
+                <div class="inv-badge">⭐ Horario estelar</div>
+                <div class="inv-modality">Entre semana</div>
+                <div class="inv-day">Martes</div>
+                <div class="inv-hour">6:00 pm – 9:49 pm</div>
+                <div class="inv-price-wrap">
+                    <div class="inv-price-label">Mensualidad desde</div>
+                    <div class="inv-price"><strong id="inv-mar-price">$2,200</strong><span>/mes</span></div>
+                    <div class="inv-boletos-note" id="inv-mar-note">Sujeto a venta de 20 boletos</div>
                 </div>
-                <div class="pricing-detail">
-                    <div class="pricing-detail-left">
-                        <div class="detail-name">Paquete cuatrimestral</div>
-                        <div class="detail-sub">Credencial + seguro estudiantil · Pago cada cuatrimestre</div>
-                    </div>
-                    <div class="pricing-detail-right"><strong>$950</strong></div>
+                <div class="inv-toggle">
+                    <button class="inv-tog-btn active" id="inv-mar-esp" onclick="invCalcMartes(true,this)">Con 20 boletos</button>
+                    <button class="inv-tog-btn" id="inv-mar-reg" onclick="invCalcMartes(false,this)">Precio regular</button>
                 </div>
-                <div class="pricing-total">
-                    <span>Tu primer pago total</span>
-                    <strong id="total-primer-pago">$6,350</strong>
+                <div class="inv-rows">
+                    <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
+                    <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-mar-paq">$950</span></div>
+                    <div class="inv-row reinsc"><span>Reinscripción (desde 2do cuatri)</span><span>$1,200</span></div>
+                    <div class="inv-total"><span>Primer pago</span><span id="inv-mar-total">$4,550</span></div>
                 </div>
-                <div style="text-align:center; margin-top:.6rem; padding:.65rem 1rem; background:rgba(146,43,33,.06); border:1px dashed rgba(146,43,33,.25); border-radius:8px; font-size:.78rem; color:rgba(255,255,255,.75); line-height:1.6;"><strong style="color:var(--cyan);">Aparta tu lugar</strong> pagando inscripción y paquete cuatrimestral. No te preocupes por los espacios.</div>
+                <a href="#contacto" class="inv-cta-estelar">Quiero este horario →</a>
             </div>
+
+            <!-- Fin de semana -->
+            <div class="inv-card inv-secondary">
+                <div class="inv-modality">Fin de semana</div>
+                <div class="inv-day">Sábado <span id="inv-fds-dom">o Domingo</span></div>
+                <div class="inv-hour">8:00 am – 12:00 pm</div>
+                <div class="inv-price-wrap">
+                    <div class="inv-price-label">Mensualidad</div>
+                    <div class="inv-price"><strong id="inv-fds-price">$4,000</strong><span>/mes</span></div>
+                </div>
+                <div class="inv-toggle">
+                    <button class="inv-tog-btn active" onclick="invCalcBeca(0,this)">Sin beca</button>
+                    <button class="inv-tog-btn" onclick="invCalcBeca(10,this)">10%</button>
+                    <button class="inv-tog-btn" onclick="invCalcBeca(20,this)">20%</button>
+                </div>
+                <div class="inv-rows">
+                    <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
+                    <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-fds-paq">$950</span></div>
+                    <div class="inv-row sinreinsc"><span>✓ Sin reinscripción</span><span>$0</span></div>
+                    <div class="inv-total"><span>Primer pago</span><span id="inv-fds-total">$6,350</span></div>
+                </div>
+                <a href="#contacto" class="inv-cta-sec">Quiero este horario</a>
+            </div>
+
         </div>
         <p class="pricing-nota">⚠ Los costos pueden variar. Becas sujetas a disponibilidad. Contacta a un asesor para más información.</p>
     </div>
@@ -855,7 +936,7 @@
             <p>Visítanos y conoce nuestras instalaciones.</p>
             <div class="accent-line"></div>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:900px; margin:0 auto;">
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:960px; margin:0 auto;">
             <!-- CENYCA Palmas -->
             <a href="https://maps.app.goo.gl/X4jXGNjSZyvkf13EA" target="_blank" rel="noopener" class="ubicacion-card anim anim-up anim-delay-1" style="display:flex; align-items:flex-start; gap:1rem; background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,.08); text-decoration:none; color:inherit;">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="#E53935" stroke="none" style="flex-shrink:0; margin-top:2px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
@@ -870,14 +951,6 @@
                 <div>
                     <strong style="font-size:1.05rem; color:var(--navy); display:block; margin-bottom:.35rem;">CENYCA Campus Casa Blanca</strong>
                     <span style="font-size:.9rem; color:#555; line-height:1.5;">Blvd. Casa Blanca 5530, Col. Matamoros, 22206 Tijuana, B.C.</span>
-                </div>
-            </a>
-            <!-- CENYCA Universidad Plaza Americana Otay -->
-            <a href="https://maps.app.goo.gl/WQeZDZUEUCzS6EWY7" target="_blank" rel="noopener" class="ubicacion-card anim anim-up anim-delay-3" style="display:flex; align-items:flex-start; gap:1rem; background:#fff; border-radius:14px; padding:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,.08); text-decoration:none; color:inherit;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="#E53935" stroke="none" style="flex-shrink:0; margin-top:2px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
-                <div>
-                    <strong style="font-size:1.05rem; color:var(--navy); display:block; margin-bottom:.35rem;">CENYCA Universidad Plaza Americana Otay</strong>
-                    <span style="font-size:.9rem; color:#555; line-height:1.5;">Calz. del Tecnológico 2016, Local 16, Otay Constituyentes, 22457 Tijuana, B.C.</span>
                 </div>
             </a>
             <!-- CENYCA Universidad Tecate -->
@@ -993,8 +1066,8 @@
         btn.textContent = 'Enviando...';
         btn.disabled = true;
 
-        const plantelMap = { palmas: 'Palmas', casablanca: 'Casa Blanca', otay: 'Otay', tecate: 'Tecate' };
-        const ciudadMap = { palmas: 'Tijuana', casablanca: 'Tijuana', otay: 'Tijuana', tecate: 'Tecate' };
+        const plantelMap = { palmas: 'Palmas', casablanca: 'Casa Blanca', tecate: 'Tecate' };
+        const ciudadMap = { palmas: 'Tijuana', casablanca: 'Tijuana', tecate: 'Tecate' };
         const telefonoRaw = e.target.telefono.value.replace(/\D/g, '');
         const telefono = telefonoRaw.length > 10 ? telefonoRaw.slice(-10) : telefonoRaw;
 
@@ -1050,26 +1123,61 @@
         setTimeout(() => { btn.textContent = originalText; btn.style.background = ''; btn.style.color = ''; }, 4000);
     }
 
-    // Simulador de inversión
-    function calcBeca(pct, btn) {
-        const base = 4000;
-        const mensualidad = base - base * (pct / 100);
-        const inscripcion = 1400;
-        const paquete = 950;
-        document.getElementById('total-display').innerHTML = '$' + mensualidad.toLocaleString('es-MX') + '<span>/mes</span>';
-        document.getElementById('total-primer-pago').textContent = '$' + (inscripcion + mensualidad + paquete).toLocaleString('es-MX');
-        document.querySelectorAll('.beca-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // Inversión — lógica de tarjetas Mayo 2026
+    let invCampus = 'tj', invMarEsp = true, invBecaPct = 0;
+
+    function invSetCampus(c) {
+        invCampus = c;
+        document.getElementById('inv-camp-tj').classList.toggle('active', c === 'tj');
+        document.getElementById('inv-camp-tc').classList.toggle('active', c === 'tc');
+        // Tecate no tiene domingo
+        const domEl = document.getElementById('inv-fds-dom');
+        if (domEl) domEl.style.display = c === 'tc' ? 'none' : '';
+        invRecalc();
     }
 
-    // Promo timer - 10 min countdown, reinicia silenciosamente
+    function invCalcMartes(esp, btn) {
+        invMarEsp = esp;
+        document.getElementById('inv-mar-esp').classList.toggle('active', esp);
+        document.getElementById('inv-mar-reg').classList.toggle('active', !esp);
+        const noteEl = document.getElementById('inv-mar-note');
+        if (noteEl) noteEl.style.display = esp ? '' : 'none';
+        invRecalc();
+    }
+
+    function invCalcBeca(pct, btn) {
+        invBecaPct = pct;
+        document.querySelectorAll('.inv-beca-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        invRecalc();
+    }
+
+    function invRecalc() {
+        const paq = invCampus === 'tc' ? 800 : 950;
+        const inscripcion = 1400;
+        // Martes
+        const marM = invMarEsp ? 2200 : 4000;
+        const marTotal = inscripcion + marM + paq;
+        document.getElementById('inv-mar-price').textContent = '$' + marM.toLocaleString('es-MX');
+        document.getElementById('inv-mar-paq').textContent = '$' + paq.toLocaleString('es-MX');
+        document.getElementById('inv-mar-total').textContent = '$' + marTotal.toLocaleString('es-MX');
+        // Fin de semana
+        const fdsBase = 4000;
+        const fdsM = Math.round(fdsBase - fdsBase * (invBecaPct / 100));
+        const fdsTotal = inscripcion + fdsM + paq;
+        document.getElementById('inv-fds-price').textContent = '$' + fdsM.toLocaleString('es-MX');
+        document.getElementById('inv-fds-paq').textContent = '$' + paq.toLocaleString('es-MX');
+        document.getElementById('inv-fds-total').textContent = '$' + fdsTotal.toLocaleString('es-MX');
+    }
+
+    // Promo timer — 5 min, reinicia silenciosamente
     (function() {
-        let secs = 600;
-        const el = document.getElementById('promo-timer');
+        let secs = 300;
+        const el = document.getElementById('inv-timer');
         if (!el) return;
         setInterval(function() {
             secs--;
-            if (secs <= 0) secs = 600;
+            if (secs <= 0) secs = 300;
             const m = Math.floor(secs / 60);
             const s = secs % 60;
             el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
@@ -1106,6 +1214,15 @@
         const barra = document.getElementById('barra-form-lugares');
         if (barra) barra.style.width = pct + '%';
     })();
+    // Auto-focus nombre al navegar a #contacto
+    window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#contacto') {
+            setTimeout(function() {
+                var input = document.getElementById('nombre');
+                if (input) input.focus();
+            }, 600);
+        }
+    });
 </script>
 <script>
     // Carousel

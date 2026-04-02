@@ -1077,6 +1077,15 @@
         const barra = document.getElementById('barra-form-lugares');
         if (barra) barra.style.width = pct + '%';
     })();
+    // Auto-focus nombre al navegar a #contacto
+    window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#contacto') {
+            setTimeout(function() {
+                var input = document.getElementById('nombre');
+                if (input) input.focus();
+            }, 600);
+        }
+    });
 </script>
 <script>
     // Carousel

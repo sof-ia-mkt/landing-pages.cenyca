@@ -110,7 +110,7 @@
         @keyframes shimmer-text { 0%{background-position:100% 0} 50%{background-position:0% 0} 100%{background-position:100% 0} }
         .modalidades-title span { -webkit-text-fill-color: transparent; }
         .modalidades-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; opacity: .8; margin-bottom: 3rem; max-width: 600px; }
-        .modalidades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+        .modalidades-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto; }
         .modalidad-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; position: relative; transition: transform .3s, box-shadow .3s, border-color .3s; }
         .modalidad-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(142,68,173,.15); border-color: rgba(142,68,173,.4); }
         .modalidad-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; }
@@ -646,9 +646,8 @@
                             <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
                             <select id="turno" name="turno">
                                 <option value="" selected>Sin preferencia</option>
-                                <option value="Turno Matutino">Turno matutino (Lunes a Viernes)</option>
-                                <option value="Entre Semana">Entre semana (1 día a la semana)</option>
-                                <option value="Sabado Matutino">Ejecutivo (Sábado o Domingo)</option>
+                                <option value="Entre Semana">Entre semana (Martes)</option>
+                                <option value="Sabado Matutino">Fin de semana (Sábado o Domingo)</option>
                             </select>
                         </div>
                     </div>
@@ -674,13 +673,6 @@
         <div class="modalidades-title">Tu carrera,<br><span>a tu ritmo</span></div>
         <p class="modalidades-subtitle" style="margin-left:auto; margin-right:auto;">Estudia sin pausar tus actividades cotidianas.</p>
         <div class="modalidades-grid">
-            <div class="modalidad-card">
-                <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8E44AD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-                <span class="modalidad-tag">Escolarizada</span>
-                <h3>Tiempo completo</h3>
-                <div class="modalidad-dia">Turno matutino</div>
-                <p>La experiencia universitaria completa. Vive el campus, convive con tus compañeros y aprovecha al máximo tu formación.</p>
-            </div>
             <div class="modalidad-card">
                 <div class="modalidad-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#64dc64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
                 <span class="modalidad-tag">Entre semana</span>
@@ -770,50 +762,134 @@
 </section>
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
+<style>
+.inv-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;max-width:480px;margin:0 auto;}
+@media(min-width:680px){.inv-grid{grid-template-columns:1fr 1fr;max-width:820px;}}
+.inv-campus-wrap{text-align:center;margin-bottom:1rem;}
+.inv-campus-label{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);margin-bottom:.4rem;}
+.inv-campus-toggle{display:inline-flex;background:rgba(255,255,255,.07);border-radius:20px;padding:3px;}
+.inv-camp-btn{padding:.3rem 1rem;border-radius:18px;border:none;cursor:pointer;font-size:.75rem;font-weight:600;transition:.2s;}
+.inv-camp-btn.active{background:var(--amarillo);color:#1a1a2e;}
+.inv-camp-btn:not(.active){background:transparent;color:rgba(255,255,255,.55);}
+.inv-promo{background:linear-gradient(90deg,#c0392b,#922B21,#c0392b);border-radius:14px;padding:.85rem 1.1rem;margin-bottom:1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;box-shadow:0 4px 20px rgba(146,43,33,.4);max-width:820px;margin-left:auto;margin-right:auto;margin-bottom:1.1rem;}
+.inv-promo-left{display:flex;align-items:center;gap:.6rem;}
+.inv-promo-text strong{display:block;font-size:.88rem;color:#fff;font-weight:700;}
+.inv-promo-text span{font-size:.75rem;color:rgba(255,255,255,.8);}
+.inv-promo-timer-wrap{text-align:right;flex-shrink:0;}
+.inv-promo-timer-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.6);margin-bottom:.15rem;}
+.inv-timer{font-family:'Courier New',monospace;font-size:1.15rem;font-weight:800;color:#fff;background:rgba(0,0,0,.3);padding:.15rem .55rem;border-radius:6px;min-width:56px;text-align:center;display:inline-block;}
+.inv-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;}
+.inv-estelar{border-color:rgba(192,57,43,.5);background:linear-gradient(160deg,rgba(146,43,33,.18) 0%,rgba(255,255,255,.03) 100%);}
+.inv-badge-row{display:flex;justify-content:center;}
+.inv-estelar-badge{background:linear-gradient(90deg,#922B21,#e74c3c);color:#fff;font-size:.72rem;font-weight:700;padding:.25rem .75rem;border-radius:20px;letter-spacing:.5px;}
+.inv-day{font-size:1.35rem;font-weight:800;color:#fff;letter-spacing:-.02em;}
+.inv-day span{font-size:.95rem;font-weight:500;color:rgba(255,255,255,.55);}
+.inv-schedule{font-size:.78rem;color:rgba(255,255,255,.5);}
+.inv-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:.1rem 0;}
+.inv-price{display:flex;align-items:baseline;gap:.3rem;}
+.inv-price strong{font-size:2rem;font-weight:800;color:#fff;line-height:1;}
+.inv-price span{font-size:.85rem;color:rgba(255,255,255,.5);}
+.inv-boletos-note{font-size:.73rem;color:#e74c3c;font-weight:600;}
+.inv-tog-row{display:flex;gap:.4rem;}
+.inv-tog-btn{flex:1;padding:.35rem .5rem;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.5);font-size:.72rem;font-weight:600;cursor:pointer;transition:.2s;}
+.inv-tog-btn.active{background:rgba(231,76,60,.25);border-color:#e74c3c;color:#fff;}
+.inv-beca-row{display:flex;gap:.35rem;}
+.inv-beca-btn{flex:1;padding:.32rem .4rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-size:.72rem;font-weight:600;cursor:pointer;transition:.2s;}
+.inv-beca-btn.active{background:rgba(26,82,118,.35);border-color:var(--cyan);color:var(--cyan);}
+.inv-rows{display:flex;flex-direction:column;gap:.4rem;}
+.inv-row{display:flex;justify-content:space-between;font-size:.8rem;color:rgba(255,255,255,.6);}
+.inv-row-green{color:#4ade80;font-size:.78rem;display:flex;justify-content:space-between;}
+.inv-total{display:flex;justify-content:space-between;font-size:.88rem;font-weight:700;color:#fff;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.12);}
+.inv-cta-estelar{text-align:center;font-size:.82rem;padding:.6rem 1rem;border-radius:50px;background:linear-gradient(90deg,#922B21,#e74c3c);color:white;text-decoration:none;font-weight:700;box-shadow:0 4px 14px rgba(146,43,33,.4);display:block;margin-top:.1rem;}
+.inv-cta-sec{text-align:center;font-size:.82rem;padding:.55rem 1rem;border-radius:50px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);text-decoration:none;font-weight:600;display:block;margin-top:.1rem;}
+</style>
 <section id="inversion" class="inversion-section">
-    <div class="container">
-        <div class="section-title">
-            <h2 class="text-reveal" style="background-image:linear-gradient(90deg, var(--blanco) 50%, rgba(255,255,255,.2) 50%);">Inversión</h2>
-            <p>Conoce el costo de tu carrera y simula con beca.</p>
-            <div class="accent-line"></div>
-        </div>
-        <div class="pricing-card anim anim-up">
-            <div class="promo-banner">
-                <span>30% OFF inscripción — Oferta termina en</span>
-                <div class="promo-timer" id="promo-timer">10:00</div>
-            </div>
-            <div class="pricing-toggle">
-                <button class="beca-btn active" onclick="calcBeca(0, this)">Sin beca</button>
-                <button class="beca-btn" onclick="calcBeca(10, this)">10%</button>
-                <button class="beca-btn" onclick="calcBeca(20, this)">20%</button>
-            </div>
-            <div class="pricing-price">
-                <div class="price-amount" id="total-display">$4,000<span>/mes</span></div>
-            </div>
-            <div class="pricing-details">
-                <div class="pricing-detail">
-                    <div class="pricing-detail-left">
-                        <div class="detail-name">Inscripción única <span class="detail-badge badge-green">Sin reinscripción</span></div>
-                        <div class="detail-sub">Un solo pago al inicio — no vuelves a pagar inscripción</div>
-                    </div>
-                    <div class="pricing-detail-right"><span class="price-original">$2,000</span> <strong class="price-promo" style="color:#ff6b35;">$1,400</strong> <span class="detail-badge badge-orange">-30%</span></div>
-                </div>
-                <div class="pricing-detail">
-                    <div class="pricing-detail-left">
-                        <div class="detail-name">Paquete cuatrimestral</div>
-                        <div class="detail-sub">Credencial + seguro estudiantil · Pago cada cuatrimestre</div>
-                    </div>
-                    <div class="pricing-detail-right"><strong>$950</strong></div>
-                </div>
-                <div class="pricing-total">
-                    <span>Tu primer pago total</span>
-                    <strong id="total-primer-pago">$6,350</strong>
-                </div>
-                <div style="text-align:center; margin-top:.6rem; padding:.65rem 1rem; background:rgba(142,68,173,.06); border:1px dashed rgba(142,68,173,.25); border-radius:8px; font-size:.78rem; color:rgba(255,255,255,.75); line-height:1.6;"><strong style="color:var(--cyan);">Aparta tu lugar</strong> pagando inscripción y paquete cuatrimestral. No te preocupes por los espacios.</div>
-            </div>
-        </div>
-        <p class="pricing-nota">⚠ Los costos pueden variar. Becas sujetas a disponibilidad. Contacta a un asesor para más información.</p>
+  <div class="container">
+    <div class="section-title">
+      <h2 class="text-reveal" style="background-image:linear-gradient(90deg,var(--blanco) 50%,rgba(255,255,255,.2) 50%);">Elige tu modalidad y conoce tu inversión.</h2>
+      <div class="accent-line"></div>
     </div>
+    <!-- Campus selector -->
+    <div class="inv-campus-wrap">
+      <div class="inv-campus-label">¿En qué plantel estudiarías?</div>
+      <div class="inv-campus-toggle">
+        <button id="inv-camp-cb" class="inv-camp-btn active" onclick="invSetCampus('cb')">Casa Blanca</button>
+        <button id="inv-camp-palmas" class="inv-camp-btn" onclick="invSetCampus('palmas')">Palmas</button>
+        <button id="inv-camp-otay" class="inv-camp-btn" onclick="invSetCampus('otay')">Otay</button>
+        <button id="inv-camp-tc" class="inv-camp-btn" onclick="invSetCampus('tc')">Tecate</button>
+      </div>
+    </div>
+    <!-- Promo banner -->
+    <div class="inv-promo">
+      <div class="inv-promo-left">
+        <span style="font-size:1.3rem;">🔥</span>
+        <div class="inv-promo-text">
+          <strong>30% OFF en tu Inscripción</strong>
+          <span>Regístrate ahora y ahorra $600 en tu inscripción</span>
+        </div>
+      </div>
+      <div class="inv-promo-timer-wrap">
+        <div class="inv-promo-timer-label">TERMINA EN</div>
+        <div class="inv-timer" id="inv-timer">5:00</div>
+      </div>
+    </div>
+    <!-- Cards grid -->
+    <div class="inv-grid">
+      <!-- Martes — Horario Estelar -->
+      <div class="inv-card inv-estelar">
+        <div class="inv-badge-row"><span class="inv-estelar-badge">⭐ HORARIO ESTELAR</span></div>
+        <div>
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);margin-bottom:.2rem;">ENTRE SEMANA</div>
+          <div class="inv-day">Martes</div>
+          <div class="inv-schedule">6:00 pm – 9:49 pm</div>
+        </div>
+        <hr class="inv-divider">
+        <div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:.25rem;">Mensualidad desde</div>
+          <div class="inv-price"><strong id="inv-mar-price">$2,200</strong><span>/mes</span></div>
+          <div class="inv-boletos-note" id="inv-mar-note">Sujeto a venta de 20 boletos</div>
+        </div>
+        <div class="inv-tog-row">
+          <button class="inv-tog-btn active" id="inv-mar-esp" onclick="invCalcMartes(true,this)">Con 20 boletos</button>
+          <button class="inv-tog-btn" id="inv-mar-reg" onclick="invCalcMartes(false,this)">Precio regular</button>
+        </div>
+        <hr class="inv-divider">
+        <div class="inv-rows">
+          <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
+          <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-mar-paq">$950</span></div>
+          <div class="inv-total"><span>Primer pago</span><span id="inv-mar-total">$4,550</span></div>
+        </div>
+        <a href="#contacto" class="inv-cta-estelar">Quiero este horario</a>
+      </div>
+      <!-- Fin de semana -->
+      <div class="inv-card inv-secondary">
+        <div>
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);margin-bottom:.2rem;">FIN DE SEMANA</div>
+          <div class="inv-day">Sábado <span id="inv-fds-dom">o Domingo</span></div>
+          <div class="inv-schedule" id="inv-fds-sched">Sáb: 1 pm – 5 pm  ·  Dom: 8 am – 12 pm</div>
+        </div>
+        <hr class="inv-divider">
+        <div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:.25rem;">Mensualidad desde</div>
+          <div class="inv-price"><strong id="inv-fds-price">$4,000</strong><span>/mes</span></div>
+        </div>
+        <div class="inv-beca-row">
+          <button class="inv-beca-btn active" onclick="invCalcBeca(0,this)">Sin beca</button>
+          <button class="inv-beca-btn" onclick="invCalcBeca(10,this)">10%</button>
+          <button class="inv-beca-btn" onclick="invCalcBeca(20,this)">20%</button>
+        </div>
+        <hr class="inv-divider">
+        <div class="inv-rows">
+          <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
+          <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-fds-paq">$950</span></div>
+          <div class="inv-row-green"><span>✓ Sin reinscripción</span><span>$0</span></div>
+          <div class="inv-total"><span>Primer pago</span><span id="inv-fds-total">$6,350</span></div>
+        </div>
+        <a href="#contacto" class="inv-cta-sec">Quiero este horario</a>
+      </div>
+    </div>
+    <p class="pricing-nota">⚠ Los costos pueden variar. Becas sujetas a disponibilidad. Contacta a un asesor para más información.</p>
+  </div>
 </section>
 <div class="section-divider" style="background:#0d0f1a;"></div>
 
@@ -1098,26 +1174,64 @@
         setTimeout(() => { btn.textContent = originalText; btn.style.background = ''; btn.style.color = ''; }, 4000);
     }
 
-    // Simulador de inversión
-    function calcBeca(pct, btn) {
-        const base = 4000;
-        const mensualidad = base - base * (pct / 100);
-        const inscripcion = 1400;
-        const paquete = 950;
-        document.getElementById('total-display').innerHTML = '$' + mensualidad.toLocaleString('es-MX') + '<span>/mes</span>';
-        document.getElementById('total-primer-pago').textContent = '$' + (inscripcion + mensualidad + paquete).toLocaleString('es-MX');
-        document.querySelectorAll('.beca-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // Inversión — lógica de tarjetas Mayo 2026
+    let invCampus = 'cb', invMarEsp = true, invBecaPct = 0;
+
+    function invSetCampus(c) {
+        invCampus = c;
+        ['cb','palmas','otay','tc'].forEach(function(x) {
+            const el = document.getElementById('inv-camp-'+x);
+            if (el) el.classList.toggle('active', x === c);
+        });
+        const schedEl = document.getElementById('inv-fds-sched');
+        if (schedEl) {
+            schedEl.textContent = c === 'cb' ? 'Sáb: 1 pm – 5 pm  ·  Dom: 8 am – 12 pm' : '8:00 am – 12:00 pm';
+        }
+        const domEl = document.getElementById('inv-fds-dom');
+        if (domEl) domEl.style.display = c === 'otay' ? 'none' : '';
+        invRecalc();
     }
 
-    // Promo timer - 10 min countdown, reinicia silenciosamente
+    function invCalcMartes(esp, btn) {
+        invMarEsp = esp;
+        document.getElementById('inv-mar-esp').classList.toggle('active', esp);
+        document.getElementById('inv-mar-reg').classList.toggle('active', !esp);
+        const noteEl = document.getElementById('inv-mar-note');
+        if (noteEl) noteEl.style.display = esp ? '' : 'none';
+        invRecalc();
+    }
+
+    function invCalcBeca(pct, btn) {
+        invBecaPct = pct;
+        document.querySelectorAll('.inv-beca-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        invRecalc();
+    }
+
+    function invRecalc() {
+        const paq = invCampus === 'tc' ? 800 : 950;
+        const inscripcion = 1400;
+        const marM = invMarEsp ? 2200 : 4000;
+        const marTotal = inscripcion + marM + paq;
+        document.getElementById('inv-mar-price').textContent = '$' + marM.toLocaleString('es-MX');
+        document.getElementById('inv-mar-paq').textContent = '$' + paq.toLocaleString('es-MX');
+        document.getElementById('inv-mar-total').textContent = '$' + marTotal.toLocaleString('es-MX');
+        const fdsBase = 4000;
+        const fdsM = Math.round(fdsBase - fdsBase * (invBecaPct / 100));
+        const fdsTotal = inscripcion + fdsM + paq;
+        document.getElementById('inv-fds-price').textContent = '$' + fdsM.toLocaleString('es-MX');
+        document.getElementById('inv-fds-paq').textContent = '$' + paq.toLocaleString('es-MX');
+        document.getElementById('inv-fds-total').textContent = '$' + fdsTotal.toLocaleString('es-MX');
+    }
+
+    // Promo timer — 5 min, reinicia silenciosamente
     (function() {
-        let secs = 600;
-        const el = document.getElementById('promo-timer');
+        let secs = 300;
+        const el = document.getElementById('inv-timer');
         if (!el) return;
         setInterval(function() {
             secs--;
-            if (secs <= 0) secs = 600;
+            if (secs <= 0) secs = 300;
             const m = Math.floor(secs / 60);
             const s = secs % 60;
             el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
@@ -1154,6 +1268,15 @@
         const barra = document.getElementById('barra-form-lugares');
         if (barra) barra.style.width = pct + '%';
     })();
+    // Auto-focus nombre al navegar a #contacto
+    window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#contacto') {
+            setTimeout(function() {
+                var input = document.getElementById('nombre');
+                if (input) input.focus();
+            }, 600);
+        }
+    });
 </script>
 <script>
     // Carousel
