@@ -883,16 +883,14 @@
     // Autoplay video "Así se vive" al hacer scroll
     (function() {
         const video = document.getElementById('vidaVideo');
-        const btn = document.getElementById('vidaPlayBtn');
         if (!video) return;
         video.muted = true;
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
-                    video.play().then(function() { if (btn) btn.style.opacity = '0'; }).catch(function(){});
+                    video.play().catch(function(){});
                 } else {
                     video.pause();
-                    if (btn) btn.style.opacity = '1';
                 }
             });
         }, { threshold: 0.4 });
