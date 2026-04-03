@@ -204,7 +204,7 @@
         .vida-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
         .vida-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         .vida-grid img, .vida-grid-bottom img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; transition: transform .3s; }
-        .vida-grid img:hover, .vida-grid-bottom img:hover { transform: scale(1.03); }
+        .vida-grid img:hover, .vida-grid-bottom img:hover { transform: scale(1.03); cursor: zoom-in; }
         .vida-item { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
         .vida-item.visible { opacity: 1; transform: translateY(0); }
         @media (max-width: 768px) {
@@ -338,6 +338,14 @@
         .back-to-top.visible { opacity: 1; transform: translateY(0); }
         .back-to-top:hover { transform: translateY(-3px) !important; box-shadow: 0 6px 22px rgba(0,0,0,.45); }
         @media (max-width: 768px) { .back-to-top { bottom: 11rem; right: 1rem; width: 40px; height: 40px; } }
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem; }
+        .lightbox.open { display: flex; animation: lb-in .25s ease; }
+        @keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+        .lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 12px; box-shadow: 0 24px 80px rgba(0,0,0,.8); animation: lb-zoom .25s ease; object-fit: contain; }
+        @keyframes lb-zoom { from { transform: scale(.92); } to { transform: scale(1); } }
+        .lightbox-close { position: fixed; top: 1.2rem; right: 1.5rem; background: rgba(255,255,255,.1); border: none; color: #fff; font-size: 1.8rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; backdrop-filter: blur(6px); }
+        .lightbox-close:hover { background: rgba(255,255,255,.2); }
     </style>
 </head>
 <body>
@@ -997,6 +1005,22 @@
 </button>
 <script>
 (function(){ const b=document.getElementById('backToTop'); window.addEventListener('scroll',function(){ b.classList.toggle('visible',window.scrollY>400); }); })();
+</script>
+
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('open')">&#x2715;</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+<script>
+    document.querySelectorAll('.vida-fotos img, .vida-grid img, .vida-grid-bottom img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox').classList.add('open');
+        });
+    });
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('open');
+    });
 </script>
 
 </body>

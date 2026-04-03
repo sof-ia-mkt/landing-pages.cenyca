@@ -20,11 +20,14 @@
         p, li, span, label, select, input, textarea { font-weight: 400; }
         .hero p, .beneficio-card p, .campo-item h3, footer p, .footer-col a { font-weight: 300; }
         header { background: var(--navy); box-shadow: 0 2px 12px rgba(0,0,0,.15); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
-        .logo-area { display: flex; align-items: center; gap: .75rem; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: .5rem; }
+        .header-inner nav { display: flex; align-items: center; gap: .1rem; flex-shrink: 0; }
+        .header-inner nav a { font-size: .75rem; padding: .35rem .55rem; white-space: nowrap; }
+        .header-inner nav .nav-cta { font-size: .75rem; padding: .45rem .9rem; white-space: nowrap; }
+        .logo-area { display: flex; align-items: center; gap: .75rem; min-width: 0; flex-shrink: 1; }
         .logo-img { height: 50px; width: auto; flex-shrink: 0; object-fit: contain; }
         .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,.4); flex-shrink: 0; }
-        .header-career { color: var(--blanco); font-family: montserrat, sans-serif; font-size: .95rem; font-weight: 600; letter-spacing: .3px; }
+        .header-career { color: var(--blanco); font-family: montserrat, sans-serif; font-size: .85rem; font-weight: 600; letter-spacing: .3px; white-space: nowrap; }
         nav a { text-decoration: none; color: var(--blanco); font-size: .9rem; font-weight: 500; padding: .4rem .75rem; border-radius: 6px; transition: .2s; } .nav-cta { display: inline-block; padding: .6rem 1.5rem; background: var(--cyan); color: var(--navy); font-family: montserrat, sans-serif; font-weight: 700; font-size: .9rem; border-radius: 50px; text-decoration: none; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; animation: cta-pulse 2s infinite; } .nav-cta:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(26,82,118,.4); } .nav-cta::after { content: ""; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); transform: skewX(-20deg); animation: cta-shine 3s infinite; } @keyframes cta-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(26,82,118,.4); } 50% { box-shadow: 0 0 15px 5px rgba(26,82,118,.2); } } @keyframes cta-shine { 0% { left: -60%; } 100% { left: 120%; } }
         nav a:hover { color: var(--blanco); background: rgba(255,255,255,.15); }
         .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
@@ -220,15 +223,17 @@
         .footer-col a:hover { color: var(--blanco); }
         .footer-bottom { max-width: 1100px; margin: 1.5rem auto 0; text-align: center; font-size: .82rem; color: rgba(255,255,255,.4); }
         .footer-legal { max-width: 1100px; margin: .5rem auto 0; text-align: center; font-size: .72rem; color: rgba(255,255,255,.3); }
-        @media (max-width: 768px) {
+        @media (max-width: 1100px) {
             .logo-area img[alt="Donde tu potencial se vuelve éxito"] { display: none; }
             .divider-slogan { display: none; }
+        }
+        @media (max-width: 768px) {
             .bg-flecha::before { background-attachment: scroll; background-size: 400px; opacity: .1; }
             .section-divider { padding: 0 1rem; }
-            nav { display: none; }
+            .header-inner nav { display: none; }
             .hamburger { display: flex; }
-            nav.active { display: flex; flex-direction: column; width: 100%; padding: .5rem 0; gap: .25rem; background: var(--navy); }
-            nav.active a { padding: .75rem 1rem; border-radius: 8px; font-size: .95rem; }
+            .header-inner nav.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; padding: .5rem .75rem; gap: .25rem; background: var(--navy); z-index: 999; box-shadow: 0 8px 20px rgba(0,0,0,.3); }
+            .header-inner nav.active a { padding: .75rem 1rem; border-radius: 8px; font-size: .95rem; }
             .hero { padding: 4.5rem 1.25rem 3.5rem; }
             .hero h1 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
@@ -486,6 +491,32 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Así se vive */
+        .vida-section { background: #0d0f1a; padding: 5rem 1.5rem; }
+        .vida-section .section-title { margin-bottom: 2.5rem; }
+        .vida-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; align-items: start; }
+        .vida-video-wrap { position: relative; border-radius: 20px; overflow: hidden; width: 100%; aspect-ratio: 9/16; box-shadow: 0 16px 48px rgba(0,0,0,.5); }
+        .vida-video { width: 100%; height: 100%; display: block; object-fit: cover; }
+        .vida-fotos { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 1rem; }
+        .vida-fotos img:nth-child(4) { grid-column: span 1; }
+        .vida-fotos img:nth-child(5) { grid-column: span 2; }
+        .vida-fotos img { width: 100%; height: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; transition: transform .3s; }
+        .vida-fotos img:hover { transform: scale(1.03); cursor: zoom-in; }
+        .vida-item { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
+        .vida-item.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 768px) {
+            .vida-layout { grid-template-columns: 1fr; }
+            .vida-video-wrap { max-width: 300px; margin: 0 auto; }
+        }
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem; }
+        .lightbox.open { display: flex; animation: lb-in .25s ease; }
+        @keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+        .lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 12px; box-shadow: 0 24px 80px rgba(0,0,0,.8); animation: lb-zoom .25s ease; object-fit: contain; }
+        @keyframes lb-zoom { from { transform: scale(.92); } to { transform: scale(1); } }
+        .lightbox-close { position: fixed; top: 1.2rem; right: 1.5rem; background: rgba(255,255,255,.1); border: none; color: #fff; font-size: 1.8rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; backdrop-filter: blur(6px); }
+        .lightbox-close:hover { background: rgba(255,255,255,.2); }
+
     </style>
 </head>
 <body>
@@ -496,8 +527,18 @@
             <span class="header-divider"></span>
             <img src="assets/slogan.avif" alt="Donde tu potencial se vuelve éxito" style="height:45px; opacity:.9;">
             <span class="header-divider divider-slogan"></span>
-            <span class="header-career">Licenciatura en Administración de Empresas</span>
+            <span class="header-career">Administración</span>
         </div>
+        <nav id="main-nav">
+            <a href="#beneficios" onclick="document.getElementById('main-nav').classList.remove('active')">¿Por qué CENYCA?</a>
+            <a href="#modalidades" onclick="document.getElementById('main-nav').classList.remove('active')">Modalidades</a>
+            <a href="#instalaciones" onclick="document.getElementById('main-nav').classList.remove('active')">Conoce tu Campus</a>
+            <a href="#vida" onclick="document.getElementById('main-nav').classList.remove('active')">Vida Estudiantil</a>
+            <a href="#contacto" class="nav-cta" onclick="document.getElementById('main-nav').classList.remove('active')">Contactar un Asesor</a>
+        </nav>
+        <button class="hamburger" aria-label="Menú" onclick="document.getElementById('main-nav').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </header>
 <section class="hero">
@@ -633,7 +674,26 @@
 </section>
 
 
-<!-- TODO: Vida Estudiantil section — assets pendientes -->
+<section class="vida-section" id="vida">
+    <div class="container">
+        <div class="section-title">
+            <h2 style="color:#fff; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight:900; letter-spacing:2px; text-transform:uppercase;">Así se vive la <span class="accent">Administración de Empresas</span> en CENYCA</h2>
+            <div class="accent-line"></div>
+        </div>
+        <div class="vida-layout">
+            <div class="vida-video-wrap">
+                <video class="vida-video" src="assets/video-vida-admin.mp4" loop muted autoplay playsinline></video>
+            </div>
+            <div class="vida-fotos">
+                <img src="assets/vida-1.jpg" alt="Vida estudiantil Administración CENYCA" loading="lazy" class="vida-item">
+                <img src="assets/vida-2.jpg" alt="Vida estudiantil Administración CENYCA" loading="lazy" class="vida-item">
+                <img src="assets/vida-3.jpg" alt="Vida estudiantil Administración CENYCA" loading="lazy" class="vida-item">
+                <img src="assets/vida-4.jpg" alt="Vida estudiantil Administración CENYCA" loading="lazy" class="vida-item">
+                <img src="assets/vida-5.jpg" alt="Vida estudiantil Administración CENYCA" loading="lazy" class="vida-item">
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="section-divider"><div class="divider-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="4" width="8" height="8" transform="rotate(45 8 8)"/></svg></div></div>
 
@@ -1362,6 +1422,35 @@
         });
     });
     </script>
+
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('open')">&#x2715;</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+<script>
+    // Lightbox para fotos vida estudiantil
+    document.querySelectorAll('.vida-fotos img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox').classList.add('open');
+        });
+    });
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('open');
+    });
+    // Vida items scroll animation
+    (function() {
+        var vidaObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.vida-item').forEach(function(el, i) {
+            el.style.transitionDelay = (i * 0.1) + 's';
+            vidaObs.observe(el);
+        });
+    })();
+</script>
 
 </body>
 </html>
