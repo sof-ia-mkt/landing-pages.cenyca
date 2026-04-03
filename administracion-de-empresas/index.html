@@ -764,7 +764,9 @@
 .inv-row-green{color:#4ade80;font-size:.78rem;display:flex;justify-content:space-between;}
 .inv-total{display:flex;justify-content:space-between;font-size:.88rem;font-weight:700;color:#fff;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.12);}
 .inv-cta-estelar{text-align:center;font-size:.82rem;padding:.6rem 1rem;border-radius:50px;background:linear-gradient(90deg,#922B21,#e74c3c);color:white;text-decoration:none;font-weight:700;box-shadow:0 4px 14px rgba(146,43,33,.4);display:block;margin-top:auto;}
-.inv-cta-sec{text-align:center;font-size:.82rem;padding:.55rem 1rem;border-radius:50px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);text-decoration:none;font-weight:600;display:block;margin-top:auto;}
+.inv-cta-sec{text-align:center;font-size:.82rem;padding:.55rem 1rem;border-radius:50px;border:none;background:linear-gradient(90deg,#FFD700,#FFA500);color:#1a1a2e;text-decoration:none;font-weight:700;display:block;margin-top:auto;box-shadow:0 4px 14px rgba(255,215,0,.3);}
+.inv-popular{border-color:rgba(255,215,0,.4);background:linear-gradient(160deg,rgba(255,215,0,.08) 0%,rgba(255,255,255,.03) 100%);}
+.inv-popular-badge{background:linear-gradient(90deg,#FFD700,#FFA500);color:#1a1a2e;font-size:.72rem;font-weight:700;padding:.25rem .75rem;border-radius:20px;letter-spacing:.5px;}
 </style>
 <section id="inversion" class="inversion-section">
   <div class="container">
@@ -826,7 +828,8 @@
         <a href="#contacto" class="inv-cta-estelar">Quiero este horario</a>
       </div>
       <!-- Fin de semana -->
-      <div class="inv-card inv-secondary">
+      <div class="inv-card inv-secondary inv-popular">
+        <div class="inv-badge-row"><span class="inv-popular-badge">🔥 MÁS SOLICITADO</span></div>
         <div>
           <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);margin-bottom:.2rem;">FIN DE SEMANA</div>
           <div class="inv-day">Sábado <span id="inv-fds-dom">o Domingo</span></div>
