@@ -42,7 +42,7 @@
         .hamburger span { display: block; width: 26px; height: 3px; background: var(--blanco); border-radius: 2px; transition: .3s; }
         .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
         .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(27,32,64,.84), rgba(27,32,64,.92)); z-index: 1; }
-        .hero { margin-top: 80px; position: relative; overflow: hidden; color: var(--blanco); padding: 5.5rem 1.5rem 4.5rem; text-align: center; background: var(--navy); }
+        .hero { margin-top: 0; position: relative; overflow: hidden; color: var(--blanco); padding: calc(80px + 5.5rem) 1.5rem 4.5rem; text-align: center; background: var(--navy); }
         .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
         .hero-badge { display: inline-block; background: rgba(0,212,255,.15); backdrop-filter: blur(8px); padding: .4rem 1.2rem; border-radius: 50px; font-size: .85rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: .5px; }
         .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 1px; text-wrap: balance; }
@@ -290,7 +290,7 @@
             .header-inner nav { display: none; } .hamburger { display: flex; }
             .header-inner nav.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; padding: .5rem .75rem; gap: .25rem; background: var(--navy); z-index: 999; box-shadow: 0 8px 20px rgba(0,0,0,.3); }
             .header-inner nav.active a { padding: .75rem 1rem; border-radius: 8px; font-size: .95rem; }
-            .hero { padding: 4.5rem 1.25rem 3.5rem; } .hero h1 { font-size: 1.8rem; }
+            .hero { padding: calc(70px + 4.5rem) 1.25rem 3.5rem; } .hero h1 { font-size: 1.8rem; }
             .perfil-content, .contacto-grid { grid-template-columns: 1fr; }
             .modalidades-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
             .modalidad-card { padding: 2rem 1.5rem; } .modalidades-section { padding: 3.5rem 1.25rem; }
@@ -315,7 +315,7 @@
             .header-inner { padding: .6rem .75rem; } .logo-img { height: 34px; }
             .header-divider { height: 22px; }
             .header-career { font-size: .7rem; max-width: 120px; line-height: 1.2; }
-            .hero { margin-top: 53px; padding: 2.5rem 1rem 2rem; } .hero h1 { font-size: 1.4rem; }
+            .hero { margin-top: 0; padding: calc(53px + 2.5rem) 1rem 2rem; } .hero h1 { font-size: 1.4rem; }
             .hero p { font-size: .88rem; } .btn { padding: .7rem 1.6rem; font-size: .88rem; }
             section { padding: 2.5rem .85rem; }
             .beneficios-grid { grid-template-columns: 1fr; }
