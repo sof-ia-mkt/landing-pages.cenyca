@@ -715,46 +715,31 @@
 .inv-timer-wrap{text-align:center;flex-shrink:0;}
 .inv-timer-label{font-size:.58rem;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:1px;margin-bottom:.1rem;}
 .inv-timer{font-family:'Courier New',monospace;font-size:1.25rem;font-weight:900;color:white;background:rgba(0,0,0,.28);padding:.15rem .55rem;border-radius:8px;min-width:54px;text-align:center;}
-.inv-card{border-radius:20px;padding:1.4rem;display:flex;flex-direction:column;gap:.65rem;}
-.inv-estelar{background:linear-gradient(145deg,rgba(146,43,33,.25) 0%,rgba(14,14,40,.95) 60%);border:2px solid #922B21;box-shadow:0 0 28px rgba(146,43,33,.3),0 0 60px rgba(146,43,33,.12);position:relative;}
-.inv-secondary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);}
-.inv-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#922B21,#c0392b);color:#fff;font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;padding:.22rem .9rem;border-radius:20px;white-space:nowrap;box-shadow:0 2px 10px rgba(146,43,33,.5);}
-.inv-modality{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;}
-.inv-estelar .inv-modality{color:#ff6b6b;}
-.inv-secondary .inv-modality{color:rgba(255,255,255,.5);}
-.inv-day{font-size:1.35rem;font-weight:900;color:white;}
-.inv-hour{font-size:.76rem;color:rgba(255,255,255,.5);margin-top:-.2rem;}
-.inv-price-wrap{border-top:1px solid rgba(255,255,255,.09);padding-top:.65rem;}
-.inv-estelar .inv-price-wrap{border-color:rgba(146,43,33,.35);}
-.inv-price-label{font-size:.68rem;color:rgba(255,255,255,.45);margin-bottom:.2rem;}
-.inv-price{display:flex;align-items:baseline;gap:.35rem;}
-.inv-price strong{font-size:2rem;font-weight:900;color:white;}
-.inv-price span{font-size:.78rem;color:rgba(255,255,255,.45);}
-.inv-boletos-note{font-size:.67rem;color:rgba(255,150,150,.75);margin-top:.1rem;}
-.inv-toggle{display:flex;border-radius:20px;padding:2px;}
-.inv-estelar .inv-toggle{background:rgba(0,0,0,.25);border:1px solid rgba(146,43,33,.3);}
-.inv-secondary .inv-toggle{background:rgba(255,255,255,.06);}
-.inv-tog-btn{flex:1;padding:.26rem .4rem;border-radius:18px;border:none;cursor:pointer;font-size:.68rem;font-weight:600;transition:.2s;}
-.inv-estelar .inv-tog-btn.active{background:#922B21;color:#fff;}
-.inv-estelar .inv-tog-btn:not(.active){background:transparent;color:rgba(255,255,255,.5);}
-.inv-secondary .inv-tog-btn.active{background:rgba(255,255,255,.15);color:white;}
-.inv-secondary .inv-tog-btn:not(.active){background:transparent;color:rgba(255,255,255,.5);}
-.inv-rows{display:flex;flex-direction:column;gap:.35rem;font-size:.77rem;}
-.inv-row{display:flex;justify-content:space-between;padding:.28rem 0;}
-.inv-estelar .inv-row{border-bottom:1px solid rgba(146,43,33,.18);}
-.inv-secondary .inv-row{border-bottom:1px solid rgba(255,255,255,.05);}
-.inv-row:last-child{border-bottom:none;}
-.inv-row span:first-child{color:rgba(255,255,255,.7);}
-.inv-row span:last-child{color:white;font-weight:500;}
-.inv-row.reinsc span:first-child{color:rgba(255,180,100,.85);}
-.inv-row.reinsc span:last-child{color:rgba(255,180,100,.85);}
-.inv-row.sinreinsc span:first-child{color:#4ade80;}
-.inv-row.sinreinsc span:last-child{color:#4ade80;}
-.inv-total{display:flex;justify-content:space-between;font-weight:800;color:white;padding:.4rem 0;font-size:.9rem;border-top:1px solid rgba(255,255,255,.1);margin-top:.1rem;}
-.inv-estelar .inv-total{border-color:rgba(146,43,33,.3);}
+.inv-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;}
+.inv-estelar{border-color:rgba(192,57,43,.5);background:linear-gradient(160deg,rgba(146,43,33,.18) 0%,rgba(255,255,255,.03) 100%);}
+.inv-badge-row{display:flex;justify-content:center;}
+.inv-estelar-badge{background:linear-gradient(90deg,#922B21,#e74c3c);color:#fff;font-size:.72rem;font-weight:700;padding:.25rem .75rem;border-radius:20px;letter-spacing:.5px;}
+.inv-day{font-size:1.35rem;font-weight:800;color:#fff;letter-spacing:-.02em;}
+.inv-day span{font-size:.95rem;font-weight:500;color:rgba(255,255,255,.55);}
+.inv-schedule{font-size:.78rem;color:rgba(255,255,255,.5);}
+.inv-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:.1rem 0;}
+.inv-price{display:flex;align-items:baseline;gap:.3rem;}
+.inv-price strong{font-size:2rem;font-weight:800;color:#fff;line-height:1;}
+.inv-price span{font-size:.85rem;color:rgba(255,255,255,.5);}
+.inv-boletos-note{font-size:.73rem;color:#e74c3c;font-weight:600;}
+.inv-tog-row{display:flex;gap:.4rem;}
+.inv-tog-btn{flex:1;padding:.35rem .5rem;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.5);font-size:.72rem;font-weight:600;cursor:pointer;transition:.2s;}
+.inv-tog-btn.active{background:rgba(231,76,60,.25);border-color:#e74c3c;color:#fff;}
+.inv-beca-row{display:flex;gap:.35rem;}
+.inv-beca-btn{flex:1;padding:.32rem .4rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-size:.72rem;font-weight:600;cursor:pointer;transition:.2s;}
+.inv-beca-btn.active{background:rgba(26,82,118,.35);border-color:var(--cyan);color:var(--cyan);}
+.inv-rows{display:flex;flex-direction:column;gap:.4rem;}
+.inv-row{display:flex;justify-content:space-between;font-size:.8rem;color:rgba(255,255,255,.6);}
+.inv-row-green{color:#4ade80;font-size:.78rem;display:flex;justify-content:space-between;}
+.inv-row-orange{color:rgba(255,180,100,.85);font-size:.78rem;display:flex;justify-content:space-between;}
+.inv-total{display:flex;justify-content:space-between;font-size:.88rem;font-weight:700;color:#fff;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.12);}
 .inv-cta-estelar{text-align:center;font-size:.82rem;padding:.6rem 1rem;border-radius:50px;background:linear-gradient(90deg,#922B21,#e74c3c);color:white;text-decoration:none;font-weight:700;box-shadow:0 4px 14px rgba(146,43,33,.4);display:block;margin-top:auto;}
 .inv-cta-sec{text-align:center;font-size:.82rem;padding:.55rem 1rem;border-radius:50px;border:none;background:linear-gradient(90deg,#FFD700,#FFA500);color:#1a1a2e;text-decoration:none;font-weight:700;display:block;margin-top:auto;box-shadow:0 4px 14px rgba(255,215,0,.3);}
-.inv-badge-row{display:flex;justify-content:center;}
 .inv-popular{border-color:rgba(255,215,0,.4);background:linear-gradient(160deg,rgba(255,215,0,.08) 0%,rgba(255,255,255,.03) 100%);}
 .inv-popular-badge{background:linear-gradient(90deg,#FFD700,#FFA500);color:#1a1a2e;font-size:.72rem;font-weight:700;padding:.25rem .75rem;border-radius:20px;letter-spacing:.5px;}
 </style>
@@ -788,53 +773,60 @@
         <!-- Tarjetas -->
         <div class="inv-grid anim anim-up">
 
-            <!-- Martes — Horario estelar -->
-            <div class="inv-card inv-estelar">
-                <div class="inv-badge">⭐ Horario estelar</div>
-                <div class="inv-modality">Entre semana</div>
-                <div class="inv-day">Martes</div>
-                <div class="inv-hour">6:00 pm – 9:49 pm</div>
-                <div class="inv-price-wrap">
-                    <div class="inv-price-label">Mensualidad desde</div>
-                    <div class="inv-price"><strong id="inv-mar-price">$2,200</strong><span>/mes</span></div>
-                    <div class="inv-boletos-note" id="inv-mar-note">Sujeto a venta de 20 boletos</div>
-                </div>
-                <div class="inv-toggle">
-                    <button class="inv-tog-btn active" id="inv-mar-esp" onclick="invCalcMartes(true,this)">Con 20 boletos</button>
-                    <button class="inv-tog-btn" id="inv-mar-reg" onclick="invCalcMartes(false,this)">Precio regular</button>
-                </div>
-                <div class="inv-rows">
-                    <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
-                    <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-mar-paq">$950</span></div>
-                    <div class="inv-row reinsc"><span>Reinscripción (desde 2do cuatri)</span><span>$1,200</span></div>
-                    <div class="inv-total"><span>Primer pago</span><span id="inv-mar-total">$4,550</span></div>
-                </div>
-                <a href="#contacto" class="inv-cta-estelar">Quiero este horario →</a>
-            </div>
-
-            <!-- Fin de semana -->
-            <div class="inv-card inv-secondary inv-popular">
-                <div class="inv-badge-row"><span class="inv-popular-badge">🔥 MÁS SOLICITADO</span></div>
-                <div class="inv-modality">Fin de semana</div>
-                <div class="inv-day">Sábado <span id="inv-fds-dom">o Domingo</span></div>
-                <div class="inv-hour">8:00 am – 12:00 pm</div>
-                <div class="inv-price-wrap">
-                    <div class="inv-price-label">Mensualidad</div>
-                    <div class="inv-price"><strong id="inv-fds-price">$4,000</strong><span>/mes</span></div>
-                </div>
-                <div class="inv-toggle">
-                    <button class="inv-tog-btn active" onclick="invCalcBeca(0,this)">Sin beca</button>
-                    <button class="inv-tog-btn" onclick="invCalcBeca(10,this)">10%</button>
-                    <button class="inv-tog-btn" onclick="invCalcBeca(20,this)">20%</button>
-                </div>
-                <div class="inv-rows">
-                    <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
-                    <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-fds-paq">$950</span></div>
-                    <div class="inv-row sinreinsc"><span>✓ Sin reinscripción</span><span>$0</span></div>
-                    <div class="inv-total"><span>Primer pago</span><span id="inv-fds-total">$6,350</span></div>
-                </div>
-                <a href="#contacto" class="inv-cta-sec">Quiero este horario</a>
-            </div>
+      <!-- Martes — Horario Estelar -->
+      <div class="inv-card inv-estelar">
+        <div class="inv-badge-row"><span class="inv-estelar-badge">⭐ HORARIO ESTELAR</span></div>
+        <div>
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);margin-bottom:.2rem;">ENTRE SEMANA</div>
+          <div class="inv-day">Martes</div>
+          <div class="inv-schedule">6:00 pm – 9:49 pm</div>
+        </div>
+        <hr class="inv-divider">
+        <div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:.25rem;">Mensualidad desde</div>
+          <div class="inv-price"><strong id="inv-mar-price">$2,200</strong><span>/mes</span></div>
+          <div class="inv-boletos-note" id="inv-mar-note">Sujeto a venta de 20 boletos</div>
+        </div>
+        <div class="inv-tog-row">
+          <button class="inv-tog-btn active" id="inv-mar-esp" onclick="invCalcMartes(true,this)">Con 20 boletos</button>
+          <button class="inv-tog-btn" id="inv-mar-reg" onclick="invCalcMartes(false,this)">Precio regular</button>
+        </div>
+        <hr class="inv-divider">
+        <div class="inv-rows">
+          <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
+          <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-mar-paq">$950</span></div>
+          <div class="inv-row-orange"><span>Reinscripción (desde 2do cuatri)</span><span>$1,200</span></div>
+          <div class="inv-total"><span>Primer pago</span><span id="inv-mar-total">$4,550</span></div>
+        </div>
+        <a href="#contacto" class="inv-cta-estelar">Quiero este horario</a>
+      </div>
+      <!-- Fin de semana -->
+      <div class="inv-card inv-secondary inv-popular">
+        <div class="inv-badge-row"><span class="inv-popular-badge">🔥 MÁS SOLICITADO</span></div>
+        <div>
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.4);margin-bottom:.2rem;">FIN DE SEMANA</div>
+          <div class="inv-day">Sábado <span id="inv-fds-dom">o Domingo</span></div>
+          <div class="inv-schedule">8:00 am – 12:00 pm</div>
+        </div>
+        <hr class="inv-divider">
+        <div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:.25rem;">Mensualidad desde</div>
+          <div class="inv-price"><strong id="inv-fds-price">$4,000</strong><span>/mes</span></div>
+        </div>
+        <div class="inv-beca-row">
+          <button class="inv-beca-btn active" onclick="invCalcBeca(0,this)">Sin beca</button>
+          <button class="inv-beca-btn" onclick="invCalcBeca(10,this)">10%</button>
+          <button class="inv-beca-btn" onclick="invCalcBeca(20,this)">20%</button>
+        </div>
+        <hr class="inv-divider">
+        <div class="inv-rows">
+          <div class="inv-row"><span>Inscripción (con promo -30%)</span><span>$1,400</span></div>
+          <div class="inv-row"><span>Paquete cuatrimestral</span><span id="inv-fds-paq">$950</span></div>
+          <div class="inv-row-green"><span>✓ Sin reinscripción</span><span>$0</span></div>
+          <div class="inv-total"><span>Primer pago</span><span id="inv-fds-total">$6,350</span></div>
+        </div>
+        <a href="#contacto" class="inv-cta-sec">Quiero este horario</a>
+      </div>
 
         </div>
         <p class="pricing-nota">⚠ Los costos pueden variar. Becas sujetas a disponibilidad. Contacta a un asesor para más información.</p>
